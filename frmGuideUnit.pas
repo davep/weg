@@ -458,7 +458,7 @@ End;
 
 /////
 
-Procedure TfrmGuide.NortonGuideError( Sender : TObject; Const sError: String );
+Procedure TfrmGuide.NortonGuideError( Sender : TObject; Const sError : String );
 Begin
   MessageBeep( MB_ICONERROR );
   MessageDlg( sError, mtError, [ mbOk ], 0 );
