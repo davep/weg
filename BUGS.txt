@@ -3,12 +3,6 @@
 Known WEG bugs:
 ===============
 
-o On some systems, depending on font DPI choice, the initial font choice
-  causes the guide entry display to show the text with the bottom part of
-  each line truncated. This is most likely down to me not correctly
-  calculating the correct height of a line in the TListBox descendant class
-  that displays the guide entry (currently I'm using a "20% trick" that's
-  worked with WEG for years). Until a fix is found I suggest you pick a font
-  that works for you once you've installed WEG.
+o No known bugs.
 
 $Id$

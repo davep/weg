@@ -86,7 +86,6 @@ Thanks go to:
 
 o Arnold Johnson for his invaluable input (and, who, sadly, is no longer
   with us to provide such invaluable input).
-o Mark 'Gomez' Adams for his "20% hack" when dealing with fonts.
 o Viktor Trunov for his feedback and ideas and for testing WEG v1.x against
   Russian language guides.
 o The inmates of comp.lang.clipper for their feedback, ideas and support.

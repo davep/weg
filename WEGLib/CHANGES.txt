@@ -2,6 +2,15 @@
 
 $Id$
 
+Changes since v1.5
+==================
+
+o Improved the code in the entry viewer that worked out how wide a
+  horizontal scrollbar should be.
+
+o Improved the code in the entry viewer that worked out how tall an a line
+  is for a given font.
+  
 Changes since v1.4
 ==================
 

@@ -369,7 +369,8 @@ Begin
   Begin
 
     // Inherit the font.
-    Font := FNortonGuide.Settings.GuideFont;
+    Font        := FNortonGuide.Settings.GuideFont;
+    Canvas.Font := Font;
 
     // Inherit the single click setting.
     FSingleClickJump := FNortonGuide.Settings.SingleClickJump;
@@ -388,9 +389,9 @@ Begin
 
   End;
 
-  // Fudge! I smell fudge!
-  ItemHeight := Abs( Font.Height ) + ( Round( Abs( Font.Height ) * 0.2 ) );
-  
+  // Set the item hight.
+  ItemHeight := Canvas.textHeight( 'W' );
+    
   // Start an update.
   Items.beginUpdate();
 
@@ -488,10 +489,9 @@ End;
 
 Procedure TwegLibNGEntryViewer.addHorizontalScrollBar;
 Var
-  sMax    : String;
-  iMax    : Integer;
-  i       : Integer;
-  iPixels : Integer;
+  sMax : String;
+  iMax : Integer;
+  i    : Integer;
 Begin
 
   // First we find the longest string to be displayed.
@@ -503,11 +503,8 @@ Begin
       sMax := FEntry.StrippedLines[ i ];
     End;
 
-  // Work out how wide, in pixels, the string is (plus one extra character).
-  iPixels := Canvas.textWidth( sMax + 'W' );
-
-  // Add the scroll bar.
-  SendMessage( Handle, LB_SETHORIZONTALEXTENT, iPixels, 0 );
+  // Then we tell Windows the point at which it should add a horizontal scrollbar.
+  SendMessage( Handle, LB_SETHORIZONTALEXTENT, Canvas.textWidth( sMax ), 0 );
   
 End;
 
