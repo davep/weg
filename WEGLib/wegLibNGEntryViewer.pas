@@ -186,6 +186,7 @@ Type
     Property MultiSelect;
     Property OnClick;
     Property PopupMenu;
+    Property OnKeyPress;
 
   End;
 

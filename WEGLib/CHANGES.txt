@@ -17,6 +17,8 @@ o The non-colour mode of the entry viewer now paints monochrome versions of
 o Replaced the guide entry control code stripping code with a call to one of
   the line parser classes.
 
+o Exposed the OnKeyPress property of TwegLibNGEntryViewer.
+
 Changes since v1.2
 ==================
 
