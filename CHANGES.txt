@@ -2,6 +2,19 @@
 
 $Id$
 
+Changes since v2.13
+===================
+
+o You can now drag a guide from the guide manager and drop it on an open
+  guide window and that window will be reused to display the new guide.
+
+o You can now drag a bookmark from the bookmark window and drop it on an
+  open guide window and that window will be reused to display the bookmarked
+  entry.
+
+o You can now drag a hit from the global finder and drop it on an open guide
+  window and that window will be reused to display the hit.
+
 Changes since v2.12
 ===================
 

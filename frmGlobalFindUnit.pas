@@ -179,6 +179,12 @@ Type
     Procedure setMatchCase( bOn : Boolean );
     {** Start a search }
     Procedure startSearch;
+    {** Return the guide name of the highlighted hit }
+    Function highlightedGuide : String;
+    {** Return the offset associated with the highlighted hit }
+    Function highlightedOffset : LongInt;
+    {** Return the line number associated with the highlighted hit }
+    Function highlightedLine : Integer;
 
   End;
 
@@ -838,6 +844,36 @@ Begin
       free();
     End;
   
+End;
+
+/////
+
+Function TfrmGlobalFind.highlightedGuide : String;
+Begin
+  If lbHits.ItemIndex = -1 Then
+    Result := ''
+  Else
+    Result := aResults[ lbHits.ItemIndex ].sGuide;
+End;
+
+/////
+
+Function TfrmGlobalFind.highlightedOffset : LongInt;
+Begin
+  If lbHits.ItemIndex = -1 Then
+    Result := -1
+  Else
+    Result := aResults[ lbHits.ItemIndex ].lEntry;
+End;
+
+/////
+
+Function TfrmGlobalFind.highlightedLine : Integer;
+Begin
+  If lbHits.ItemIndex = -1 Then
+    Result := 0
+  Else
+    Result := aResults[ lbHits.ItemIndex ].iLine;
 End;
 
 End.

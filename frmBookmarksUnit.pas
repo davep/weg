@@ -110,6 +110,13 @@ Type
     {** Add a bookmark to the list }
     Procedure addBookmark( Const sCaption : String; Const sName : String; Const sOffset : String );
 
+  Public
+
+    {** Return the guide name of the highlighted bookmark }
+    Function highlightedGuide : String;
+    {** Return the offset associated with the highlighted bookmark }
+    Function highlightedOffset : LongInt;
+
   End;
 
 Var
@@ -493,7 +500,7 @@ Begin
   If lvBookmarks.Selected = Nil Then
     sbBookmarks.Panels[ 1 ].Text := ''
   Else
-    sbBookmarks.Panels[ 1 ].Text := ExtractFileName( lvBookmarks.Selected.SubItems[ 0 ] );
+    sbBookmarks.Panels[ 1 ].Text := ExtractFileName( highlightedGuide() );
       
 End;
 
@@ -525,6 +532,26 @@ Begin
     saveBookmarks();
   End;
 
+End;
+
+/////
+
+Function TfrmBookmarks.highlightedGuide : String;
+Begin
+  If lvBookmarks.Selected = Nil Then
+    Result := ''
+  Else
+    Result := lvBookmarks.Selected.SubItems[ 0 ];
+End;
+
+/////
+
+Function TfrmBookmarks.highlightedOffset : LongInt;
+Begin
+  If lvBookmarks.Selected = Nil Then
+    Result := -1
+  Else
+    Result := StrToInt( lvBookmarks.Selected.SubItems[ 1 ] );  
 End;
 
 End.

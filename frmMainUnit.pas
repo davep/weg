@@ -178,9 +178,9 @@ Type
   Public
 
     {** Open a guide in the given window }
-    Function openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
+    Function openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = 0 ) : TForm; Overload;
     {** Open a guide }
-    Function openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
+    Function openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt = -1; iStartingLine : Integer = 0 ) : TForm; Overload;
     {** Return a pointer to the focused Norton Guide }
     Function focusedGuide : TwegLibNortonGuide;
     {** Return a pointer to the focused Norton Guide entry viewer }
@@ -326,9 +326,13 @@ Begin
       // Failing all that, display the first entry.
       NGEntry.displayFirstEntry();
 
-    // If we managed to open a guide, remember it.
+    // If we managed to open a guide, sort out the focus and remember it.
     If oWindow <> Nil Then
+    Begin
+      oWindow.bringToFront();
+      self.setFocus();
       rememberInMRU( NortonGuide );
+    End;
 
   End;
 
@@ -366,8 +370,6 @@ Begin
         Begin
           // ...use this window.
           oWindow := TfrmGuide( MDIChildren[ i ] );
-          oWindow.bringToFront();
-          setFocus();
           Break;
         End;
 

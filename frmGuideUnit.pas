@@ -196,6 +196,9 @@ Type
     procedure actNavigateHomeUpdate(Sender: TObject);
     procedure actEditCopyLineUpdate(Sender: TObject);
     procedure actEditCopyLineExecute(Sender: TObject);
+    procedure NGEntryDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure NGEntryDragDrop(Sender, Source: TObject; X, Y: Integer);
 
   Protected
 
@@ -251,6 +254,9 @@ Uses
   wegLibNGLineParser,
   wegUtils,
   frmMainUnit,
+  frmGuideManagerUnit,
+  frmBookmarksUnit,
+  frmGlobalFindUnit,
   frmGuideCreditsUnit;
 
 {$R *.DFM}
@@ -1199,6 +1205,32 @@ End;
 Procedure TfrmGuide.actEditCopyLineExecute( Sender : TObject );
 Begin
   Clipboard().AsText := NGEntry.Entry.StrippedLines[ NGEntry.ItemIndex ];
+End;
+
+/////
+
+Procedure TfrmGuide.NGEntryDragOver( Sender, Source : TObject; X, Y : Integer; State : TDragState; Var Accept : Boolean );
+Begin
+  // We accept dropped items from the guide manager, the bookmark window and
+  // the global finder.
+  Accept := ( Source = frmGuideManager.lvGuides ) Or
+            ( Source = frmBookmarks.lvBookmarks ) Or
+            ( Source = frmGlobalFind.lbHits     );
+End;
+
+/////
+
+Procedure TfrmGuide.NGEntryDragDrop( Sender, Source : TObject; X, Y : Integer );
+Begin
+
+  // If the user is dropping a guide from somewhere we know, open it...
+  If Source = frmGuideManager.lvGuides Then
+    frmMain.openGuide( frmGuideManager.highlightedGuide(), self )
+  Else If Source = frmBookmarks.lvBookmarks Then
+    frmMain.openGuide( frmBookmarks.highlightedGuide(), self, frmBookmarks.highlightedOffset() )
+  Else If Source = frmGlobalFind.lbHits Then
+    frmMain.openGuide( frmGlobalFind.highlightedGuide(), self, frmGlobalFind.highlightedOffset(), frmGlobalFind.highlightedLine() )
+
 End;
 
 End.

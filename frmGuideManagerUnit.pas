@@ -128,6 +128,8 @@ Type
 
     {** Get the guide name list }
     Procedure getGuideNames( slNames : TStringList );
+    {** Returns the name of the highlighted guide }
+    Function highlightedGuide : String;
     
   End;
 
@@ -554,7 +556,7 @@ Procedure TfrmGuideManager.actGuidesOpenExecute( Sender : TObject );
 Begin
 
   If lvGuides.Selected <> Nil Then
-    frmMain.openGuide( lvGuides.Selected.SubItems[ 0 ], OpenType() );
+    frmMain.openGuide( highlightedGuide(), OpenType() );
     
 End;
 
@@ -678,6 +680,16 @@ End;
 Procedure TfrmGuideManager.actOptionsRecycleWindowsExecute( Sender : TObject );
 Begin
   actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
+End;
+
+/////
+
+Function TfrmGuideManager.highlightedGuide : String;
+Begin
+  If lvGuides.Selected = Nil Then
+    Result := ''
+  Else
+    Result := lvGuides.Selected.SubItems[ 0 ];
 End;
 
 End.
