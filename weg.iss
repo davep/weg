@@ -1,0 +1,78 @@
+;; $Id$
+
+[Setup]
+AppName=Expert Guide for Windows
+AppVerName=Expert Guide for Windows v2.0
+AppCopyright=Copyright © 2003 Dave Pearson
+AppPublisher=Dave Pearson
+AppPublisherURL=http://www.davep.org/
+AppSupportURL=http://www.davep.org/
+AppUpdatesURL=http://www.davep.org/
+DefaultDirName={pf}\Expert Guide for Windows
+DefaultGroupName=Expert Guide for Windows
+LicenseFile=COPYING
+OutputBaseFileName=WEGSetup
+OutputDir=.
+ChangesAssociations=Yes
+
+[Tasks]
+Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
+Name: "quicklaunchicon"; Description: "Create a &Quick Launch icon"; GroupDescription: "Additional icons:"; Flags: unchecked
+Name: "assocngfiles"; Description: "Associate Expert Guide with Norton Guides?"; GroupDescription: "Associations"
+
+[Components]
+Name: "WEGSources"; Description: "WEG Sources"; Types: full
+Name: "WEGLibSources"; Description: "WEGLib Sources"; Types: full
+
+[Files]
+; Main application files.
+Source: "WEG.exe";     DestDir: "{app}"; Flags: ignoreversion
+Source: "COPYING";     DestDir: "{app}"; Flags: ignoreversion
+Source: "README.txt";  DestDir: "{app}"; Flags: ignoreversion
+Source: "CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "TODO.txt";    DestDir: "{app}"; Flags: ignoreversion
+Source: "BUGS.txt";    DestDir: "{app}"; Flags: ignoreversion
+Source: "website.url"; DestDir: "{app}"; Flags: ignoreversion
+Source: "email.url";   DestDir: "{app}"; Flags: ignoreversion
+; Optional WEG sources.
+Source: "*.dpr";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.res";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.dof";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.pas";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.dfm";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "Icons\*.*";  DestDir: "{app}\Source\WEG\Icons";  Flags: ignoreversion; Components: WEGSources
+Source: "Images\*.*"; DestDir: "{app}\Source\WEG\Images"; Flags: ignoreversion; Components: WEGSources
+; Optional WEGLib sources.
+Source: "WEGLib\*.dpk"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.res"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.dof"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.pas"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.dcr"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.dfm"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+
+[Icons]
+Name: "{group}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"
+Name: "{group}\View README.txt"; Filename: "{app}\README.txt"; Comment: "View the README file for WEG"
+Name: "{group}\View Licence"; Filename: "Notepad"; Parameters: "{app}\COPYING"; Comment: "View the licence for WEG"
+Name: "{group}\View CHANGES.txt"; Filename: "{app}\CHANGES.txt"; Comment: "View the change documentation for WEG"
+Name: "{group}\View TODO.txt"; Filename: "{app}\TODO.txt"; Comment: "View the list of things still to be done to WEG"
+Name: "{group}\View BUGS.txt"; Filename: "{app}\BUGS.txt"; Comment: "View the list known WEG bugs"
+Name: "{group}\Visit www.davep.org"; Filename: "{app}\website.url"; Comment: "Visit http://www.davep.org/"
+Name: "{group}\Email the author"; Filename: "{app}\email.url"; Comment: "Send an email to the author"
+Name: "{group}\WEG Sources"; Filename: "{app}\Source\WEG"; Components: WEGSources; Comment: "View the sources for WEG"
+Name: "{group}\WEGLib Sources"; Filename: "{app}\Source\WEGLib"; Components: WEGLibSources; Comment: "View the sources for WEGLib"
+Name: "{group}\Uninstall Expert Guide for Windows"; Filename: "{uninstallexe}"
+Name: "{userdesktop}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: quicklaunchicon
+
+[Registry]
+Root: HKCU; SubKey: "Software\davep.org"; Flags: uninsdeletekeyifempty
+Root: HKCU; SubKey: "Software\davep.org\WEG"; Flags: uninsdeletekey
+Root: HKCR; SubKey: ".ng"; ValueType: string; ValueName: ""; ValueData: "org.davep.WEG"; Flags: uninsdeletekey; Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG"; ValueType: string; ValueName: ""; ValueData: "Norton Guide Database"; Flags: uninsdeletekey;  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe,0";  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\WEG.exe"" ""%1""";  Tasks: assocngfiles
+
+[Run]
+Filename: "{app}\WEG.exe"; Description: "Launch Expert Guide for Windows"; Flags: nowait postinstall skipifsilent
+

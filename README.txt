@@ -1,0 +1,55 @@
+-*- mode:flyspell; -*-
+
+                       Expert Guide for Windows v2.0
+                       =============================
+
+                              By Dave pearson
+                             <davep@davep.org>
+
+Introduction
+============
+
+Welcome to WEG version 2. WEG is a Norton Guide database reader for Windows.
+If you don't know what a Norton Guide database is you probably don't need
+WEG.
+
+WEG is released, under the GPL, with full source code. Please take the time
+to read the file COPYING if you want to further enhance this software, in
+fact, why not take the time to read it anyway?
+
+Latest Release
+==============
+
+You'll always find the latest release of WEG at:
+
+    http://www.davep.org/norton-guides/#weg
+
+See the file CHANGES.txt for details of what has changed in this and
+previous releases.
+
+Feedback
+========
+
+Please feel free to send me any feedback, ideas, enhancement requests, bug
+reports, bug fixes (even better) or anything else. I'd appreaciate if you
+sent email concerining WEG to weg@davep.org, if you just want a chat then
+use the email address at the start of this file.
+
+Before you do drop me a line please make sure that you've had a read of
+TODO.txt and BUGS.txt. It might be that I'm already aware of a bug you're
+about to report or I might already plan to implement some feature you're
+about to ask me for.
+
+Thanks
+======
+
+Thanks go to:
+
+o Arnold Johnson for his invaluable input (and, who, sadly, is no longer
+  with us to provide such invaluable input).
+o Mark 'Gomez' Adams for his "20% hack" when dealing with fonts.
+o Viktor Trunov for his feedback and ideas and for testing WEG v1.x against
+  Russian language guides.
+o The inmates of comp.lang.clipper for their feedback, ideas and support.
+
+$Id$

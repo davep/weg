@@ -1,0 +1,8 @@
+-*- mode:flyspell; -*-
+
+Known WEG bugs:
+===============
+
+No known bugs at the moment.
+
+$Id$

@@ -1,0 +1,15 @@
+-*- mode:flyspell; -*-
+
+$Id$
+
+Things TODO to WEG:
+===================
+
+o DDE server support (was in WEG 1.x).
+
+o Printing support (was in WEG 1.x).
+
+o Associating .NG files doesn't work so well with WEG now that it is an MDI
+  application. Come up with a method of ensuring that files passed on the
+  command line get opened in a previously running instance of WEG if such an
+  instance exists.

@@ -1,0 +1,30 @@
+-*- mode:flyspell; -*-
+
+$Id$
+
+Changes since v1.0.15
+=====================
+
+WEG 2.0 is a ground-up re-write of WEG, as such everything has changed. Some
+of the more significant changes since WEG v1.0.15 are:
+
+o Large parts of WEG are now implemented in a library for Delphi called
+  WEGLib. If you're so inclined you can use WEGLib to develop your own
+  Norton Guide reader (be sure to understand the licence before you do).
+
+o On machines that have the VBScript regular expression class installed you
+  can do regular expression searching.
+
+o WEG is now an MDI application.
+
+o Every aspect of the colour setup is now configurable by the user.
+
+o WEG now uses a proper installer.
+
+o Guide menus and see-also lists are now proper menus (WEG 1.x used a tree
+  to navigate guides).
+
+However, please also note that, as of the time of writing, I've not yet
+implemented some of the facilities that existed in WEG 1.x. Please see
+TODO.txt for a list of these facilities. If you need these facilities you
+should probably keep WEG 1.x installed on your machine for a while longer.
