@@ -94,6 +94,8 @@ Type
     Function getIsShort : Boolean; Virtual;
     {** Get if this is a long entry }
     Function getIsLong : Boolean; Virtual;
+    {** Return a description of the entry type }
+    Function getTypeName : String; Virtual;
     {** Read the entry as a short entry }
     Procedure readShort( hNG : TStream ); Virtual;
     {** Read the entry as a long entry }
@@ -146,6 +148,8 @@ Type
     Property IsShort : Boolean Read getIsShort;
     {** Is this a long entry? }
     Property IsLong : Boolean Read getIsLong;
+    {** Get a description of the type of entry }
+    property TypeName : String Read getTypeName;
     {** Is there a previous entry? }
     Property HasPrevious : Boolean Read getHasPrevious;
     {** Is there a next entry? }
@@ -250,6 +254,24 @@ End;
 Function TwegLibNGEntry.getIsLong : Boolean;
 Begin
   Result := ( iType = wegLib_ENTRY_LONG );
+End;
+
+/////
+
+Function TwegLibNGEntry.getTypeName : String;
+ResourceString
+  RSShort   = 'Short';
+  RSLong    = 'Long';
+  RSUnknown = 'Unknown';
+Begin
+
+  Case iType Of
+    wegLib_ENTRY_SHORT : Result := RSShort;
+    wegLib_ENTRY_LONG  : Result := RSLong;
+  Else
+    Result := RSUnknown;
+  End;
+
 End;
 
 /////

@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v1.10
+===================
+
+o Added the TypeName property to TwegLibNGEntry.
+
 Changes since v1.9
 ==================
 
