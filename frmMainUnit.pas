@@ -188,7 +188,7 @@ Type
     Procedure loadWindowState;
     {** Remember a guide in the MRU lists }
     Procedure rememberInMRU( oGuide : TwegLibNortonGuide );
-    {** Procedure for re-opening a guide from the MRU list }
+    {** Procedure for reopening a guide from the MRU list }
     Procedure reopenFromMRU( oSender : TObject );
     {** Refresh the MRU menu }
     Procedure refreshMRUMenu;
@@ -833,7 +833,7 @@ End;
 
 Procedure TfrmMain.refreshMRUMenu;
 ResourceString
-  RSReOpen = 'Re-open "%s"';
+  RSReOpen = 'Reopen "%s"';
 Var
   i : Integer;
 Begin
@@ -845,7 +845,7 @@ Begin
   If slMRUTitles.Count > 0 Then
   Begin
 
-    // Populate the re-open menu list.
+    // Populate the reopen menu list.
     For i := 0 To slMRUTitles.Count - 1 Do
     Begin
       mnuFileReOpen.add( TTBItem.create( mnuFileReOpen ) );
@@ -859,14 +859,14 @@ Begin
       End;
     End;
 
-    // Enable the re-open menu item.
+    // Enable the reopen menu item.
     mnuFileReOpen.Enabled    := True;
     tbFileOpen.DropdownCombo := True;
 
   End
   Else
   Begin
-    // Disable the re-open menu item.
+    // Disable the reopen menu item.
     mnuFileReOpen.Enabled    := False;
     tbFileOpen.DropdownCombo := False;
   End;
