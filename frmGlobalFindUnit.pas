@@ -478,7 +478,7 @@ ResourceString
 Begin
 
   // Update the status bar.
-  sbGlobalFind.SimpleText := RSFinished;
+  sbGlobalFind.Panels[ 1 ].Text := RSFinished;
 
   // Reset the progress bars.
   pbGuides.Position       := 0;
@@ -494,7 +494,7 @@ ResourceString
 Begin
 
   // Update the status bar.
-  sbGlobalFind.SimpleText := RSFinished;
+  sbGlobalFind.Panels[ 1 ].Text := RSFinished;
 
   // Size the guides progress bar.
   pbGuides.Min := 0;
@@ -510,7 +510,7 @@ ResourceString
 Begin
 
   // Update the status bar.
-  sbGlobalFind.SimpleText := Format( RSNewGuide, [ NortonGuide.Title ] );
+  sbGlobalFind.Panels[ 1 ].Text := Format( RSNewGuide, [ NortonGuide.Title ] );
 
   // Update the guide progress bar.
   pbGuides.Position := NGFind.CurrentGuide + 1;

@@ -60,6 +60,7 @@ object frmGlobalFind: TfrmGlobalFind
         Caption = '&Options'
         object mnuOptionsSearch: TTBSubmenuItem
           Caption = '&Search'
+          Hint = 'Decide where to search'
           object mnuOptionsSearchCurrent: TTBItem
             Action = actOptionsSearchCurrentGuide
           end
@@ -69,6 +70,7 @@ object frmGlobalFind: TfrmGlobalFind
         end
         object mnuSearchLookIn: TTBSubmenuItem
           Caption = '&Look In'
+          Hint = 'Set the type of entry to look at'
           object mnuOptionsLookInShorts: TTBItem
             Action = actOptionsLookInShorts
           end
@@ -167,8 +169,15 @@ object frmGlobalFind: TfrmGlobalFind
     Top = 487
     Width = 559
     Height = 19
-    Panels = <>
-    SimplePanel = True
+    AutoHint = True
+    Panels = <
+      item
+        Width = 310
+      end
+      item
+        Width = 50
+      end>
+    SimplePanel = False
   end
   object lbHits: TListBox
     Left = 9
