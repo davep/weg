@@ -353,8 +353,8 @@ object frmMain: TfrmMain
     object actOptionsBOLShortSearch: TAction
       Caption = '&BOL Search First in Shorts'
       Hint = 
-        'When searching in short entries, do start-of-line searching in p' +
-        'reference to in-text searching?'
+        'When searching in short entries, do beginning-of-line searching ' +
+        'in preference to in-text searching?'
       OnExecute = actOptionsCheckItemExecute
     end
     object actWindowCascade: TAction
