@@ -1092,8 +1092,11 @@ End;
 
 Procedure TfrmMain.FormDragOver( Sender, Source : TObject; X, Y : Integer; State : TDragState; Var Accept : Boolean );
 Begin
-  // We accept dropped items from the guide manager or the bookmark window.
-  Accept := ( Source = frmGuideManager.lvGuides ) Or ( Source = frmBookmarks.lvBookmarks );
+  // We accept dropped items from the guide manager, the bookmark window and
+  // the global finder.
+  Accept := ( Source = frmGuideManager.lvGuides ) Or
+            ( Source = frmBookmarks.lvBookmarks ) Or
+            ( Source = frmGlobalFind.lbHits     );
 End;
 
 /////
@@ -1108,7 +1111,11 @@ Begin
   // Perhaps it's from the bookmark window?
   Else If Source = frmBookmarks.lvBookmarks Then
     // ...yup, open the bookmark.
-    frmBookmarks.actBookmarksOpenExecute( Sender );
+    frmBookmarks.actBookmarksOpenExecute( Sender )
+  // How about the global finder?
+  Else If Source = frmGlobalFind.lbHits Then
+    // ..that's it, open the hit.
+    frmGlobalFind.actFindOpenExecute( Sender );
     
 End;
 

@@ -191,6 +191,7 @@ object frmGlobalFind: TfrmGlobalFind
     Width = 541
     Height = 397
     Align = alClient
+    DragMode = dmAutomatic
     ItemHeight = 13
     ParentShowHint = False
     PopupMenu = popHits
