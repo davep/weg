@@ -57,6 +57,7 @@ object wegLibNGSettingsDialog: TwegLibNGSettingsDialog
     BevelInner = bvLowered
     Caption = 'pnlFont'
     TabOrder = 3
+    OnDblClick = btnFontClick
   end
   object cbUseColour: TCheckBox
     Left = 8
