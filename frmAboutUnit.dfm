@@ -144,6 +144,7 @@ object frmAbout: TfrmAbout
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
+    Cancel = True
     Caption = '&OK'
     Default = True
     ModalResult = 1
