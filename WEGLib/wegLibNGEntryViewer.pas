@@ -108,8 +108,6 @@ Type
     Procedure historyMove( Var aThis : TwegLibNGEntryViewerHistory; Var aOther : TwegLibNGEntryViewerHistory ); Virtual;
     {** Add a horizontal scroll bar } 
     Procedure addHorizontalScrollBar; Virtual;
-    {** Do we have an entry yet? }
-    Function hasEntry : Boolean; Virtual;
 
     {** Handle a click }
     Procedure click; Override;
@@ -130,6 +128,8 @@ Type
     {** Destructor }
     Destructor destroy; Override;
 
+    {** Do we have an entry yet? }
+    Function hasEntry : Boolean; Virtual;
     {** Display the entry at the given offset }
     Procedure display( lOffset : LongInt; iStartingLine : Integer = 0 ); Virtual;
     {** Load the first entry in the guide }

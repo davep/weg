@@ -7,6 +7,8 @@ Changes since v1.10
 
 o Added the TypeName property to TwegLibNGEntry.
 
+o Made TwegLibNGEntryViewer.hasEntry() public.
+
 Changes since v1.9
 ==================
 
