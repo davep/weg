@@ -354,7 +354,7 @@ End;
 
 Procedure TfrmGuide.populateMenu;
 ResourceString
-  RSSeeAlso = 'See Also';
+  RSSeeAlso = 'See &Also';
   RSJump    = 'Jump to the "%s" entry';
 Var
   i     : Integer;
