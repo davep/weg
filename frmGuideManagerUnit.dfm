@@ -102,6 +102,7 @@ object frmGuideManager: TfrmGuideManager
       end
       object mnuOptions: TTBSubmenuItem
         Caption = '&Options'
+        Hint = 'Options menu'
         object mnuOptionsShowHint: TTBItem
           Action = actOptionsShowHint
         end
