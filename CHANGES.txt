@@ -14,6 +14,8 @@ o You can now drag a bookmark from the bookmark window and drop it on the
 o You can now drag a hit from the global finder and drop it on the
   background of the main window to open the hit.
 
+o Implemented a "search" macro for the DDE support.
+
 Changes since v2.7
 ==================
 

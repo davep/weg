@@ -5,5 +5,5 @@ $Id$
 Things TODO to WEG:
 ===================
 
-o Implement searching macros for the DDE server.
+o No TODO items at the moment.
 

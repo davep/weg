@@ -72,13 +72,16 @@ DDE
 You can talk to WEG via DDE. The details are:
 
 Application: {path-to-weg}\weg
-Service....: weg
+Service....: WEG
 Topic......: Execute
 
-WEG currently implements a single macro called "open"; this lets you ask WEG
-to open a guide for you. The format is "open,{file-name}". For example, if
-you wanted to open c:\ng\foo.ng you'd execute a macro whose content is
-"open,c:\ng\foo.ng".
+WEG implements the following macros:
+
+Syntax: open,<filename>
+Usage.: Opens a guide. <filename> should be the full path to the guide.
+
+Syntax: search,<searchstring>
+Usage.: Opens the global finder and starts a search using <searchstring>.
 
 Feedback
 ========
