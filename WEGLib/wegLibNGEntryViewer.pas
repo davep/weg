@@ -434,7 +434,7 @@ Begin
   // See if the offset is valid.
   If hasEntry() Then
     // We've got an entry, see if the offset is valid.
-    Result := FEntry.validOffset( lOffset )
+    Result := FNortonGuide.isOffsetValidEntry( lOffset )
   Else
     // If we've not got an entry yet we assume that the link is valid.
     Result := True;

@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v1.4
+==================
+
+o The entry viewer now properly checks that a given offset is a real short
+  or long entry.
+
 Changes since v1.3
 ==================
 
