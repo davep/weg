@@ -9,6 +9,9 @@ o Modified the line parsing code so that if a colour attribute is in effect
   and a new attribute marker of the same value is seen it reverts to the
   normal text colour.
 
+o Modified the TFileStream oriented functions in wegLibUtils.pas so that
+  they work on a TStream instead of a TFileStream.
+
 Changes since v1.8
 ==================
 

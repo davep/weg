@@ -51,18 +51,18 @@ Type
 
 {** Decrypt a byte }
 Function wegLibDecrypt( c : Byte ) : Byte;
-{** Read a byte from the passed file stream }
-Function wegLibReadByte( hFile : TFileStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Byte;
-{** Read a word from the passed file stream }
-Function wegLibReadWord( hFile : TFileStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Word;
-{** Read a long from the passed file stream }
-Function wegLibReadLong( hFile : TFileStream; wlrt : TwegLibReadType = wlrtDecrypt ) : LongInt;
+{** Read a byte from the passed stream }
+Function wegLibReadByte( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Byte;
+{** Read a word from the passed stream }
+Function wegLibReadWord( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Word;
+{** Read a long from the passed stream }
+Function wegLibReadLong( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : LongInt;
 {** Expand the passed text }
 Function wegLibExpand( Const s : String ) : String;
-{** Get a string of a given length from the passed file }
-Function wegLibReadString( hFile : TFileStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
-{** Get a null terminated string from the passed file }
-Function wegLibReadStringZ( hFile : TFileStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
+{** Get a string of a given length from the passed stream }
+Function wegLibReadString( h : TStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
+{** Get a null terminated string from the passed stream }
+Function wegLibReadStringZ( h : TStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
 {** Convert OEM text to ANSI text }
 Function wegLibOEMToANSI( Const s : String ) : String;
 {** Convert a hex string into an integer }
@@ -85,13 +85,13 @@ End;
 
 /////
 
-Function wegLibReadByte( hFile : TFileStream; wlrt : TwegLibReadType ) : Byte;
+Function wegLibReadByte( h : TStream; wlrt : TwegLibReadType ) : Byte;
 Var
   c : Byte;
 Begin
 
   // Read the byte.
-  hFile.read( c, 1 );
+  h.read( c, 1 );
 
   // If we need to decrypt it...
   If wlrt = wlrtDecrypt Then
@@ -105,16 +105,16 @@ End;
 
 /////
 
-Function wegLibReadWord( hFile : TFileStream; wlrt : TwegLibReadType ) : Word;
+Function wegLibReadWord( h : TStream; wlrt : TwegLibReadType ) : Word;
 Var
   cLow  : Byte;
   cHigh : Byte;
 Begin
 
   // Read the low byte.
-  cLow := wegLibReadByte( hFile, wlrt );
+  cLow := wegLibReadByte( h, wlrt );
   // Read the high byte.
-  cHigh := wegLibReadByte( hFile, wlrt );
+  cHigh := wegLibReadByte( h, wlrt );
   // Combine them.
   Result := ( ( cHigh Shl 8 ) + cLow );
 
@@ -122,16 +122,16 @@ End;
 
 /////
 
-Function wegLibReadLong( hFile : TFileStream; wlrt : TwegLibReadType ) : LongInt;
+Function wegLibReadLong( h : TStream; wlrt : TwegLibReadType ) : LongInt;
 Var
   wLow  : Word;
   wHigh : Word;
 Begin
 
   // Read the low word.
-  wLow := wegLibReadWord( hFile, wlrt );
+  wLow := wegLibReadWord( h, wlrt );
   // Read the high word.
-  wHigh := wegLibReadWord( hFile, wlrt );
+  wHigh := wegLibReadWord( h, wlrt );
   // Combine them.
   Result := ( ( wHigh Shl 16 ) + wLow );
 
@@ -178,7 +178,7 @@ Begin
         // Everything looks reasonably normal, do the unrolling.
         For iExpand := 1 To iRLE Do
           Result := Result + ' ';
-        
+
     End
     // ...otherwise, if we're not supposed to jump the next character...
     Else If Not bJump Then
@@ -192,7 +192,7 @@ End;
 
 /////
 
-Function wegLibReadString( hFile : TFileStream; wLen : Word; wlrt : TwegLibReadType ) : String;
+Function wegLibReadString( h : TStream; wLen : Word; wlrt : TwegLibReadType ) : String;
 Var
   pBuff : PByteArray;
   i     : Integer;
@@ -204,7 +204,7 @@ Begin
   Try
 
     // Read wLen bytes from the file into the buffer.
-    hFile.read( pBuff^, wLen );
+    h.read( pBuff^, wLen );
 
     // Decrypt the content of the buffer if necessary.
     If wlrt = wlrtDecrypt Then
@@ -229,19 +229,19 @@ End;
 
 /////
 
-Function wegLibReadStringZ( hFile : TFileStream; wLen : Word; wlrt : TwegLibReadType ) : String;
+Function wegLibReadStringZ( h : TStream; wLen : Word; wlrt : TwegLibReadType ) : String;
 Var
   lSavOff : LongInt;
 Begin
 
   // Remember where we are.
-  lSavOff := hFile.seek( 0, soFromCurrent );
+  lSavOff := h.seek( 0, soFromCurrent );
 
   // Load the string.
-  Result := wegLibReadString( hFile, wLen, wlrt );
+  Result := wegLibReadString( h, wLen, wlrt );
 
   // Now roll back to the next byte after the end of what was read.
-  hFile.seek( lSavOff + Length( Result ) + 1, soFromBeginning );
+  h.seek( lSavOff + Length( Result ) + 1, soFromBeginning );
   
 End;
 
