@@ -40,7 +40,7 @@ Type
   Public
 
     {** Load the see-also entries }
-    Procedure load( hNG : TFileStream ); Override;
+    Procedure load( hNG : TStream ); Override;
 
   End;
 
@@ -48,10 +48,10 @@ Implementation
 
 Uses
   wegLibUtils;
-  
+
 /////
 
-Procedure TwegLibNGSeeAlso.load( hNG : TFileStream );
+Procedure TwegLibNGSeeAlso.load( hNG : TStream );
 ResourceString
   RSSeeAlso = 'See Also';
 Var

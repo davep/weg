@@ -81,8 +81,8 @@ Type
     {** Destructor }
     Destructor destroy; Override;
 
-    {** Load a menu from the passed file, note that we expect to be past the entry marker. }
-    Procedure load( hNG : TFileStream ); Virtual;
+    {** Load a menu from the passed stream, note that we expect to be past the entry marker. }
+    Procedure load( hNG : TStream ); Virtual;
     {** Add a prompt to the menu }
     Procedure add( Const sPrompt : String; lOffset : LongInt ); Virtual;
 
@@ -108,7 +108,7 @@ End;
 
 /////
 
-Procedure TwegLibNGMenu.load( hNG : TFileStream );
+Procedure TwegLibNGMenu.load( hNG : TStream );
 Var
   i        : Integer;
   iPrompts : Word;

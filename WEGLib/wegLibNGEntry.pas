@@ -95,11 +95,11 @@ Type
     {** Get if this is a long entry }
     Function getIsLong : Boolean; Virtual;
     {** Read the entry as a short entry }
-    Procedure readShort( hNG : TFileStream ); Virtual;
+    Procedure readShort( hNG : TStream ); Virtual;
     {** Read the entry as a long entry }
-    Procedure readLong( hNG : TFileStream ); Virtual;
+    Procedure readLong( hNG : TStream ); Virtual;
     {** Read the text for the entry }
-    Procedure readText( hNG : TFileStream ); Virtual;
+    Procedure readText( hNG : TStream ); Virtual;
     {** Strip the control characters from the passed text }
     Function stripControls( sRaw : String ) : String; Virtual;
     {** Is there a previous entry }
@@ -161,8 +161,8 @@ Type
     {** Destructor }
     Destructor destroy; Override;
 
-    {** Load an entry from the passed file }
-    Procedure load( hNG : TFileStream ); Virtual;
+    {** Load an entry from the passed stream }
+    Procedure load( hNG : TStream ); Virtual;
     {** Is the passed offset a valid offset? }
     Function validOffset( lOffset : LongInt ) : Boolean; Virtual;
     {** Is the passed menu ID vaid? }
@@ -254,7 +254,7 @@ End;
 
 /////
 
-Procedure TwegLibNGEntry.load( hNG : TFileStream );
+Procedure TwegLibNGEntry.load( hNG : TStream );
 Begin
 
   // Free any previously used see-also list.
@@ -297,7 +297,7 @@ End;
 
 /////
 
-Procedure TwegLibNGEntry.readShort( hNG : TFileStream );
+Procedure TwegLibNGEntry.readShort( hNG : TStream );
 Var
   i : Integer;
 Begin
@@ -321,7 +321,7 @@ End;
 
 /////
 
-Procedure TwegLibNGEntry.readLong( hNG : TFileStream );
+Procedure TwegLibNGEntry.readLong( hNG : TStream );
 Begin
 
   // First we load the text of the entry.
@@ -335,7 +335,7 @@ End;
 
 /////
 
-Procedure TwegLibNGEntry.readText( hNG : TFileStream );
+Procedure TwegLibNGEntry.readText( hNG : TStream );
 Const
   MAX_LINE_LENGTH = 512;
 Var
