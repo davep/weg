@@ -191,6 +191,7 @@ object frmGlobalFind: TfrmGlobalFind
     ItemHeight = 13
     PopupMenu = popHits
     TabOrder = 5
+    OnClick = lbHitsClick
     OnDblClick = actFindOpenExecute
   end
   object pbGuides: TProgressBar

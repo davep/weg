@@ -22,6 +22,3 @@ o When closing down, remember if the bookmarks window was open and open it
 
 o When closing down, remember if the global finder was open and open it the
   next time WEG is run.
-
-o The global finder doesn't give the user any indication as to where a hit
-  was found; it did do this in WEG 1.x. Correct this omission.

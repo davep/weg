@@ -138,6 +138,7 @@ Type
     procedure actOptionsMatchCaseUpdate(Sender: TObject);
     procedure actOptionsMatchCaseExecute(Sender: TObject);
     procedure NGFindBadRegExp(Sender: TObject);
+    procedure lbHitsClick(Sender: TObject);
 
   Protected
 
@@ -549,7 +550,9 @@ Begin
   // Clear the content of the list box.
   lbHits.Items.clear();
   // Set the length of the results array to zero.
-  SetLength( aResults, 0 ); 
+  SetLength( aResults, 0 );
+  // Clear out the status.
+  sbGlobalFind.Panels[ 1 ].Text := '';
 End;
 
 /////
@@ -659,6 +662,19 @@ Begin
   MessageBeep( MB_ICONERROR );
   MessageDlg( RSBadRegExp, mtError, [ mbOk ], 0 );
   
+End;
+
+/////
+
+Procedure TfrmGlobalFind.lbHitsClick( Sender : TObject );
+ResourceString
+  RSFoundIn = 'Found in ''%s''';
+Begin
+
+  If Not NGFind.Finding Then
+    If lbHits.ItemIndex <> -1 Then
+      sbGlobalFind.Panels[ 1 ].Text := Format( RSFoundIn, [ aResults[ lbHits.ItemIndex ].sTitle ] );
+
 End;
 
 End.

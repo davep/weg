@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.5
+==================
+
+o The global finder now tells you -- in the status bar -- the name of the
+  guide that a hit was found in.
+
 Changes since v2.4
 ==================
 
