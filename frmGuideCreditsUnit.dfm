@@ -99,4 +99,13 @@ object frmGuideCredits: TfrmGuideCredits
     WordWrap = False
     OnEnter = memCreditsEnter
   end
+  object btnCopy: TButton
+    Left = 5
+    Top = 267
+    Width = 75
+    Height = 25
+    Caption = '&Copy'
+    TabOrder = 2
+    OnClick = btnCopyClick
+  end
 end

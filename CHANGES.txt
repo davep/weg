@@ -15,6 +15,9 @@ o The toolbar configuration of each of the guide windows is now saved and
 o Added the ability to copy just the highlighted line of an entry to the
   clipboard.
 
+o Added a copy button to the guide information dialog so that you can copy
+  a guide's credits to the clipboard.
+
 Changes since v2.11
 ===================
 

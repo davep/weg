@@ -54,8 +54,10 @@ Type
     lblFileSize: TLabel;
     lblTimeStampLabel: TLabel;
     lblTimeStamp: TLabel;
+    btnCopy: TButton;
     procedure FormShow(Sender: TObject);
     procedure memCreditsEnter(Sender: TObject);
+    procedure btnCopyClick(Sender: TObject);
 
   Public
 
@@ -67,6 +69,7 @@ Type
 Implementation
 
 Uses
+  Clipbrd,
   frmMainUnit;
 
 {$R *.DFM}
@@ -95,8 +98,12 @@ Begin
   // If there are some credits...
   If Trim( oNortonGuide.Credits ) <> '' Then
     // ...place them in the memo.
-    memCredits.Lines.Text := oNortonGuide.Credits;
-    
+    memCredits.Lines.Text := oNortonGuide.Credits
+  Else
+    // ...hide the copy button, there's nothing to copy.
+    btnCopy.Visible := False;  
+
+
 End;
 
 /////
@@ -104,6 +111,13 @@ End;
 Procedure TfrmGuideCredits.memCreditsEnter( Sender : TObject );
 Begin
   btnOK.setFocus();
+End;
+
+/////
+
+Procedure TfrmGuideCredits.btnCopyClick( Sender : TObject );
+Begin
+  Clipboard().asText := memCredits.Lines.Text;
 End;
 
 End.
