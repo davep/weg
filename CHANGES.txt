@@ -13,6 +13,8 @@ o When a guide name is provided on the command line or via DDE and it
   the current directory the file will be looked for in the default guide
   directory.
 
+o DDE support now handles multi-line macros.
+
 Changes since v2.10
 ===================
 

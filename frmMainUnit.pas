@@ -1124,28 +1124,27 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
     End
 
   End;
-  
-ResourceString
-  RSNoMessage = 'DDE error.'#13#10#13#10'No message passed for topic Execute';
+
 Var
   slCall    : TStringList;
   sFunction : String;
+  i         : Integer;
 Begin
 
   // Ensure the user can see the application.
   Application.restore();
 
-  // If we've got something to execute...
-  If Msg.Count > 0 Then
+  // For each line in the macro...
+  For i := 0 To Msg.Count - 1 Do
   Begin
 
-    // Create a string list to hold the macro call.
+    // Create a string list to hold the macro line.
     slCall := TStringList.create();
 
     Try
 
-      // Create a string list out of the macro.
-      slCall.CommaText := Msg[ 0 ];
+      // Create a string list out of the macro line.
+      slCall.CommaText := Msg[ i ];
 
       // Extract the function.
       sFunction := AnsiLowerCase( slCall[ 0 ] );
@@ -1164,12 +1163,6 @@ Begin
       slCall.free();
     End;
 
-  End
-  Else
-  Begin
-    // Nothing passed for execution, tell the user.
-    MessageBeep( MB_ICONERROR );
-    MessageDlg( RSNoMessage, mtError, [ mbOk ], 0 );
   End;
 
 End;
