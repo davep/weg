@@ -390,7 +390,7 @@ Begin
       CTRL_CHAR :
       Begin
         Result := Result + CTRL_CHAR;
-				Inc( iCtrl, 2 );
+        Inc( iCtrl, 2 );
       End;
 
       Else
