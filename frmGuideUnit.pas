@@ -1228,13 +1228,27 @@ End;
 Procedure TfrmGuide.NGEntryDragDrop( Sender, Source : TObject; X, Y : Integer );
 Begin
 
-  // If the user is dropping a guide from somewhere we know, open it...
-  If Source = frmGuideManager.lvGuides Then
-    frmMain.openGuide( frmGuideManager.highlightedGuide(), self )
-  Else If Source = frmBookmarks.lvBookmarks Then
-    frmMain.openGuide( frmBookmarks.highlightedGuide(), self, frmBookmarks.highlightedOffset() )
-  Else If Source = frmGlobalFind.lbHits Then
-    frmMain.openGuide( frmGlobalFind.highlightedGuide(), self, frmGlobalFind.highlightedOffset(), frmGlobalFind.highlightedLine() )
+  // We're starting a brand new browsing session in the same window, suspend
+  // history while we start things off.
+  NGEntry.HistorySuspended := True;
+
+  Try
+
+    // If the user is dropping a guide from somewhere we know, open it...
+    If Source = frmGuideManager.lvGuides Then
+      frmMain.openGuide( frmGuideManager.highlightedGuide(), self )
+    Else If Source = frmBookmarks.lvBookmarks Then
+      frmMain.openGuide( frmBookmarks.highlightedGuide(), self, frmBookmarks.highlightedOffset() )
+    Else If Source = frmGlobalFind.lbHits Then
+      frmMain.openGuide( frmGlobalFind.highlightedGuide(), self, frmGlobalFind.highlightedOffset(), frmGlobalFind.highlightedLine() );
+
+    // Clear the history.
+    NGEntry.clearHistory();
+
+  Finally
+    // Start up history tracking again.
+    NGEntry.HistorySuspended := False;
+  End;
 
 End;
 
