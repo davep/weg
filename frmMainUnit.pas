@@ -171,7 +171,7 @@ Type
   Public
 
     {** Open a guide in the given window }
-    Function openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
+    Function openGuide( sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Open a guide }
     Function openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Return a pointer to the focused Norton Guide }
@@ -275,9 +275,17 @@ Const
 
 /////
 
-Function TfrmMain.openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
+Function TfrmMain.openGuide( sFile : String; oWindow : TfrmGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
 Begin
 
+  // If the file doesn't exist and there is no path information...
+  If Not FileExists( sFile ) And ( ExtractFilePath( sFile ) = '' ) Then
+    // ...if we've got a default guide directory...
+    If NGSettings.DefaultGuideDirectory <> '' Then
+      // ...assume that the user wishes to try and open it from the default
+      // guide directory.
+      sFile := IncludeTrailingBackslash( NGSettings.DefaultGuideDirectory ) + sFile;
+      
   With oWindow Do
   Begin
 

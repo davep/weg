@@ -8,6 +8,11 @@ Changes since v2.11
 o Changed the in-entry finder so that the find dialog retains focus when the
   find button is pressed.
 
+o When a guide name is provided on the command line or via DDE and it
+  doesn't have a path attached and it isn't in whatever Windows thinks is
+  the current directory the file will be looked for in the default guide
+  directory.
+
 Changes since v2.10
 ===================
 
