@@ -5,8 +5,8 @@ $Id$
 Changes since v1.11
 ===================
 
-o Published the OnDragOver and OnDragDrop events of the entry viewer
-  component.
+o Published many more of the entry viewer component's inherited events and
+  properties.
 
 o Added methods for reloading the header and the menus of a guide.
 

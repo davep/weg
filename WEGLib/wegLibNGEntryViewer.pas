@@ -194,16 +194,33 @@ Type
 
     // Publish some inherited properties.
     Property Align;
+    Property Anchors;
+    Property BorderStyle;
+    Property DragCursor;
+    Property DragKind;
+    Property DragMode;
+    Property Enabled;
+    Property IntegralHeight;
     Property Font;
+    Property HelpContext;
     Property Hint;
     Property MultiSelect;
     Property PopupMenu;
+    Property ShowHint;
+    Property TabOrder;
+    Property Visible;
 
     // Publish some inherited events.
     Property OnClick;
     Property OnDragOver;
     Property OnDragDrop;
+    Property OnEndDock;
+    Property OnEndDrag;
+    Property OnEnter;
+    Property OnExit;
     Property OnKeyPress;
+    Property OnStartDock;
+    Property OnStartDrag;
 
   End;
 
