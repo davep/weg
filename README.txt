@@ -22,10 +22,21 @@ Latest Release
 
 You'll always find the latest release of WEG at:
 
-    http://www.davep.org/norton-guides/#weg
+    <URL:http://www.davep.org/norton-guides/#weg>
 
 See the file CHANGES.txt for details of what has changed in this and
 previous releases.
+
+Building WEG
+============
+
+To build WEG you'll need Delphi. I developed WEG and WEGLib with Delphi 5, I
+don't know if this code will build with later versions of Delphi (I'm pretty
+certain that it won't build with Kylix). You'll then need to build and
+install WEGLib. You will also need to get and install Toolbar2000. You can
+get it from <URL:http://www.jrsoftware.org/>. Note that Toolbar2000 is free
+to use as long as you're building free software (well, "non-profit" software
+anyway).
 
 Feedback
 ========
@@ -51,5 +62,6 @@ o Mark 'Gomez' Adams for his "20% hack" when dealing with fonts.
 o Viktor Trunov for his feedback and ideas and for testing WEG v1.x against
   Russian language guides.
 o The inmates of comp.lang.clipper for their feedback, ideas and support.
+o Jordon Russell for Toolbar2000.
 
 $Id$
