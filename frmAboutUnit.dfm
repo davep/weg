@@ -74,9 +74,9 @@ object frmAbout: TfrmAbout
   object lblCopyright: TLabel
     Left = 8
     Top = 32
-    Width = 184
+    Width = 216
     Height = 13
-    Caption = 'Copyright © 2003 Dave Pearson'
+    Caption = 'Copyright © 1998-2003 Dave Pearson'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
