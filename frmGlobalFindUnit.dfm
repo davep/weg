@@ -123,7 +123,9 @@ object frmGlobalFind: TfrmGlobalFind
       ClientAreaWidth = 294
       DockPos = 32
       DockRow = 1
+      ParentShowHint = False
       Resizable = False
+      ShowHint = True
       TabOrder = 2
       object lblSearchFor: TLabel
         Left = 8
@@ -138,6 +140,7 @@ object frmGlobalFind: TfrmGlobalFind
         Top = 1
         Width = 221
         Height = 21
+        Hint = 'Enter the search term here'
         ItemHeight = 13
         TabOrder = 0
       end
