@@ -980,6 +980,7 @@ Var
   i       : Integer;
   iY      : Integer;
   slLines : TStringList;
+  rRect   : TRect;
 Begin
 
   // Check that the user actually wants to print.
@@ -1025,7 +1026,9 @@ Begin
               // Print the line.
               With TwegLibNGLinePainter.create() Do
                 Try
-                  parse( slLines[ i ], Canvas, iY, 0, NortonGuide.OEMToANSI );
+                  rRect     := Canvas.ClipRect;
+                  rRect.Top := iY;
+                  parse( slLines[ i ], Canvas, rRect, NortonGuide.OEMToANSI );
                 Finally
                   free();
                 End;
