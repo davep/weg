@@ -15,7 +15,7 @@ o When a guide name is provided on the command line or via DDE and it
 
 o Re-worked the DDE macros that deal with the global search window to make
   controlling searches a lot more flexible. Please note that this isn't a
-  backward compatible change. See README.txt for details of the news macros.
+  backward compatible change. See README.txt for details of the new macros.
 
 o DDE support now handles multi-line macros.
 
