@@ -1,6 +1,6 @@
 -*- mode:flyspell; -*-
 
-                       Expert Guide for Windows v2.5
+                       Expert Guide for Windows v2.6
                        =============================
 
                               By Dave pearson
@@ -45,9 +45,9 @@ of "Fixedsys" and the guide reading code will do OEM to ANSI translation.
 Personally, for the types of guides I read (US/UK English with lots of line
 drawing characters), I've found that "MS Linedraw" with OEM to ANSI
 translation turned off works best. I'd suggest that you try and track down a
-copy of "MS Linedraw" and use that. I don't think it ships with later
-versions of Windows so you might need to go hunting in earlier Windows
-installs.
+copy of "MS Linedraw" and use that. As best as I can tell it used to ship
+with some versions of Microsoft Office. A search on Google seems to turn up
+copies for download.
 
 Please don't ask me to send you a copy of the font. I will ignore such
 requests.
