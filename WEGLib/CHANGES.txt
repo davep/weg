@@ -18,6 +18,10 @@ o Modified the Entry, Menu and See-Also classes so that they work on TStream
 o Increased the max read line length from 512 to 1024 to stay consistent
   with the limits mentioned in the Expert Help Compiler manual.
 
+o Limited the max number of read see-also entries to 20 to stay consistent
+  with the limits mentioned in the Expert Help Compiler manual. This change
+  also helps guard against corrupt guides.
+
 Changes since v1.8 
 ==================
 

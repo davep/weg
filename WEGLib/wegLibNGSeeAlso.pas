@@ -47,6 +47,7 @@ Type
 Implementation
 
 Uses
+  Math,
   wegLibUtils;
 
 /////
@@ -62,8 +63,11 @@ Begin
   // Set the title of the menu.
   FTitle := RSSeeAlso;
   
-  // Get the see-also count.
-  iPrompts := wegLibReadWord( hNG );
+  // Get the see-also count. Note that we only deal with a max of 20 see-also
+  // entries. This is the limit published in the Expert Help Compiler manual
+  // and, while this limit isn't really needed here, it does help guard
+  // against corrupt guides.
+  iPrompts := Min( wegLibReadWord( hNG ), 20 );
 
   // Size the see-also array.
   SetLength( FPrompts, iPrompts );
