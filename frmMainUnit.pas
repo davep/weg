@@ -500,16 +500,18 @@ Begin
           If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ), True ) Then
             Try
 
-              // Loop over the child windows, saving their state.
+              // Loop over the child guide windows, saving their state.
               For i := 0 To MDIChildCount - 1 Do
-              Begin
-                sPrefix := IntToStr( ( MDIChildCount - 1 ) - i ) + '.';
-                writeString(  sPrefix + REG_GUIDE,    TfrmGuide( MDIChildren[ i ] ).NortonGuide.Guide );
-                writeInteger( sPrefix + REG_ENTRY,    TfrmGuide( MDIChildren[ i ] ).NGEntry.Entry.Offset );
-                writeInteger( sPrefix + REG_LINE,     TfrmGuide( MDIChildren[ i ] ).NGEntry.ItemIndex );
-                writeInteger( sPrefix + REG_TOP_LINE, TfrmGuide( MDIChildren[ i ] ).NGEntry.TopIndex );
-                wegSaveWindowState( MDIChildren[ i ], oReg, sPrefix );
-              End;
+                If MDIChildren[ i ] Is TfrmGuide Then
+                Begin
+                  sPrefix := IntToStr( ( MDIChildCount - 1 ) - i ) + '.';
+                  writeString(  sPrefix + REG_GUIDE,    TfrmGuide( MDIChildren[ i ] ).NortonGuide.Guide );
+                  writeInteger( sPrefix + REG_ENTRY,    TfrmGuide( MDIChildren[ i ] ).NGEntry.Entry.Offset );
+                  writeInteger( sPrefix + REG_LINE,     TfrmGuide( MDIChildren[ i ] ).NGEntry.ItemIndex );
+                  writeInteger( sPrefix + REG_TOP_LINE, TfrmGuide( MDIChildren[ i ] ).NGEntry.TopIndex );
+                  wegSaveWindowState( MDIChildren[ i ], oReg, sPrefix );
+                  TBRegSavePositions( MDIChildren[ i ], HKEY_CURRENT_USER, wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN, sPrefix + REG_TOOLBARS ] ) );
+                End;
 
               // Remember if the guide manager was open.
               writeBool( REG_GUIDE_MANAGER_OPEN, frmGuideManager.Visible );
@@ -627,8 +629,9 @@ Begin
               // If it looks like we managed to open the window...
               If oForm <> Nil Then
               Begin
-                // ... try and restore the window's size and location.
+                // ... try and restore the window's size, configuration and location.
                 wegRestoreWindowState( oForm, oReg, sPrefix );
+                TBRegLoadPositions( oForm, HKEY_CURRENT_USER, wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN, sPrefix + REG_TOOLBARS ] ) );
                 TfrmGuide( oForm ).NGEntry.TopIndex := iTopLine;
                 // Ensure that the item index is the selected line.
                 TfrmGuide( oForm ).NGEntry.Selected[ TfrmGuide( oForm ).NGEntry.ItemIndex ] := True; 
@@ -922,11 +925,12 @@ Begin
 
   // Refresh the guide windows.
   For i := MDIChildCount - 1 DownTo 0 Do
-    With TfrmGuide( MDIChildren[ i ] ) Do
-    Begin
-      NortonGuide.readSettings();
-      NGEntry.redisplay();
-    End;
+    If MDIChildren[ i ] Is TfrmGuide Then
+      With TfrmGuide( MDIChildren[ i ] ) Do
+      Begin
+        NortonGuide.readSettings();
+        NGEntry.redisplay();
+      End;
 
   // Refresh the global find window.
   frmGlobalFind.NortonGuide.readSettings();
