@@ -15,3 +15,5 @@ o Associating .NG files doesn't work so well with WEG now that it is an MDI
   instance exists.
 
 o Bookmarks (was in WEG 1.x).
+
+o URL scanner (was in WEG 1.x)
