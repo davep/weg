@@ -6,6 +6,8 @@ object frmGuideCredits: TfrmGuideCredits
   BorderIcons = [biSystemMenu]
   Caption = 'Credits for'
   Color = clBtnFace
+  Constraints.MinHeight = 324
+  Constraints.MinWidth = 500
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -104,6 +106,7 @@ object frmGuideCredits: TfrmGuideCredits
     Top = 267
     Width = 75
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = '&Copy'
     TabOrder = 2
     OnClick = btnCopyClick
