@@ -78,6 +78,8 @@ Type
 
     {** Stream for the open guide }
     hNG : TFileStream;
+    {** Remember where we found the menus }
+    lMenuOffset : LongInt;
 
     {** Handle notification messages }
     Procedure notification( AComponent : TComponent; Operation : TOperation ); Override;
@@ -168,6 +170,10 @@ Type
     Function isEOF : Boolean; Virtual;
     {** Is the passed offset a valid entry? }
     Function isOffsetValidEntry( lOffset : LongInt ) : Boolean; Virtual;
+    {** Reload the header }
+    Procedure reloadHeader; Virtual;
+    {** Reload the menus }
+    Procedure reloadMenus; Virtual;
 
   Published
 
@@ -350,6 +356,9 @@ Begin
   // Read the title of the guide. We always OEM->ANSI this.
   FTitle := wegLibOEMToANSI( wegLibReadString( hNG, 40, wlrtNoDecrypt ) );
 
+  // Ensure that the credits start out empty.
+  FCredits := '';
+
   // Read the credits for the guide.
   For i := 0 To 4 Do
     If FOEMToANSI Then
@@ -380,7 +389,11 @@ Begin
   // Size the menu array.
   SetLength( FMenus, FMenuCount );
 
-  // Loop over each entry in the guide, looking for menus and loading them.  
+  // Remember where we started looking for menus, this is used if we need to
+  // reload menus.
+  lMenuOffset := hNG.seek( 0, soFromCurrent );
+  
+  // Loop over each entry in the guide, looking for menus and loading them.
   Repeat
 
     Case wegLibReadWord( hNG ) Of
@@ -681,10 +694,49 @@ End;
 
 /////
 
+Procedure TwegLibNortonGuide.reloadHeader;
+Var
+  lSavOff : LongInt;
+Begin
+
+  lSavOff := hNG.seek( 0, soFromCurrent );
+  Try
+    hNG.seek( 0, soFromBeginning );
+    readHeader();
+  Finally
+    hNG.seek( lSavOff, soFromBeginning );
+  End;
+
+End;
+
+/////
+
+Procedure TwegLibNortonGuide.reloadMenus;
+Var
+  lSavOff : LongInt;
+Begin
+
+  // If there's anything to reload...
+  If FMenuCount > 0 Then
+  Begin
+
+    lSavOff := hNG.seek( 0, soFromCurrent );
+    Try
+      hNG.seek( lMenuOffset, soFromBeginning );
+      loadMenus();
+    Finally
+      hNG.seek( lSavOff, soFromBeginning );
+    End;
+
+  End;
+
+End;
+
+/////
+
 Procedure Register;
 Begin
   RegisterComponents( 'org.davep.weglib', [ TwegLibNortonGuide ] );
 End;
 
 End.
- 
