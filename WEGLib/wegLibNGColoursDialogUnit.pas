@@ -172,11 +172,28 @@ Begin
 
 End;
 
-//
+/////
 
 Procedure TwegLibNGColoursDialog.FormShow( Sender : TObject );
 Begin
+
+  // Only the normal text list is populated; no point in repeating the text
+  // so many times. Copy the colour text to the other lists.
+  cbNormalBackground.Items    := cbNormalText.Items;
+  cbBoldText.Items            := cbNormalText.Items;
+  cbBoldBackground.Items      := cbNormalText.Items;
+  cbReverseText.Items         := cbNormalText.Items;
+  cbReverseBackground.Items   := cbNormalText.Items;
+  cbUnderlineText.Items       := cbNormalText.Items;
+  cbUnderlineBackground.Items := cbNormalText.Items;
+  cbSelectedText.Items        := cbNormalText.Items;
+  cbSelectedBackground.Items  := cbNormalText.Items;
+  cbFocusedText.Items         := cbNormalText.Items;
+  cbFocusedBackground.Items   := cbNormalText.Items;
+
+  // Populate the dialog.
   populateDialog();
+  
 End;
 
 /////

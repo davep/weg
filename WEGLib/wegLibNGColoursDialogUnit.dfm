@@ -453,23 +453,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 1
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbBoldText: TComboBox
       Left = 64
@@ -480,23 +463,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 2
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbBoldBackground: TComboBox
       Left = 176
@@ -507,23 +473,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 3
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbReverseText: TComboBox
       Left = 64
@@ -534,23 +483,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 4
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbReverseBackground: TComboBox
       Left = 176
@@ -561,23 +493,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 5
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbUnderlineText: TComboBox
       Left = 64
@@ -588,23 +503,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 6
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbUnderlineBackground: TComboBox
       Left = 176
@@ -615,23 +513,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 7
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbSelectedText: TComboBox
       Left = 64
@@ -642,23 +523,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 8
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbSelectedBackground: TComboBox
       Left = 176
@@ -669,23 +533,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 9
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbFocusedText: TComboBox
       Left = 64
@@ -696,23 +543,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 10
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
     object cbFocusedBackground: TComboBox
       Left = 176
@@ -723,23 +553,6 @@ object wegLibNGColoursDialog: TwegLibNGColoursDialog
       ItemHeight = 16
       TabOrder = 11
       OnDrawItem = cbNGColourDrawItem
-      Items.Strings = (
-        'Black'
-        'Blue'
-        'Green'
-        'Cyan'
-        'Red'
-        'Violet'
-        'Brown'
-        'White'
-        'Bright Black'
-        'Bright Blue'
-        'Bright Green'
-        'Bright Cyan'
-        'Bright Red'
-        'Bright Violet'
-        'Bright Brown'
-        'Bright White')
     end
   end
   object btnDefaults: TButton
