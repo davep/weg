@@ -1,3 +1,4 @@
+;; -*- ini-generic -*-
 ;; $Id$
 
 [Setup]
