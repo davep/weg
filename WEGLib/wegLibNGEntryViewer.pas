@@ -295,12 +295,14 @@ Begin
 
       // If we're not doing a history thing.
       If Not bDoingHistory Then
-      Begin
-        // Remember the current entry.
-        rememberEntry( aBackHistory );
-        // Zero out the fore history.
-        aForeHistory := Nil;
-      End;
+        // If this won't result in being in the same place as we are now.
+        If ( FEntry = Nil ) Or ( lOffset <> FEntry.Offset ) Or ( iStartingLine <> ItemIndex ) Then
+        Begin
+          // Remember the current entry.
+          rememberEntry( aBackHistory );
+          // Zero out the fore history.
+          aForeHistory := Nil;
+        End;
 
       // Free any entry we're looking at.
       freeEntry( FEntry );
