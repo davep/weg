@@ -22,6 +22,8 @@ o The bookmark manager now makes a better guess at a default title for a
 o The guide printing code now makes a better guess at a good title for a
   print job.
 
+o Added short-cuts for each of the window oriented menu items.
+
 Changes since v2.5
 ==================
 

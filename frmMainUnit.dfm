@@ -298,6 +298,7 @@ object frmMain: TfrmMain
       Caption = '&Cascade'
       Hint = 'Cascade windows'
       ImageIndex = 2
+      ShortCut = 16449
       OnExecute = actWindowCascadeExecute
       OnUpdate = actWindowUpdate
     end
@@ -305,6 +306,7 @@ object frmMain: TfrmMain
       Caption = 'Tile &Horizontal'
       Hint = 'Horizontally tile windows'
       ImageIndex = 3
+      ShortCut = 16456
       OnExecute = actWindowTileHorizontalExecute
       OnUpdate = actWindowUpdate
     end
@@ -312,6 +314,7 @@ object frmMain: TfrmMain
       Caption = 'Tile &Vertical'
       Hint = 'Vertically tile windows'
       ImageIndex = 4
+      ShortCut = 16470
       OnExecute = actWindowTileVerticalExecute
       OnUpdate = actWindowUpdate
     end
