@@ -3,6 +3,6 @@
 Known WEG bugs:
 ===============
 
-o Changing guides in an existing guide window breaks the history system.
+o No known bugs.
 
 $Id$
