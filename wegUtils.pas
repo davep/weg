@@ -136,29 +136,30 @@ End;
 
 Procedure wegSaveWindowState( oForm : TCustomForm; oReg : TRegistry; Const sPrefix : String );
 Var
-  wsSave : TWindowState;
+  rPlacement : TWindowPlacement;
 Begin
 
-  // Remember the window's state.
-  wsSave := oForm.WindowState;
+  // Init the size field of the placement record.
+  rPlacement.length := SizeOf( TWindowPlacement );
 
-  Try
+  // Try and get the window's placement.
+  If GetWindowPlacement( oForm.Handle, @rPlacement ) Then
+  Begin
 
+    // We got it, save the placement details of the widnow.
+    
     // Write the maximized flag.
     oReg.writeBool( sPrefix + REG_FORM_MAXIMIZED, oForm.WindowState = wsMaximized );
 
-    // Now ensure that the window is in its normal state so that we can save the size/location.
-    oForm.WindowState := wsNormal;
-
     // Save the main location details.
-    oReg.writeInteger( sPrefix + REG_FORM_TOP,    oForm.Top    );
-    oReg.writeInteger( sPrefix + REG_FORM_LEFT,   oForm.Left   );
-    oReg.writeInteger( sPrefix + REG_FORM_WIDTH,  oForm.Width  );
-    oReg.writeInteger( sPrefix + REG_FORM_HEIGHT, oForm.Height );
+    With rPlacement.rcNormalPosition Do
+    Begin
+      oReg.writeInteger( sPrefix + REG_FORM_TOP,    Top          );
+      oReg.writeInteger( sPrefix + REG_FORM_LEFT,   Left         );
+      oReg.writeInteger( sPrefix + REG_FORM_WIDTH,  Right - Left );
+      oReg.writeInteger( sPrefix + REG_FORM_HEIGHT, Bottom - Top )
+    End;
 
-  Finally
-    // Restore the WindowState of the window.
-    oForm.WindowState := wsSave;
   End;
 
 End;

@@ -79,5 +79,7 @@ o Viktor Trunov for his feedback and ideas and for testing WEG v1.x against
   Russian language guides.
 o The inmates of comp.lang.clipper for their feedback, ideas and support.
 o Jordon Russell for Toolbar2000.
+o Douglas Woodrow for his fix to saving window positions in a way that
+  doesn't look odd on XP with animated Windows.
 
 $Id$
