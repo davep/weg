@@ -46,6 +46,7 @@ Uses
   TB2ExtItems,
   TB2MDI,
   wegLibNortonGuide,
+  wegLibNGEntry,
   wegLibNGColours,
   wegLibNGSettings,
   Menus;
@@ -109,6 +110,11 @@ Type
     mnuFileGlobalFind: TTBItem;
     tbFileSep2: TTBSeparatorItem;
     tbFileGlobalFind: TTBItem;
+    actFileBookmarks: TAction;
+    mnuFileBoomarks: TTBItem;
+    mnuFileSplit4: TTBSeparatorItem;
+    tbFileBookmarks: TTBItem;
+    tbFileSep3: TTBSeparatorItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -127,6 +133,7 @@ Type
     procedure actEditColoursExecute(Sender: TObject);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actFileGlobalFindExecute(Sender: TObject);
+    procedure actFileBookmarksExecute(Sender: TObject);
 
   Public
 
@@ -134,6 +141,8 @@ Type
     Function openGuide( Const sFile : String; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm;
     {** Return a pointer to the focused Norton Guide }
     Function focusedGuide : TwegLibNortonGuide;
+    {** Return a pointer to the focused Norton Guide entry }
+    Function focusedEntry : TwegLibNGEntry;
 
   Protected
 
@@ -171,7 +180,8 @@ Uses
   frmGuideUnit,
   frmGuideManagerUnit,
   frmAboutUnit,
-  frmGlobalFindUnit;
+  frmGlobalFindUnit,
+  frmBookmarksUnit;
 
 {$R *.DFM}
 
@@ -255,7 +265,22 @@ Begin
   Else
     // ...otherwise return Nil.
     Result := Nil;
-      
+
+End;
+
+/////
+
+Function TfrmMain.focusedEntry : TwegLibNGEntry;
+Begin
+
+  // If there is an MDI child kicking about...
+  If ActiveMDIChild <> Nil Then
+    // ...return a pointer to its Norton Guide entry component.
+    Result := TfrmGuide( ActiveMDIChild ).NGEntry.Entry
+  Else
+    // ...otherwise return Nil.
+    Result := Nil;
+
 End;
 
 /////
@@ -488,6 +513,8 @@ Begin
   frmGuideManager.close();
   // Ensure that the global finder gets to save its data.
   frmGlobalFind.close();
+  // Ensure that the bookmarks window gets to save its data.
+  frmBookmarks.close();
   // Save the state of the window.
   saveWindowState();
 End;
@@ -791,7 +818,14 @@ Begin
     DragQueryFile( msg.WParam, i, acFileName, MAX_PATH );
     openGuide( acFileName );
   End;
-  
+
+End;
+
+/////
+
+Procedure TfrmMain.actFileBookmarksExecute( Sender : TObject );
+Begin
+  frmBookmarks.show();
 End;
 
 End.

@@ -35,7 +35,9 @@ uses
   frmAboutUnit in 'frmAboutUnit.pas' {frmAbout},
   frmGuideCreditsUnit in 'frmGuideCreditsUnit.pas' {frmGuideCredits},
   frmGuideEntryFindUnit in 'frmGuideEntryFindUnit.pas' {frmGuideEntryFind},
-  frmGlobalFindUnit in 'frmGlobalFindUnit.pas' {frmGlobalFind};
+  frmGlobalFindUnit in 'frmGlobalFindUnit.pas' {frmGlobalFind},
+  frmBookmarksUnit in 'frmBookmarksUnit.pas' {frmBookmarks},
+  frmBookmarkNameUnit in 'frmBookmarkNameUnit.pas' {frmBookmarkName};
 
 {$R *.RES}
 
@@ -45,5 +47,6 @@ Begin
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmGuideManager, frmGuideManager);
   Application.CreateForm(TfrmGlobalFind, frmGlobalFind);
+  Application.CreateForm(TfrmBookmarks, frmBookmarks);
   Application.Run;
 End.

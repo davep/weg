@@ -7,6 +7,8 @@ Changes since v2.2
 
 o Removed the maximise and minimise buttons from the guide credits dialog.
 
+o Added bookmarks.
+
 Changes since v2.1
 ==================
 
