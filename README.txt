@@ -76,16 +76,62 @@ Topic......: Execute
 WEG implements the following macros:
 
 Syntax: open,<filename>
-Usage.: Opens a guide. <filename> should be the full path to the guide.
+Usage.: Opens a guide. <filename> can be the full path to the guide or just
+        the name of the file. If you only provide the name of the file then,
+        if that file isn't in WEG's current working directly, the file will
+        be looked for in the default guide directory as defined in the guide
+        preferences dialog.
 
-Syntax: search,<searchstring>
-Usage.: Opens the global finder, sets the search options to look at all
-        known guides and starts a search using <searchstring>.
+Syntax: gsearch,<searchstring>
+Usage.: Opens the global finder, sets the search string to <searchstring>
+        and starts a global search.
 
-Syntax: searchguide,<filename>,<searchstring>
-Usage.: Opens the NG <filename>, opens the global finder, sets the search
-        options to only look at the current guide and starts a search using
-        <searchstring>.
+Syntax: gsearchset,<setting>,<value>
+Usage.: Opens the global finder and sets <setting> depending on <value>.
+        Available settings and values are:
+
+        Setting: guides
+        Values.: current/all
+        Usage..: Specify if you want to search to search the currently
+                 focused guide or all known guides.
+
+        Setting: shorts
+        Values.: on/off
+        Usage..: Specify if you want to search short entries.
+
+        Setting: longs
+        Values.: on/off
+        Usage..: Specify if you want to search long entries.
+
+        Setting: regexp
+        Values.: on/off
+        Usage..: Specify if you want to do a regular expression search.
+
+        Setting: matchcase
+        Values.: on/off
+        Usage..: Specify if you want the search to be case-sensitive or
+                 case-insensitive.
+
+Note that you can send any combination of the above as a multi-line macro.
+For example, if you wanted to get WEG to perform a case-sensitive regular
+expression search on a guide called wibble.ng, looking only in short entries
+for "^\s+MY", you could send:
+
+,----[ Example search macro ]
+| open,wibble.ng
+| gsearchset,guides,current
+| gsearchset,shorts,on
+| gsearchset,longs,off
+| gsearchset,regexp,on
+| gsearchset,matchcase,on
+| gsearch,"^\s+MY"
+`----
+
+Please note that, for the moment, WEG is a little too forgiving of mistakes
+and any typos in the above will generally be silently ignored. If your macro
+isn't doing what you'd expect it to do you probably need to check your
+spelling. At some point in the future I'll make WEG moan like mad if you get
+something wrong.
 
 Feedback
 ========

@@ -1062,9 +1062,53 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
 
   End;
 
-  Procedure DDESearch( slParams : TStringList );
+  Procedure DDESetGlobalSearch( slParams : TStringList );
+  Var
+    sSetting : String;
+    sValue   : String;
+  Begin
+
+    If slParams.Count > 1 Then
+    Begin
+
+      // If there isn't a find in progress.
+      If Not frmGlobalFind.NGFind.Finding Then
+      Begin
+
+        // Ensure that the global finder is visible.
+        If Not frmGlobalFind.Visible Then frmGlobalFind.show();
+        
+        // Get the setting.
+        sSetting := AnsiLowerCase( Trim( slParams[ 0 ] ) );
+        // Get the value.
+        sValue := AnsiLowerCase( Trim( slParams[ 1 ] ) );
+
+        // Act on the setting.
+        If sSetting = 'guides' Then
+        Begin
+          If sValue = 'all' Then
+            frmGlobalFind.setSearchAll()
+          Else
+            frmGlobalFind.setSearchCurrent();
+        End
+        Else If sSetting = 'shorts' Then
+          frmGlobalFind.setShortSearch( sValue = 'on' )
+        Else If sSetting = 'longs' Then
+          frmGlobalFind.setLongSearch( sValue = 'on' )
+        Else If sSetting = 'matchcase' Then
+          frmGlobalFind.setMatchCase( sValue = 'on' )
+        Else If sSetting = 'regexp' Then
+          frmGlobalFind.setRegExpSearch( sValue = 'on' );
+
+      End;
+
+    End;
+    
+  End;
+  
+  Procedure DDEGlobalSearch( slParams : TStringList );
   ResourceString
-    RSNoSearchStringGiven = 'DDE Error:'#13#10#13#10'No search string given for "search" macro.';
+    RSNoSearchStringGiven = 'DDE Error:'#13#10#13#10'No search string given for "gsearch" macro.';
   Begin
 
     If slParams.Count > 0 Then
@@ -1075,11 +1119,11 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
         With frmGlobalFind Do
         Begin
           // Ensure that the global finder is visible.
-          show();
+          If Not Visible Then show();
           // Set the search string.
           setSearchText( slParams[ 0 ] );
-          // Search all known guides.
-          setSearchAll();
+          // Bring the window to the front.
+          bringToFront();
           // Start the search.
           startSearch();
         End;
@@ -1090,39 +1134,6 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
       MessageBeep( MB_ICONERROR );
       MessageDlg( RSNoSearchStringGiven, mtError, [ mbOk ], 0 );
     End;
-
-  End;
-
-  Procedure DDESearchGuide( slParams : TStringList );
-  ResourceString
-    RSInvalidArguments = 'DDE Error:'#13#10#13#10'A guide and a search string must be provided.';
-  Begin
-
-    If slParams.Count > 1 Then
-    Begin
-
-      // If there isn't a find in progress.
-      If Not frmGlobalFind.NGFind.Finding Then
-        // Try and open the guide.
-        If openGuide( slParams[ 0 ], openType( actOptionsRecycleDDE ) ) <> Nil Then
-          With frmGlobalFind Do
-          Begin
-            // Ensure that the global finder is visible.
-            show();
-            // Set the search string.
-            setSearchText( slParams[ 1 ] );
-            // Only search the guide we've just opened.
-            setSearchCurrent();
-            // Start the search.
-            startSearch();
-          End;
-      
-    End
-    Else
-    Begin
-      MessageBeep( MB_ICONERROR );
-      MessageDlg( RSInvalidArguments, mtError, [ mbOk ], 0 );
-    End
 
   End;
 
@@ -1148,16 +1159,16 @@ Begin
       slCall.CommaText := Msg[ i ];
 
       // Extract the function.
-      sFunction := AnsiLowerCase( slCall[ 0 ] );
+      sFunction := AnsiLowerCase( Trim( slCall[ 0 ] ) );
       slCall.delete( 0 );
 
       // Act on the function.
       If sFunction = 'open' Then
         DDEOpenFile( slCall )
-      Else If sFunction = 'search' Then
-        DDESearch( slCall )
-      Else If sFunction = 'searchguide' Then
-        DDESearchGuide( slCall );    
+      Else If sFunction = 'gsearchset' Then
+        DDESetGlobalSearch( slCall )  
+      Else If sFunction = 'gsearch' Then
+        DDEGlobalSearch( slCall );
         
     Finally
       // Free the string list used for breaking up the call.
