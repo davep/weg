@@ -3,8 +3,8 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.14
-AppVersion=2.14
+AppVerName=Expert Guide for Windows v2.15
+AppVersion=2.15
 AppCopyright=Copyright © 1998-2004 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
@@ -19,7 +19,7 @@ OutputBaseFileName=WEGSetup
 OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
-VersionInfoVersion=2.14
+VersionInfoVersion=2.15
 VersionInfoTextVersion=$Revision$
 WizardSmallImageFile=Images\WEGInstallImage.bmp
 Compression=bzip
@@ -28,8 +28,8 @@ SolidCompression=Yes
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 Name: "quicklaunchicon"; Description: "Create a &Quick Launch icon"; GroupDescription: "Additional icons:"; Flags: unchecked
-Name: "assocngfiles";    Description: "&Associate Expert Guide with Norton Guides"; GroupDescription: "Associations"
-Name: "addapppath";      Description: "Add WEG to your machine's &PATH"; GroupDescription: "Other";
+Name: "assocngfiles";    Description: "&Associate Expert Guide with Norton Guides"; GroupDescription: "Associations:"
+Name: "addapppath";      Description: "Add Expert Guide to your machine's &PATH"; GroupDescription: "Other:";
 
 [Components]
 Name: "WEGSources";    Description: "WEG Sources"; Types: full
