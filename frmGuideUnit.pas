@@ -182,6 +182,7 @@ Type
     procedure actGuidePrintExecute(Sender: TObject);
     procedure NGEntryKeyPress(Sender: TObject; var Key: Char);
     procedure actGuidePrintUpdate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   Protected
 
@@ -195,6 +196,12 @@ Type
     pnlGuideTitle : TStatusPanel;
     {** Pointer to the finder form. }
     frmFinder : TfrmGuideEntryFind;
+    {** Pointer to a regular expression object for finding URLs }
+    oURLRegExp : Variant;
+    {** Can we look for URLs and add them to the see-also list? }
+    bCanURLSeeAlso : Boolean;
+    {** String list for holding URLs found in a guide entry }
+    slURLs : TStringList;
 
     {** Refresh the window title }
     Procedure refreshTitle;
@@ -210,8 +217,12 @@ Type
     Procedure menuClick( Sender : TObject );
     {** Handle a see-also menu click }
     Procedure seeAlsoClick( Sender : TObject );
+    {** Handle a see-also URL menu click }
+    Procedure seeAlsoURLClick( Sender : TObject );
     {** Handle a "find" click in the finder dialog }
     Procedure findClick( Sender : TObject );
+    {** Look for URLs in the current entry and populate the list }
+    Procedure populateURLList;
 
   End;
 
@@ -219,6 +230,7 @@ Implementation
 
 Uses
   ClipBrd,
+  ComObj,
   Printers,
   wegLibUtils,
   wegLibNGLineParser,
@@ -268,7 +280,7 @@ End;
 
 Procedure TfrmGuide.refreshSeeAlsoMenu;
 
-  Function SetupSeeAlsoItem( oItem : TTBItem; i : Integer; Const sCaption : String ) : TTBItem;
+  Function SetupSeeAlsoItem( oItem : TTBItem; i : Integer; Const sCaption : String; pOnClick : TNotifyEvent ) : TTBItem;
   ResourceString
     RSSeeAlso = 'See Also "%s"';
   Begin
@@ -276,7 +288,7 @@ Procedure TfrmGuide.refreshSeeAlsoMenu;
     With oItem Do
     Begin
       Caption := StringReplace( sCaption, '&', '&&', [ rfReplaceAll ] );
-      OnClick := seeAlsoClick;
+      OnClick := pOnClick;
       Hint    := Format( RSSeeAlso, [ sCaption ] );
       Tag     := i;
     End;
@@ -298,9 +310,28 @@ Begin
     // ...populate the menu.
     For i := 0 To NGEntry.Entry.SeeAlso.Count - 1 Do
     Begin
-      mnuSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( tbGuideMenu ), i, NGEntry.Entry.SeeAlso[ i ] ) );
-      popGuideSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( tbGuideMenu ), i, NGEntry.Entry.SeeAlso[ i ] ) );
+      mnuSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( mnuSeeAlso ), i, NGEntry.Entry.SeeAlso[ i ], seeAlsoClick ) );
+      popGuideSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( popGuideSeeAlso ), i, NGEntry.Entry.SeeAlso[ i ], seeAlsoClick ) );
     End;
+
+  // Now that we've done the real see-also items, add any URLs.
+  If slURLs.Count > 0 Then
+  Begin
+
+    // If there are some real see-also entries in the menu, add a split line.
+    If mnuSeeAlso.Count > 0 Then
+    Begin
+      mnuSeeAlso.add( TTBSeparatorItem.create( mnuSeeAlso ) );
+      popGuideSeeAlso.add( TTBSeparatorItem.create( popGuideSeeAlso ) );
+    End;
+    
+    For i := 0 To slURLs.Count - 1 Do
+    Begin
+      mnuSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( mnuSeeAlso ), i, slURLs[ i ], seeAlsoURLClick ) );
+      popGuideSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( popGuideSeeAlso ), i, slURLs[ i ], seeAlsoURLClick ) );
+    End;
+
+  End;
 
   // Set the enabled state of the see-also menu.
   mnuSeeAlso.Enabled      := ( mnuSeeAlso.Count > 0 );
@@ -409,6 +440,9 @@ Begin
   // Refresh the menu.
   refreshMenu();
 
+  // Scan for any URLs.
+  populateURLList();
+  
   // Refresh the see also menu.
   refreshSeeAlsoMenu();
 
@@ -443,6 +477,18 @@ Begin
   With Sender As TTBItem Do
     // Jump to the entry associated with the chosen menu item.
     NGEntry.display( NGEntry.Entry.SeeAlso.Offsets[ Tag ] );
+
+End;
+
+/////
+
+Procedure TfrmGuide.seeAlsoURLClick( Sender : TObject );
+Begin
+
+  // The sender is a TTBItem.
+  With Sender As TTBItem Do
+    // Fire off the URL at Windows.
+    wegFireURL( slURLs[ Tag ] );
 
 End;
 
@@ -590,6 +636,26 @@ Begin
   pnlGuideType  := sbGuide.Panels[ 0 ];
   pnlGuideName  := sbGuide.Panels[ 1 ];
   pnlGuideTitle := sbGuide.Panels[ 2 ];
+
+  // Create the string list for holding the URLs found in an entry.
+  slURLs := TStringList.create();
+
+  // Create regexp object for looking for URLs.
+  Try
+
+    // Try and create the regular expression object for finding URLs.
+    oURLRegExp := CreateOLEObject( 'VBScript.RegExp' );
+
+    // We managed to create it, remember this.
+    bCanURLSeeAlso := True;
+
+    // Set the regular expression for funding URLs.
+    oURLRegExp.Pattern := '(http|https|ftp|news|mailto|telnet|finger):[^ "''\)>\t\r\n]*';
+    
+  Except
+    // Seems that this facility isn't available in the current environment.
+    bCanURLSeeAlso := False;
+  End;
 
 End;
 
@@ -1008,6 +1074,49 @@ Begin
   Begin
     actGuidePrint.Caption := RSPrintCaption;
     actGuidePrint.Hint    := RSPrintHint;
+  End;
+
+End;
+
+/////
+
+Procedure TfrmGuide.FormDestroy( Sender : TObject );
+Begin
+  // Free the URLs string list.
+  slURLs.free();
+End;
+
+/////
+
+Procedure TfrmGuide.populateURLList;
+Var
+  i     : Integer;
+  j     : Integer;
+  oHits : Variant;
+Begin
+
+  // If we can do URL scanning...
+  If bCanURLSeeAlso Then
+  Begin
+
+    // Clear the current list.
+    slURLs.clear();
+
+    // For each line in the current entry.
+    For i := 0 To NGEntry.Entry.LineCount - 1 Do
+    Begin
+
+      // Look for hits in a line.
+      oHits := oURLRegExp.execute( NGEntry.Entry.StrippedLines[ i ] );
+
+      // Found any?
+      If oHits.Count > 0 Then
+        // Yes, add them to the URL list.
+        For j := 0 To oHits.Count - 1 Do
+          slURLs.add( oHits.Item[ j ] );
+        
+    End;
+    
   End;
 
 End;

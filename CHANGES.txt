@@ -7,6 +7,11 @@ Changes since v2.7
 
 o Added physical information about a guide to the guide information dialog.
 
+o The see also menu of a guide entry will, where possible, include any URLs
+  found in the entry in the see-also menu. When you select such an item from
+  the menu the URL will be passed to the operating system so that your URL
+  handler of choice is used.
+
 Changes since v2.6
 ==================
 
