@@ -878,6 +878,7 @@ Begin
 
     // Configure it.
     frmFinder.Caption                     := Format( RSCaption, [ NGEntry.entryTitle() ] );
+    frmFinder.Hint                        := frmFinder.Caption;
     frmFinder.cbRegularExpression.Enabled := NGEntryFind.CanRegExp;
     frmFinder.btnFind.OnClick             := findClick;
 
