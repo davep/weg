@@ -16,6 +16,9 @@ o Made the first letter of each main menu title from a guide into an
   if someone is trying to use just the keyboard, they're probably more
   interested in getting at the guide's menu that any of the other menus.
 
+o The bookmark manager now makes a better guess at a default title for a
+  bookmark.
+
 Changes since v2.5
 ==================
 

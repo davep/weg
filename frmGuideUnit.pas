@@ -239,32 +239,8 @@ End;
 /////
 
 Procedure TfrmGuide.refreshStatusBar;
-ResourceString
-  RSSep = ' » ';
 Begin
-
-  With sbGuide, NGEntry.Entry Do
-  Begin
-
-    // Start out with the title of the guide.
-    pnlGuideTitle.Text := NortonGuide.Title;
-
-    // If we're looking at something that hangs off a menu...
-    If validMenu( ParentMenu ) Then
-    Begin
-
-      // Add the menu's title to the status bar.
-      pnlGuideTitle.Text := pnlGuideTitle.Text + RSSep + tbGuideMenu.Items[ ParentMenu ].Caption;
-
-      // If we also know which menu prompt on that menu we belong to...
-      If validMenu( ParentMenuPrompt ) Then
-        // ...add the prompt text to the status bar.
-        pnlGuideTitle.Text := pnlGuideTitle.Text + RSSep + tbGuideMenu.Items[ ParentMenu ].Items[ ParentMenuPrompt ].Caption;
-
-    End;
-
-  End;
-
+  pnlGuideTitle.Text := NGEntry.entryPath();
 End;
 
 /////

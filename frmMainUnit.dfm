@@ -246,7 +246,7 @@ object frmMain: TfrmMain
       OnExecute = actFileOpenExecute
     end
     object actFileGlobalFind: TAction
-      Caption = '&Global Find...'
+      Caption = '&Global Find'
       Hint = 'Search all entries in one or more Norton Guides'
       ImageIndex = 6
       ShortCut = 16455
@@ -260,7 +260,7 @@ object frmMain: TfrmMain
       OnExecute = actFileGuideManagerExecute
     end
     object actFileBookmarks: TAction
-      Caption = '&Bookmarks...'
+      Caption = '&Bookmarks'
       Hint = 'View the bookmarks window'
       ImageIndex = 7
       ShortCut = 16450

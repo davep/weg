@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v1.6
+==================
+
+o Added the entryPath() method to the entry viewer component.
+
 Changes since v1.5
 ==================
 

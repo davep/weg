@@ -47,6 +47,7 @@ Uses
   TB2MDI,
   wegLibNortonGuide,
   wegLibNGEntry,
+  wegLibNGEntryViewer,
   wegLibNGColours,
   wegLibNGSettings,
   Menus;
@@ -145,6 +146,8 @@ Type
     Function openGuide( Const sFile : String; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm;
     {** Return a pointer to the focused Norton Guide }
     Function focusedGuide : TwegLibNortonGuide;
+    {** Return a pointer to the focused Norton Guide entry viewer }
+    Function focusedViewer : TwegLibNGEntryViewer;
     {** Return a pointer to the focused Norton Guide entry }
     Function focusedEntry : TwegLibNGEntry;
 
@@ -272,6 +275,21 @@ Begin
   If ActiveMDIChild <> Nil Then
     // ...return a pointer to its Norton Guide component.
     Result := TfrmGuide( ActiveMDIChild ).NortonGuide
+  Else
+    // ...otherwise return Nil.
+    Result := Nil;
+
+End;
+
+/////
+
+Function TfrmMain.focusedViewer : TwegLibNGEntryViewer;
+Begin
+
+  // If there is an MDI child kicking about...
+  If ActiveMDIChild <> Nil Then
+    // ...return a pointer to its Norton Guide entry viewer component.
+    Result := TfrmGuide( ActiveMDIChild ).NGEntry
   Else
     // ...otherwise return Nil.
     Result := Nil;

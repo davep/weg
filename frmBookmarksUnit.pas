@@ -375,10 +375,20 @@ Begin
     Try
 
       // Try and guess an initial value for the caption.
-      With frmMain.focusedEntry() Do
-        If LineCount > 0 Then
-          If Trim( StrippedLines[ 0 ] ) <> ''  Then
-            edtCaption.Text := Trim( StrippedLines[ 0 ] );
+      With frmMain.focusedViewer() Do
+      Begin
+
+        // Start out with the default as the entry path.
+        edtCaption.Text := entryPath();
+        
+        // If it's a long entry and there's something in it...
+        If Entry.IsLong And ( Entry.LineCount > 0 ) Then
+          // ...and if the first line isn't empty...
+          If Trim( Entry.StrippedLines[ 0 ] ) <> ''  Then
+            // ... use the entry path and the first line.
+            edtCaption.Text := entryPath( Trim( Entry.StrippedLines[ 0 ] ) );
+
+      End;
             
       // If the user entered something...
       If showModal() = mrOk Then

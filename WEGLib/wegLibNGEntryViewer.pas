@@ -161,6 +161,8 @@ Type
     Procedure getSource( sl : TStringList ); Virtual;
     {** Jump to a given line in the current entry }
     Procedure jumpToLine( iLine : Integer ); Virtual;
+    {** Return a "path" for the entry within the guide }
+    Function entryPath( Const sAdditional : String = ''; sSeperator : String = '' ) : String; Virtual;
 
   Published
 
@@ -781,7 +783,43 @@ Begin
     For i := 0 To Items.Count - 1 Do
       If Selected[ i ] Or ( i = iLine ) Then
         Selected[ i ] := ( i = iLine );
+
+End;
+
+/////
+
+Function TwegLibNGEntryViewer.entryPath( Const sAdditional : String; sSeperator : String ) : String;
+ResourceString
+  RSDefaultSep = ' » ';
+Begin
+
+  // If no seperator was provided...
+  If sSeperator = '' Then
+    // ...use the default seperator.
+    sSeperator := RSDefaultSep;
+
+  // Start out with the title of the guide.
+  Result := FNortonGuide.Title;
   
+  // If we're looking at something that hangs off a menu...
+  If FEntry.validMenu( FEntry.ParentMenu ) Then
+  Begin
+
+    // Add the menu's title to the status bar.
+    Result := Result + sSeperator + FNortonGuide.Menus[ FEntry.ParentMenu ].Title;
+
+    // If we also know which menu prompt on that menu we belong to...
+    If FEntry.validMenu( FEntry.ParentMenuPrompt ) Then
+      // ...add the prompt text to the status bar.
+      Result := Result + sSeperator + FNortonGuide.Menus[ FEntry.ParentMenu ].Prompts[ FEntry.ParentMenuPrompt ];
+
+    // If there's anya additional text to be added...
+    If sAdditional <> '' Then
+      // ...add it.
+      Result := Result + sSeperator + sAdditional;
+      
+  End;
+
 End;
 
 /////
