@@ -76,6 +76,9 @@ TODO.txt and BUGS.txt. It might be that I'm already aware of a bug you're
 about to report or I might already plan to implement some feature you're
 about to ask me for.
 
+On the off chance that you want to show your thanks in some tangible way
+feel free to visit my web site and click on my picture.
+
 Thanks
 ======
 
