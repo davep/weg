@@ -50,6 +50,7 @@ object frmBookmarks: TfrmBookmarks
       TabOrder = 0
       object mnuBookmark: TTBSubmenuItem
         Caption = '&Bookmark'
+        Hint = 'Bookmarks menu'
         object mnuBookmarkOpen: TTBItem
           Action = actBookmarksOpen
         end
