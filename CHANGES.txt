@@ -172,8 +172,3 @@ o WEG now uses a proper installer.
 
 o Guide menus and see-also lists are now proper menus (WEG 1.x used a tree
   to navigate guides).
-
-However, please also note that, as of the time of writing, I've not yet
-implemented some of the facilities that existed in WEG 1.x. Please see
-TODO.txt for a list of these facilities. If you need these facilities you
-should probably keep WEG 1.x installed on your machine for a while longer.

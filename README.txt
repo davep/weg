@@ -87,9 +87,9 @@ Feedback
 ========
 
 Please feel free to send me any feedback, ideas, enhancement requests, bug
-reports, bug fixes (even better) or anything else. I'd appreciate it if you
-sent email concerining WEG to weg@davep.org, if you just want a chat then
-use the email address at the start of this file.
+reports, bug fixes or anything else. I'd appreciate it if you sent email
+concerining WEG to weg@davep.org; if you just want a chat then use the email
+address at the start of this file.
 
 Before you do drop me a line please make sure that you've had a read of
 TODO.txt and BUGS.txt. It might be that I'm already aware of a bug you're
@@ -97,7 +97,8 @@ about to report or I might already plan to implement some feature you're
 about to ask me for.
 
 On the off chance that you want to show your thanks in some tangible way
-feel free to visit my web site and click on my picture.
+feel free to help me reduce the size of my Amazon wish-list. If you fancy
+doing that just visit my web site and click on my picture.
 
 Thanks
 ======
