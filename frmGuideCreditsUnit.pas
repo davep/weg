@@ -46,6 +46,14 @@ Type
   TfrmGuideCredits = Class( TForm )
     btnOK: TButton;
     memCredits: TMemo;
+    lblFileNameLabel: TLabel;
+    lblFileName: TLabel;
+    lblFileLocationLabel: TLabel;
+    lblFileLocation: TLabel;
+    lblFileSizeLabel: TLabel;
+    lblFileSize: TLabel;
+    lblTimeStampLabel: TLabel;
+    lblTimeStamp: TLabel;
     procedure FormShow(Sender: TObject);
     procedure memCreditsEnter(Sender: TObject);
 
@@ -60,7 +68,7 @@ Implementation
 
 Uses
   frmMainUnit;
-  
+
 {$R *.DFM}
 
 /////
@@ -70,13 +78,19 @@ Begin
 
   // Set the caption.
   Caption := Caption + ' "' + oNortonGuide.Title + '"';
-  
+
   // Use the user's font choice.
   memCredits.Font := frmMain.NGSettings.GuideFont;
-  
+
   // Use the user's colour choices.
   memCredits.Font.Color := frmMain.NGColours.DOSMap[ frmMain.NGColours.NormalText ];
   memCredits.Color      := frmMain.NGColours.DOSMap[ frmMain.NGColours.NormalBackground ];
+
+  // Set the values of the labels.
+  lblFileName.Caption     := ExtractFileName( oNortonGuide.Guide );
+  lblFileLocation.Caption := ExtractFileDir( oNortonGuide.Guide );
+  lblFileSize.Caption     := Format( '%.0n', [ Int( oNortonGuide.Size ) ] );
+  lblTimeStamp.Caption    := DateTimeToStr( oNortonGuide.TimeStamp );
 
   // If there are some credits...
   If Trim( oNortonGuide.Credits ) <> '' Then

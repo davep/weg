@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v2.7
+==================
+
+o Added physical information about a guide to the guide information dialog.
+
 Changes since v2.6
 ==================
 
