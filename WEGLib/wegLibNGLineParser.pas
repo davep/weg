@@ -168,6 +168,7 @@ Begin
 
   // Initial mode is normal.
   cmMode := cmNormal;
+  handleNormal();
   
   // Find the first control sequence.
   iCtrl := Pos( CTRL_CHAR, sRaw );
