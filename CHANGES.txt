@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.6
+==================
+
+o The compatibility keystroke for pulling up the guide information should
+  have been "?", not "v". Changed.
+
 Changes since v2.5
 ==================
 

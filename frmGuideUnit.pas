@@ -980,8 +980,13 @@ End;
 /////
 
 Procedure TfrmGuide.NGEntryKeyPress( Sender : TObject; Var Key : Char );
+Var
+  bHandled : Boolean;
 Begin
 
+  // Assume that the key has been handled.
+  bHandled := True;
+  
   // Handle some of the key strokes from the DOS/Linux version of EG.
   Case Key Of
     'Q', 'q' : If NGEntry.canNavigateUp()       Then actNavigateUpExecute( Nil );
@@ -993,8 +998,16 @@ Begin
     's'      :                                       actGuideSaveTextExecute( Nil );
     'r'      :                                       frmMain.actFileOpenExecute( Nil );
     'd', 'D' :                                       frmMain.actFileGuideManagerExecute( Nil );
-    'v'      :                                       actGuideCreditsExecute( Nil );
+    '?'      :                                       actGuideCreditsExecute( Nil );
+  Else
+    // We didn't handle the key.
+    bHandled := False;
   End;
+
+  // If we handled the key...
+  If bHandled Then
+    // ...let the caller know.
+    Key := #0;
 
 End;
 
