@@ -18,6 +18,27 @@ o Changed the file associations in the installer so that DDE is used. This
   means that a single instance of WEG can be used to handle open requests
   via file associations in Windows.
 
+o Renamed the main "Edit" menu to "Options".
+
+o Added a window recycling option to the global finder.
+
+o Added a window recycling option to the guide manager.
+
+o Added a window recycling option for opening guides file the file/open menu
+  option.
+
+o Added a window recycling option for opening guides file the file/reopen
+  menu option.
+
+o Added a window recycling option for opening guides via DDE.
+
+o Added a window recycling option for opening guides via the command line.
+
+o Added a window recycling option for opening guides via drag and drop.
+
+o The entry find dialog now gives up focus to the guide window when a find
+  option has happened.
+
 Changes since v2.6
 ==================
 

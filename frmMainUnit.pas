@@ -50,10 +50,15 @@ Uses
   wegLibNGEntryViewer,
   wegLibNGColours,
   wegLibNGSettings,
-  Menus, DdeMan;
+  Menus,
+  DdeMan,
+  frmGuideUnit;
 
 Type
 
+  {** Types of guide opening options }
+  TfrmMainOpenGuide = ( mogNew, mogRecycle );
+  
   {** Main form }
   TfrmMain = Class( TForm )
     sbMain: TStatusBar;
@@ -99,11 +104,11 @@ Type
     mnuFileSplit2: TTBSeparatorItem;
     tbFileGuideManager: TTBItem;
     NGSettings: TwegLibNGSettings;
-    actEditPreferences: TAction;
-    actEditColours: TAction;
-    mnuEdit: TTBSubmenuItem;
-    mnuEditPreferences: TTBItem;
-    mniEditColours: TTBItem;
+    actOptionsGuidePreferences: TAction;
+    actOptionsColours: TAction;
+    mnuOptions: TTBSubmenuItem;
+    mnuOptionsPreferences: TTBItem;
+    mnuOptionsColours: TTBItem;
     actHelpAbout: TAction;
     mnuHelpAbout: TTBItem;
     actFileGlobalFind: TAction;
@@ -117,9 +122,20 @@ Type
     tbFileBookmarks: TTBItem;
     tbFileSep3: TTBSeparatorItem;
     psdGuide: TPrinterSetupDialog;
-    actEditPrinterSetup: TAction;
-    mnuEditPrinterSetup: TTBItem;
+    actOptionsPrinterSetup: TAction;
+    mnuOptionsPrinterSetup: TTBItem;
     Execute: TDdeServerConv;
+    actOptionsRecycleDDE: TAction;
+    mnuOptionsRecycle: TTBSubmenuItem;
+    mnuOptionsRecycleDDE: TTBItem;
+    actOptionsRecycleCommandLine: TAction;
+    mnuOptionsRecycleCommandLine: TTBItem;
+    actOptionsRecycleDragAndDrop: TAction;
+    mnuOptionsRecycleDragAndDrop: TTBItem;
+    actOptionsRecycleFileOpen: TAction;
+    actOptionsRecycleFileReOpen: TAction;
+    mnuOptionsRecycleFileOpen: TTBItem;
+    mnuOptionsRecycleFileReOpen: TTBItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -134,18 +150,21 @@ Type
     procedure actFileCloseAllUpdate(Sender: TObject);
     procedure actFileCloseAllExecute(Sender: TObject);
     procedure actFileGuideManagerExecute(Sender: TObject);
-    procedure actEditPreferencesExecute(Sender: TObject);
-    procedure actEditColoursExecute(Sender: TObject);
+    procedure actOptionsGuidePreferencesExecute(Sender: TObject);
+    procedure actOptionsColoursExecute(Sender: TObject);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actFileGlobalFindExecute(Sender: TObject);
     procedure actFileBookmarksExecute(Sender: TObject);
-    procedure actEditPrinterSetupExecute(Sender: TObject);
+    procedure actOptionsPrinterSetupExecute(Sender: TObject);
     procedure ExecuteExecuteMacro(Sender: TObject; Msg: TStrings);
+    procedure actOptionsCheckItemExecute(Sender: TObject);
 
   Public
 
+    {** Open a guide in the given window }
+    Function openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Open a guide }
-    Function openGuide( Const sFile : String; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm;
+    Function openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Return a pointer to the focused Norton Guide }
     Function focusedGuide : TwegLibNortonGuide;
     {** Return a pointer to the focused Norton Guide entry viewer }
@@ -174,6 +193,8 @@ Type
     Procedure refreshChildWindows;
     {** Accept dropped files. }
     Procedure acceptFiles( Var msg : TMessage ); Message WM_DROPFILES;
+    {** Work out the guide open type based on the state of its config option }
+    Function openType( oAction : TAction ) : TfrmMainOpenGuide;
 
   End;
 
@@ -186,7 +207,6 @@ Uses
   ShellAPI,
   Registry,
   wegUtils,
-  frmGuideUnit,
   frmGuideManagerUnit,
   frmAboutUnit,
   frmGlobalFindUnit,
@@ -205,6 +225,16 @@ Const
   REG_PREFERENCES = 'Preferences';
   {** Key name for the colour settings }
   REG_COLOURS = 'Colours';
+  {** Value name for the file-open window recycling option }
+  REG_RECYCLE_FILE_OPENS = 'Recycle Windows on File Open';
+  {** Value name for the file-reopen window recycling option }
+  REG_RECYCLE_FILE_REOPENS = 'Recycle Windows on File Reopen';
+  {** Value name for the DDE window recycling option }
+  REG_RECYCLE_DDE_OPENS = 'Recycle Windows on DDE Open';
+  {** Value name for the command line window recycling option }
+  REG_RECYCLE_COMMAND_LINE_OPENS = 'Recycle Windows on Command Line Open';
+  {** Value name for the drag and drop window recycling option }
+  REG_RECYCLE_DRAG_AND_DROP_OPENS = 'Recycle Windows on Drag and Drop Open';
   {** Key name for the child window list }
   REG_CHILDREN = 'Child Windows';
   {** Value name for the guide of a child window }
@@ -232,13 +262,10 @@ Const
 
 /////
 
-Function TfrmMain.openGuide( Const sFile : String; lEntry : LongInt; iStartingLine : Integer ) : TForm;
+Function TfrmMain.openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
 Begin
 
-  // Create the child guide window.
-  Result := TfrmGuide.create( self );
-
-  With TfrmGuide( Result ) Do
+  With oWindow Do
   Begin
 
     // Open guide.
@@ -250,7 +277,7 @@ Begin
       // ...close the window.
       close();
       // Don't return the pointer to it.
-      Result := Nil;
+      oWindow := Nil;
     End
     // Otherwise, if we're supposed to load a certain entry...
     Else If ( lEntry > -1 ) And NortonGuide.isOffsetValidEntry( lEntry ) Then
@@ -261,11 +288,60 @@ Begin
       NGEntry.displayFirstEntry();
 
     // If we managed to open a guide, remember it.
-    If Result <> Nil Then
+    If oWindow <> Nil Then
       rememberInMRU( NortonGuide );
-      
+
   End;
 
+  // Return the window.
+  Result := oWindow;
+  
+End;
+
+/////
+
+Function TfrmMain.openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
+Var
+  oWindow : TfrmGuide;
+  i       : Integer;
+  sNeedle : String;
+Begin
+
+  // Assume that we need a new window.
+  oWindow := Nil;
+
+  // If we should try and recycle a window...
+  If mog = mogRecycle Then
+  Begin
+
+    // Clean up the guide name.
+    sNeedle := AnsiLowerCase( ExpandUNCFileName( sFile ) );
+
+    // Look thru the child windows, trying to find one that is using the same
+    // guide.
+    For i := 0 To MDIChildCount - 1 Do
+      // If the child form is a guide window...
+      If MDIChildren[ i ] Is TfrmGuide Then
+        // If it's looking at the guide that's being opened...
+        If AnsiLowerCase( ExpandUNCFileName( TfrmGuide( MDIChildren[ i ] ).NortonGuide.Guide ) ) = sNeedle Then
+        Begin
+          // ...use this window.
+          oWindow := TfrmGuide( MDIChildren[ i ] );
+          oWindow.bringToFront();
+          setFocus();
+          Break;
+        End;
+
+  End;
+
+  // If we don't have a window to work with...
+  If oWindow = Nil Then
+    // ...create one.
+    oWindow := TfrmGuide.create( self );
+
+  // Open the guide.
+  Result := openGuide( sFile, oWindow, lEntry, iStartingLine );
+  
 End;
 
 /////
@@ -327,7 +403,7 @@ Begin
   If odGuide.execute() Then
     // If the user selected something, attempt to open what they selected.
     For i := 0 To odGuide.Files.Count - 1 Do
-      openGuide( odGuide.Files[ i ] );
+      openGuide( odGuide.Files[ i ], openType( actOptionsRecycleFileOpen ) );
 
 End;
 
@@ -420,6 +496,19 @@ Begin
               closeKey();
             End;
 
+          // Misc preferences.
+          If openKey( wegRegistryKey( REG_PREFERENCES ), True ) Then
+            Try
+              writeBool( REG_RECYCLE_FILE_OPENS,          actOptionsRecycleFileOpen.Checked );        
+              writeBool( REG_RECYCLE_FILE_REOPENS,        actOptionsRecycleFileReOpen.Checked );        
+              writeBool( REG_RECYCLE_DDE_OPENS,           actOptionsRecycleDDE.Checked );
+              writeBool( REG_RECYCLE_COMMAND_LINE_OPENS,  actOptionsRecycleCommandLine.Checked );
+              writeBool( REG_RECYCLE_DRAG_AND_DROP_OPENS, actOptionsRecycleDragAndDrop.Checked );
+            Finally
+              // Close the preferences key.
+              closeKey();
+            End;
+
         Finally
           // Free the registry object.
           free();
@@ -492,7 +581,7 @@ Begin
               iTopLine := readInteger( sPrefix + REG_TOP_LINE );
 
               // If we got this far without an exception we can open the window.
-              oForm := openGuide( sGuide, lOffset, iLine );
+              oForm := openGuide( sGuide, mogNew, lOffset, iLine );
 
               // If it looks like we managed to open the window...
               If oForm <> Nil Then
@@ -564,6 +653,23 @@ Begin
       // Ensure we refresh the MRU menu.
       refreshMRUMenu();
 
+      // Misc preferences.
+      If openKey( wegRegistryKey( REG_PREFERENCES ), False ) Then
+        Try
+          Try
+            actOptionsRecycleFileOpen.Checked    := readBool( REG_RECYCLE_FILE_OPENS );
+            actOptionsRecycleFileReOpen.Checked  := readBool( REG_RECYCLE_FILE_REOPENS );
+            actOptionsRecycleDDE.Checked         := readBool( REG_RECYCLE_DDE_OPENS );
+            actOptionsRecycleCommandLine.Checked := readBool( REG_RECYCLE_COMMAND_LINE_OPENS );
+            actOptionsRecycleDragAndDrop.Checked := readBool( REG_RECYCLE_DRAG_AND_DROP_OPENS );
+          Except
+            // GNDN.
+          End;
+        Finally
+          // Close the preferences key.
+          closeKey();
+        End;
+
     Finally
       // Free the registry object.
       free();
@@ -603,7 +709,7 @@ Begin
   If ParamCount() > 0 Then
     // Seems we have, try and open guides from the command line.
     For i := 1 To ParamCount() Do
-      openGuide( ParamStr( i ) );
+      openGuide( ParamStr( i ), openType( actOptionsRecycleCommandLine ) );
       
 End;
 
@@ -710,7 +816,7 @@ Begin
   // If we've been called from someone we know...
   If oSender Is TTBItem Then
     // ...deal with the call.
-    openGuide( slMRUFiles[ TTBItem( oSender ).Tag ] );
+    openGuide( slMRUFiles[ TTBItem( oSender ).Tag ], openType( actOptionsRecycleFileReOpen ) );
 
 End;
 
@@ -809,9 +915,9 @@ End;
 
 /////
 
-Procedure TfrmMain.actEditPreferencesExecute( Sender : TObject );
+Procedure TfrmMain.actOptionsGuidePreferencesExecute( Sender : TObject );
 ResourceString
-  RSCaption = 'Expert Guide Preferences';
+  RSCaption = 'Guide Preferences';
 Begin
 
   // Call the edit interface for the guide settings.
@@ -828,9 +934,9 @@ End;
 
 /////
 
-Procedure TfrmMain.actEditColoursExecute( Sender : TObject );
+Procedure TfrmMain.actOptionsColoursExecute( Sender : TObject );
 ResourceString
-  RSCaption = 'Expert Guide Colours';
+  RSCaption = 'Guide Colours';
 Begin
 
   // Call the edit interface for the colour settings.
@@ -882,7 +988,7 @@ Begin
   For i := 0 To iFiles - 1 Do
   Begin
     DragQueryFile( msg.WParam, i, acFileName, MAX_PATH );
-    openGuide( acFileName );
+    openGuide( acFileName, openType( actOptionsRecycleDragAndDrop ) );
   End;
 
 End;
@@ -896,7 +1002,7 @@ End;
 
 /////
 
-Procedure TfrmMain.actEditPrinterSetupExecute( Sender : TObject );
+Procedure TfrmMain.actOptionsPrinterSetupExecute( Sender : TObject );
 Begin
   psdGuide.execute();
 End;
@@ -911,7 +1017,7 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
   Begin
 
     If slParams.Count > 0 Then
-      openGuide( slParams[ 0 ] )
+      openGuide( slParams[ 0 ], openType( actOptionsRecycleDDE ) )
     Else
     Begin
       MessageBeep( MB_ICONERROR );
@@ -963,6 +1069,20 @@ Begin
     MessageDlg( RSNoMessage, mtError, [ mbOk ], 0 );
   End;
 
+End;
+
+/////
+
+Procedure TfrmMain.actOptionsCheckItemExecute( Sender : TObject );
+Begin
+  TAction( Sender ).Checked := Not TAction( Sender ).Checked;
+End;
+
+/////
+
+Function TfrmMain.openType( oAction : TAction ) : TfrmMainOpenGuide;
+Begin
+  If oAction.Checked Then Result := mogRecycle Else Result := mogNew;
 End;
 
 End.

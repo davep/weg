@@ -106,6 +106,9 @@ object frmGuideManager: TfrmGuideManager
         object mnuOptionsShowHint: TTBItem
           Action = actOptionsShowHint
         end
+        object mnuOptionsRecycleWindows: TTBItem
+          Action = actOptionsRecycleWindows
+        end
       end
     end
     object tbGuides: TTBToolbar
@@ -233,6 +236,11 @@ object frmGuideManager: TfrmGuideManager
       ShortCut = 16456
       OnExecute = actOptionsShowHintExecute
       OnUpdate = actOptionsShowHintUpdate
+    end
+    object actOptionsRecycleWindows: TAction
+      Caption = '&Recycle Windows'
+      Hint = 'Recycle a window when opening an already open guide?'
+      OnExecute = actOptionsRecycleWindowsExecute
     end
   end
   object ilGuideManager: TImageList

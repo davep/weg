@@ -86,6 +86,8 @@ Type
     actOptionsShowHint: TAction;
     mnuOptions: TTBSubmenuItem;
     mnuOptionsShowHint: TTBItem;
+    actOptionsRecycleWindows: TAction;
+    mnuOptionsRecycleWindows: TTBItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actGuidesAddExecute(Sender: TObject);
@@ -100,6 +102,7 @@ Type
       var InfoTip: String);
     procedure actOptionsShowHintUpdate(Sender: TObject);
     procedure actOptionsShowHintExecute(Sender: TObject);
+    procedure actOptionsRecycleWindowsExecute(Sender: TObject);
 
   Protected
 
@@ -155,6 +158,8 @@ Const
   REG_OPTIONS = 'Options';
   {** Name of the show hints option }
   REG_SHOW_HINT = 'Show Hints';
+  {** Name for the guide recycling option }
+  REG_OPTION_RECYCLE_WINDOWS = 'Recycle Windows';
   {** Key name for the guide manager's guide data }
   REG_GUIDES = 'Guides';
   {** Name of the file name list }
@@ -214,7 +219,8 @@ Begin
         // Save the options for this window.
         If openKey( wegRegistryKey( [ REG_MANAGER_WINDOW, REG_OPTIONS ] ), True ) Then
           Try
-            writeBool( REG_SHOW_HINT, lvGuides.ShowHint );
+            writeBool( REG_SHOW_HINT,              lvGuides.ShowHint );
+            writeBool( REG_OPTION_RECYCLE_WINDOWS, actOptionsRecycleWindows.Checked );
           Finally
             closeKey();
           End;
@@ -271,7 +277,8 @@ Begin
       If openKey( wegRegistryKey( [ REG_MANAGER_WINDOW, REG_OPTIONS ] ), False ) Then
         Try
           Try
-            lvGuides.ShowHint := readBool( REG_SHOW_HINT )
+            lvGuides.ShowHint                := readBool( REG_SHOW_HINT );
+            actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
           Except
             lvGuides.ShowHint := True;
           End;  
@@ -535,9 +542,20 @@ End;
 /////
 
 Procedure TfrmGuideManager.actGuidesOpenExecute( Sender : TObject );
+
+  Function OpenType : TfrmMainOpenGuide;
+  Begin
+    If actOptionsRecycleWindows.Checked Then
+      Result := mogRecycle
+    Else
+      Result := mogNew;
+  End;
+
 Begin
+
   If lvGuides.Selected <> Nil Then
-    frmMain.openGuide( lvGuides.Selected.SubItems[ 0 ] );
+    frmMain.openGuide( lvGuides.Selected.SubItems[ 0 ], OpenType() );
+    
 End;
 
 /////
@@ -652,6 +670,13 @@ Begin
     addGuide( acFileName );
   End;
 
+End;
+
+/////
+
+Procedure TfrmGuideManager.actOptionsRecycleWindowsExecute( Sender : TObject );
+Begin
+  actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
 End;
 
 End.

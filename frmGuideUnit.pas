@@ -382,53 +382,68 @@ Var
   iSubs : Integer;
 Begin
 
-  // For each menu in the guide...
-  For i := 0 To NortonGuide.MenuCount - 1 Do
-  Begin
+  // Mark that we're doing a big update.
+  tbGuideMenu.beginUpdate();
 
-    // ...add an item to the menu for the guide menu we're looking at.
-    tbGuideMenu.Items.add( TTBSubmenuItem.create( tbGuideMenu ) );
+  Try
 
-    // Configure it.
-    With tbGuideMenu.Items[ tbGuideMenu.Items.Count - 1 ] Do
+    // Ensure that the menu is clear.
+    tbGuideMenu.Items.clear();
+
+    // For each menu in the guide...
+    For i := 0 To NortonGuide.MenuCount - 1 Do
     Begin
 
-      // Set the caption of the menu title.
-      Caption := '&' + StringReplace( NortonGuide.Menus[ i ].Title, '&', '&&', [ rfReplaceAll ] );
-      // Set the tag to the menu number.
-      Tag := i;
+      // ...add an item to the menu for the guide menu we're looking at.
+      tbGuideMenu.Items.add( TTBSubmenuItem.create( tbGuideMenu ) );
 
-      // Now add the sub-menu items.
-      For iSubs := 0 To NortonGuide.Menus[ i ].Count - 1 Do
+      // Configure it.
+      With tbGuideMenu.Items[ tbGuideMenu.Items.Count - 1 ] Do
       Begin
 
-        // Add a menu item to the guide menu we're working on.
-        add( TTBItem.create( tbGuideMenu ) );
+        // Set the caption of the menu title.
+        Caption := '&' + StringReplace( NortonGuide.Menus[ i ].Title, '&', '&&', [ rfReplaceAll ] );
+        // Set the tag to the menu number.
+        Tag := i;
 
-        // Configure it.
-        With Items[ Count - 1 ] Do
+        // Now add the sub-menu items.
+        For iSubs := 0 To NortonGuide.Menus[ i ].Count - 1 Do
         Begin
-          // Set the caption of the menu title.
-          Caption := StringReplace( NortonGuide.Menus[ i ][ iSubs ], '&', '&&', [ rfReplaceAll ] );
-          // Set the hint text.
-          Hint := Format( RSJump, [ NortonGuide.Menus[ i ][ iSubs ] ] );
-          // Set the click action.
-          OnClick := menuClick;
-          // Set the tag to the sub-menu number.
-          Tag := iSubs;
+
+          // Add a menu item to the guide menu we're working on.
+          add( TTBItem.create( tbGuideMenu ) );
+
+          // Configure it.
+          With Items[ Count - 1 ] Do
+          Begin
+            // Set the caption of the menu title.
+            Caption := StringReplace( NortonGuide.Menus[ i ][ iSubs ], '&', '&&', [ rfReplaceAll ] );
+            // Set the hint text.
+            Hint := Format( RSJump, [ NortonGuide.Menus[ i ][ iSubs ] ] );
+            // Set the click action.
+            OnClick := menuClick;
+            // Set the tag to the sub-menu number.
+            Tag := iSubs;
+          End;
+
         End;
 
       End;
 
     End;
 
-  End;
+    // Finally, add a menu item onto which we can hang any see-also items.
+    mnuSeeAlso := TTBSubmenuItem.create( tbGuideMenu );
+    tbGuideMenu.Items.add( mnuSeeAlso );
+    mnuSeeAlso.Caption := RSSeeAlso;
+    mnuSeeAlso.Enabled := False;
 
-  // Finally, add a menu item onto which we can hang any see-also items.
-  mnuSeeAlso := TTBSubmenuItem.create( tbGuideMenu );
-  tbGuideMenu.Items.add( mnuSeeAlso );
-  mnuSeeAlso.Caption := RSSeeAlso;
-  mnuSeeAlso.Enabled := False;
+  Finally
+
+    // Mark that we've finished the update.
+    tbGuideMenu.endUpdate();
+
+  End;
   
 End;
 
@@ -895,7 +910,7 @@ Begin
   // Jump to the line.
   NGEntry.jumpToLine( iLine );
   // Set focus to us.
-  self.setFocus(); // TODO: Doesn't work.
+  frmMain.setFocus();
 End;
 
 /////

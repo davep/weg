@@ -84,6 +84,9 @@ object frmGlobalFind: TfrmGlobalFind
         object mnuOptionsRegexp: TTBItem
           Action = actOptionsRegexpSearch
         end
+        object mnuOptionsRecycleWindows: TTBItem
+          Action = actOptionsRecycleWindows
+        end
       end
     end
     object tbGlobalFind: TTBToolbar
@@ -298,15 +301,20 @@ object frmGlobalFind: TfrmGlobalFind
     end
     object actOptionsMatchCase: TAction
       Caption = '&Match Case'
-      Hint = 'Match case when searching'
+      Hint = 'Match case when searching?'
       OnExecute = actOptionsMatchCaseExecute
       OnUpdate = actOptionsMatchCaseUpdate
     end
     object actOptionsRegexpSearch: TAction
       Caption = '&Regular Expression Search'
-      Hint = 'Perform regular expression searches'
+      Hint = 'Perform regular expression searches?'
       OnExecute = actOptionsRegexpSearchExecute
       OnUpdate = actOptionsRegexpSearchUpdate
+    end
+    object actOptionsRecycleWindows: TAction
+      Caption = '&Recycle Windows'
+      Hint = 'Recycle a window when opening a hit from the same guide?'
+      OnExecute = actOptionsRecycleWindowsExecute
     end
   end
   object ilGlobalFind: TTBImageList

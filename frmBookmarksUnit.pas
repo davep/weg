@@ -74,6 +74,9 @@ Type
     popBookmarksSplit1: TTBSeparatorItem;
     popBookmarksAdd: TTBItem;
     popBookmarksRemove: TTBItem;
+    mnuOptions: TTBSubmenuItem;
+    actOptionsRecycleWindows: TAction;
+    mnuOptionsRecycleWindows: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure actBookmarksCloseExecute(Sender: TObject);
@@ -85,6 +88,7 @@ Type
     procedure actBookmarksOpenExecute(Sender: TObject);
     procedure lvBookmarksChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
+    procedure actOptionsRecycleWindowsExecute(Sender: TObject);
 
   Protected
 
@@ -131,6 +135,10 @@ Const
   REG_NAMES = 'Names';
   {** Name of the offsets list }
   REG_OFFSETS = 'Offsets';
+  {** Key name for the options for the bookmark window }
+  REG_OPTIONS = 'Options';
+  {** Name for the guide recycling option }
+  REG_OPTION_RECYCLE_WINDOWS = 'Recycle Windows';
 
 {$R *.DFM}
 
@@ -163,6 +171,14 @@ Begin
 
         // Save the toolbar positions.
         TBRegSavePositions( self, HKEY_CURRENT_USER, wegRegistryKey( [ REG_BOOKMARKS_WINDOW, REG_POSITION, REG_TOOLBARS ] ) );
+
+        // Save the options for this window.
+        If openKey( wegRegistryKey( [ REG_BOOKMARKS_WINDOW, REG_OPTIONS ] ), True ) Then
+          Try
+            writeBool( REG_OPTION_RECYCLE_WINDOWS, actOptionsRecycleWindows.Checked );
+          Finally
+            closeKey();
+          End;
 
         // Save the bookmarks if they've been loaded.
         If bLoaded Then
@@ -202,6 +218,19 @@ Begin
       // Load the toolbar positions.
       TBRegLoadPositions( self, HKEY_CURRENT_USER, wegRegistryKey( [ REG_BOOKMARKS_WINDOW, REG_POSITION, REG_TOOLBARS ] ) );
 
+      // Load the options for this window.
+      If openKey( wegRegistryKey( [ REG_BOOKMARKS_WINDOW, REG_OPTIONS ] ), False ) Then
+        Try
+          Try
+            actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
+          Except
+            // GNDN.
+          End;  
+        Finally
+          // Close the settings key.
+          closeKey();
+        End;
+        
       // Load the bookmarks.
       loadBookmarks();
       
@@ -435,10 +464,21 @@ End;
 /////
 
 Procedure TfrmBookmarks.actBookmarksOpenExecute( Sender : TObject );
+
+  Function OpenType : TfrmMainOpenGuide;
+  Begin
+    If actOptionsRecycleWindows.Checked Then
+      Result := mogRecycle
+    Else
+      Result := mogNew;
+  End;
+
 Begin
+
   If lvBookmarks.Selected <> Nil Then
     With lvBookmarks.Selected Do
-      frmMain.openGuide( SubItems[ 0 ], StrToInt( SubItems[ 1 ] ), 0 );
+      frmMain.openGuide( SubItems[ 0 ], OpenType(), StrToInt( SubItems[ 1 ] ), 0 );
+      
 End;
 
 /////
@@ -451,6 +491,13 @@ Begin
   Else
     sbBookmarks.Panels[ 1 ].Text := ExtractFileName( lvBookmarks.Selected.SubItems[ 0 ] );
       
+End;
+
+/////
+
+Procedure TfrmBookmarks.actOptionsRecycleWindowsExecute( Sender : TObject );
+Begin
+  actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
 End;
 
 End.

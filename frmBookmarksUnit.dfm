@@ -68,6 +68,13 @@ object frmBookmarks: TfrmBookmarks
           Action = actBookmarksClose
         end
       end
+      object mnuOptions: TTBSubmenuItem
+        Caption = '&Options'
+        Hint = 'Options menu'
+        object mnuOptionsRecycleWindows: TTBItem
+          Action = actOptionsRecycleWindows
+        end
+      end
     end
     object tbBookmarks: TTBToolbar
       Left = 0
@@ -174,6 +181,11 @@ object frmBookmarks: TfrmBookmarks
       ImageIndex = 0
       ShortCut = 16499
       OnExecute = actBookmarksCloseExecute
+    end
+    object actOptionsRecycleWindows: TAction
+      Caption = '&Recycle Windows'
+      Hint = 'Recycle a window when opening an already open guide?'
+      OnExecute = actOptionsRecycleWindowsExecute
     end
   end
   object ilBookmarks: TImageList

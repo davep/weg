@@ -89,8 +89,8 @@ object frmMain: TfrmMain
           Action = actFileOpen
         end
         object mnuFileReOpen: TTBSubmenuItem
-          Caption = '&Re-Open'
-          Hint = 'Re-open a previously opened file'
+          Caption = '&Reopen'
+          Hint = 'Reopen a previously opened file'
           ImageIndex = 0
           OnPopup = mnuFileReOpenPopup
         end
@@ -118,17 +118,36 @@ object frmMain: TfrmMain
           Action = actFileExit
         end
       end
-      object mnuEdit: TTBSubmenuItem
-        Caption = '&Edit'
-        Hint = 'Edit menu'
-        object mnuEditPreferences: TTBItem
-          Action = actEditPreferences
+      object mnuOptions: TTBSubmenuItem
+        Caption = '&Options'
+        Hint = 'Options menu'
+        object mnuOptionsRecycle: TTBSubmenuItem
+          Caption = '&Recycle Windows'
+          Hint = 'Window recycling options'
+          object mnuOptionsRecycleFileOpen: TTBItem
+            Action = actOptionsRecycleFileOpen
+          end
+          object mnuOptionsRecycleFileReOpen: TTBItem
+            Action = actOptionsRecycleFileReOpen
+          end
+          object mnuOptionsRecycleDDE: TTBItem
+            Action = actOptionsRecycleDDE
+          end
+          object mnuOptionsRecycleCommandLine: TTBItem
+            Action = actOptionsRecycleCommandLine
+          end
+          object mnuOptionsRecycleDragAndDrop: TTBItem
+            Action = actOptionsRecycleDragAndDrop
+          end
         end
-        object mniEditColours: TTBItem
-          Action = actEditColours
+        object mnuOptionsPreferences: TTBItem
+          Action = actOptionsGuidePreferences
         end
-        object mnuEditPrinterSetup: TTBItem
-          Action = actEditPrinterSetup
+        object mnuOptionsColours: TTBItem
+          Action = actOptionsColours
+        end
+        object mnuOptionsPrinterSetup: TTBItem
+          Action = actOptionsPrinterSetup
         end
       end
       object mnuWindows: TTBSubmenuItem
@@ -279,20 +298,45 @@ object frmMain: TfrmMain
       ShortCut = 32856
       OnExecute = actFileExitExecute
     end
-    object actEditPreferences: TAction
-      Caption = '&Preferences...'
-      Hint = 'Edit WEG preferences'
-      OnExecute = actEditPreferencesExecute
+    object actOptionsGuidePreferences: TAction
+      Caption = '&Guide Preferences...'
+      Hint = 'Edit guide preferences'
+      OnExecute = actOptionsGuidePreferencesExecute
     end
-    object actEditColours: TAction
+    object actOptionsColours: TAction
       Caption = '&Colours...'
       Hint = 'Edit colours'
-      OnExecute = actEditColoursExecute
+      OnExecute = actOptionsColoursExecute
     end
-    object actEditPrinterSetup: TAction
+    object actOptionsPrinterSetup: TAction
       Caption = 'Printer &Setup...'
       Hint = 'Edit the printer setup'
-      OnExecute = actEditPrinterSetupExecute
+      OnExecute = actOptionsPrinterSetupExecute
+    end
+    object actOptionsRecycleFileOpen: TAction
+      Caption = 'File &Open'
+      Hint = 'Recycle guide windows when opening a guide?'
+      OnExecute = actOptionsCheckItemExecute
+    end
+    object actOptionsRecycleFileReOpen: TAction
+      Caption = 'File &Reopen'
+      Hint = 'Recycle guide windows when reopening a guide?'
+      OnExecute = actOptionsCheckItemExecute
+    end
+    object actOptionsRecycleDDE: TAction
+      Caption = '&DDE Open Requests'
+      Hint = 'Recycle guide windows when opening a guide via DDE?'
+      OnExecute = actOptionsCheckItemExecute
+    end
+    object actOptionsRecycleCommandLine: TAction
+      Caption = '&Command Line Open Request'
+      Hint = 'Recycle guide windows when opening a guide via the comamnd line?'
+      OnExecute = actOptionsCheckItemExecute
+    end
+    object actOptionsRecycleDragAndDrop: TAction
+      Caption = 'Dr&ag and Drop Open Request'
+      Hint = 'Recycle guide windows when opening a guide via drag and drop?'
+      OnExecute = actOptionsCheckItemExecute
     end
     object actWindowCascade: TAction
       Caption = '&Cascade'

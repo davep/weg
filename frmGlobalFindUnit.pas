@@ -108,6 +108,8 @@ Type
     popHits: TTBPopupMenu;
     popHitsClearResults: TTBItem;
     popHitsOpenResult: TTBItem;
+    actOptionsRecycleWindows: TAction;
+    mnuOptionsRecycleWindows: TTBItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actFindCloseExecute(Sender: TObject);
@@ -140,6 +142,7 @@ Type
     procedure NGFindBadRegExp(Sender: TObject);
     procedure lbHitsMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure actOptionsRecycleWindowsExecute(Sender: TObject);
 
   Protected
 
@@ -189,6 +192,8 @@ Const
   REG_OPTION_REGEXP = 'Do Regular Expression';
   {** Value name for the match case option }
   REG_OPTION_MATCH_CASE = 'Match Case';
+  {** Value name for the guide recycling option }
+  REG_OPTION_RECYCLE_WINDOWS = 'Recycle Windows';
 
 {$R *.DFM}
 
@@ -235,12 +240,13 @@ Begin
         If openKey( wegRegistryKey( [ REG_FINDER_WINDOW, REG_OPTIONS ] ), True ) THen
           Try
             // Save the options.
-            writeBool( REG_OPTION_SEARCH_CURRENT, actOptionsSearchCurrentGuide.Checked );
-            writeBool( REG_OPTION_SEARCH_ALL,     actOptionsSearchAllKnownGuides.Checked );
-            writeBool( REG_OPTION_DO_SHORTS,      wlfsShorts In NGFind.SearchStyle );
-            writeBool( REG_OPTION_DO_LONGS,       wlfsLongs  In NGFind.SearchStyle );
-            writeBool( REG_OPTION_REGEXP,         NGFind.RegExpSearch );
-            writeBool( REG_OPTION_MATCH_CASE,     NGFind.MatchCase );
+            writeBool( REG_OPTION_SEARCH_CURRENT,  actOptionsSearchCurrentGuide.Checked );
+            writeBool( REG_OPTION_SEARCH_ALL,      actOptionsSearchAllKnownGuides.Checked );
+            writeBool( REG_OPTION_DO_SHORTS,       wlfsShorts In NGFind.SearchStyle );
+            writeBool( REG_OPTION_DO_LONGS,        wlfsLongs  In NGFind.SearchStyle );
+            writeBool( REG_OPTION_REGEXP,          NGFind.RegExpSearch );
+            writeBool( REG_OPTION_MATCH_CASE,      NGFind.MatchCase );
+            writeBool( REG_OPTION_RECYCLE_WINDOWS, actOptionsRecycleWindows.Checked );
           Finally
             // Close the window history key.
             closeKey();
@@ -309,8 +315,9 @@ Begin
               NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsLongs ]
             Else
               NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsLongs ];
-            NGFind.RegExpSearch := readBool( REG_OPTION_REGEXP );
-            NGFInd.MatchCase    := readBool( REG_OPTION_MATCH_CASE );
+            NGFind.RegExpSearch              := readBool( REG_OPTION_REGEXP );
+            NGFind.MatchCase                 := readBool( REG_OPTION_MATCH_CASE );
+            actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
           Except
             // GNDN.
           End;
@@ -627,11 +634,20 @@ End;
 /////
 
 Procedure TfrmGlobalFind.actFindOpenExecute( Sender : TObject );
+
+  Function OpenType : TfrmMainOpenGuide;
+  Begin
+    If actOptionsRecycleWindows.Checked Then
+      Result := mogRecycle
+    Else
+      Result := mogNew;  
+  End;
+  
 Begin
 
   If lbHits.ItemIndex > -1 Then
     With aResults[ lbHits.ItemIndex ] Do
-      frmMain.openGuide( sGuide, lEntry, iLine );
+      frmMain.openGuide( sGuide, OpenType(), lEntry, iLine );
 
 End;
 
@@ -690,6 +706,13 @@ Begin
     // ...there is a line, set the hint to tell the user the guide.
     Hint := Format( RSFoundIn, [ aResults[ iLine ].sTitle ] );
 
+End;
+
+/////
+
+Procedure TfrmGlobalFind.actOptionsRecycleWindowsExecute( Sender : TObject );
+Begin
+  actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
 End;
 
 End.
