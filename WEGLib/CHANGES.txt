@@ -13,6 +13,11 @@ o Modified the entry class so that it doesn't create and free a line
   stripper object for each line in the entry. Instead just create the
   stripper once and reuse it.
 
+o Modified wegLibExpand() so that it tries to do something sensible if an
+  author of a guide has used two consecutive "hard spaces" (which would
+  result in 255 spaces being inserted when the author probably wanted two
+  consecutive spaces).
+
 Changes since v1.7
 ==================
 

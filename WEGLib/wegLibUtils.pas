@@ -164,9 +164,20 @@ Begin
       // ...because it's a count of spaces to unroll.
       iRLE := Ord( s[ i + 1 ] );
 
-      // Do the unrolling.
-      For iExpand := 1 To iRLE Do
-        Result := Result + ' ';
+      // Is the RLE count the RLE marker too?
+      If iRLE = $ff Then
+        // Yes, it is, just stick in a couple of spaces. I'm not sure if this is
+        // the right thing to do but I've seen at least one Norton Guide
+        // database where something that renders as a normal line of spaces in
+        // NG.exe and EG.exe is actually a whole line of "hard" spaces. If we
+        // did normal RLE processing on that we'd get a massive line of spaces.
+        // I don't know if this is the right thing to do but it seems to solve
+        // the problem with no adverse effects elsewhere.
+        Result := Result + '  '
+      Else
+        // Everything looks reasonably normal, do the unrolling.
+        For iExpand := 1 To iRLE Do
+          Result := Result + ' ';
         
     End
     // ...otherwise, if we're not supposed to jump the next character...
