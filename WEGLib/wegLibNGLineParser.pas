@@ -89,15 +89,17 @@ Type
   Public
 
     {** Parse a line from a Norton Guide }
-    Procedure parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; bOEMToANSI : Boolean ); Reintroduce;
+    Procedure parse( sRaw : String; oCanvas : TCanvas; iTop : Integer; iLeft : Integer; bOEMToANSI : Boolean ); Reintroduce; Overload;
+    {** Parse a line from a Norton Guide }
+    Procedure parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; bOEMToANSI : Boolean ); Reintroduce; Overload;
 
   Protected
 
     {** Pointer to the canvas that we're supposed to paint on }
     oCanvas : TCanvas;
-    {** Details of the rectangle that we're painting into }
-    rRect : TRect;
-    {** Keeps tabs of where we're drawing }
+    {** Keep tabs of the top of where we're drawing }
+    iTop : Integer;
+    {** Keeps tabs of the left of where we're drawing }
     iLeft : Integer;
 
     {** Handle some text }
@@ -119,7 +121,9 @@ Type
   Public
 
     {** Parse a line from a Norton Guide }
-    Procedure parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; oColours : TwegLibNGColours; bOEMToANSI : Boolean ); Reintroduce;
+    Procedure parse( sRaw : String; oCanvas : TCanvas; iTop : Integer; iLeft : Integer; oColours : TwegLibNGColours; bOEMToANSI : Boolean ); Reintroduce; Overload;
+    {** Parse a line from a Norton Guide }
+    Procedure parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; oColours : TwegLibNGColours; bOEMToANSI : Boolean ); Reintroduce; Overload;
 
   Protected
 
@@ -382,15 +386,32 @@ End;
 
 /////
 
+Procedure TwegLibNGLinePainter.parse( sRaw : String; oCanvas : TCanvas; iTop : Integer; iLeft : Integer; bOEMToANSI : Boolean );
+Begin
+
+  // Remember the canvas.
+  self.oCanvas := oCanvas;
+  // Remember the top.
+  self.iTop := iTop;
+  // Remember the left.
+  self.iLeft := iLeft;
+
+  // Call the main parser.
+  Inherited parse( sRaw, bOEMToANSI );
+
+End;
+
+/////
+
 Procedure TwegLibNGLinePainter.parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; bOEMToANSI : Boolean );
 Begin
 
   // Remember the canvas.
   self.oCanvas := oCanvas;
-  // Remember the rectangle.
-  self.rRect := rRect;
-  // Start at the left hand side of the rectangle.
-  iLeft := rRect.Left;
+  // Remember the top.
+  self.iTop := rRect.Top;
+  // Remember the left.
+  self.iLeft := rRect.Left;
 
   // Do the default painting for the rectangle.
   handleNormal();
@@ -398,14 +419,14 @@ Begin
 
   // Call the main parser.
   Inherited parse( sRaw, bOEMToANSI );
-  
+
 End;
 
 /////
 
 Procedure TwegLibNGLinePainter.handleText( Const sText : String );
 Begin
-  oCanvas.textOut( iLeft, rRect.Top, sText );
+  oCanvas.textOut( iLeft, iTop, sText );
   Inc( iLeft, oCanvas.textWidth( sText ) );
 End;
 
@@ -442,14 +463,27 @@ End;
 
 /////
 
-Procedure TwegLibNGLineColourPainter.parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; oColours : TwegLibNGColours; bOEMToANSI : Boolean );
+Procedure TwegLibNGLineColourPainter.parse( sRaw : String; oCanvas : TCanvas; iTop : Integer; iLeft : Integer; oColours : TwegLibNGColours; bOEMToANSI : Boolean );
 Begin
 
   // Remember the colour configuration.
   self.oColours := oColours;
   
   // Call the main parser.
-  Inherited parse( sRaw, oCanvas, rrect, bOEMToANSI );
+  Inherited parse( sRaw, oCanvas, iTop, iLeft, bOEMToANSI );
+
+End;
+
+/////
+
+Procedure TwegLibNGLineColourPainter.parse( sRaw : String; oCanvas : TCanvas; rRect : TRect; oColours : TwegLibNGColours; bOEMToANSI : Boolean );
+Begin
+
+  // Remember the colour configuration.
+  self.oColours := oColours;
+
+  // Call the main parser.
+  Inherited parse( sRaw, oCanvas, rRect, bOEMToANSI );
 
 End;
 
