@@ -171,7 +171,7 @@ Type
   Public
 
     {** Open a guide in the given window }
-    Function openGuide( sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
+    Function openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Open a guide }
     Function openGuide( Const sFile : String; mog : TfrmMainOpenGuide; lEntry : LongInt = -1; iStartingLine : Integer = -1 ) : TForm; Overload;
     {** Return a pointer to the focused Norton Guide }
@@ -188,6 +188,8 @@ Type
     {** MRU guide titles list }
     slMRUTitles : TStringList;
 
+    {** Default the guide location }
+    Function defaultGuideLocation( Const sFile : String ) : String;
     {** Save the state of the window }
     Procedure saveWindowState;
     {** Load the state of the window }
@@ -275,22 +277,31 @@ Const
 
 /////
 
-Function TfrmMain.openGuide( sFile : String; oWindow : TfrmGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
+Function TfrmMain.defaultGuideLocation( Const sFile : String ) : String;
 Begin
 
-  // If the file doesn't exist and there is no path information...
-  If Not FileExists( sFile ) And ( ExtractFilePath( sFile ) = '' ) Then
-    // ...if we've got a default guide directory...
-    If NGSettings.DefaultGuideDirectory <> '' Then
-      // ...assume that the user wishes to try and open it from the default
-      // guide directory.
-      sFile := IncludeTrailingBackslash( NGSettings.DefaultGuideDirectory ) + sFile;
-      
+  // If the file doesn't exist and there is no path information and we've got
+  // a default guide directory...
+  If ( Not FileExists( sFile ) ) And ( ExtractFilePath( sFile ) = '' ) And ( NGSettings.DefaultGuideDirectory <> '' ) Then
+    // ...assume that the user wishes to try and open it from the default
+    // guide directory.
+    Result := IncludeTrailingBackslash( NGSettings.DefaultGuideDirectory ) + sFile
+  Else
+    // ...otherwise just go with what we've got.
+    Result := sFile;
+
+End;
+
+/////
+
+Function TfrmMain.openGuide( Const sFile : String; oWindow : TfrmGuide; lEntry : LongInt; iStartingLine : Integer ) : TForm;
+Begin
+
   With oWindow Do
   Begin
 
     // Open guide.
-    NortonGuide.Guide := sFile;
+    NortonGuide.Guide := defaultGuideLocation( sFile );
 
     // If it couldn't be opened...
     If Not NortonGuide.isOpen() Then
@@ -336,7 +347,7 @@ Begin
   Begin
 
     // Clean up the guide name.
-    sNeedle := AnsiLowerCase( ExpandUNCFileName( sFile ) );
+    sNeedle := AnsiLowerCase( ExpandUNCFileName( defaultGuideLocation( sFile ) ) );
 
     // Look thru the child windows, trying to find one that is using the same
     // guide.
