@@ -16,12 +16,12 @@ OutputDir=.
 ChangesAssociations=Yes
 
 [Tasks]
-Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
+Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 Name: "quicklaunchicon"; Description: "Create a &Quick Launch icon"; GroupDescription: "Additional icons:"; Flags: unchecked
-Name: "assocngfiles"; Description: "Associate Expert Guide with Norton Guides?"; GroupDescription: "Associations"
+Name: "assocngfiles";    Description: "Associate Expert Guide with Norton Guides"; GroupDescription: "Associations"
 
 [Components]
-Name: "WEGSources"; Description: "WEG Sources"; Types: full
+Name: "WEGSources";    Description: "WEG Sources"; Types: full
 Name: "WEGLibSources"; Description: "WEGLib Sources"; Types: full
 
 [Files]
@@ -75,4 +75,3 @@ Root: HKCR; SubKey: "org.davep.WEG\shell\open\command"; ValueType: string; Value
 
 [Run]
 Filename: "{app}\WEG.exe"; Description: "Launch Expert Guide for Windows"; Flags: nowait postinstall skipifsilent
-
