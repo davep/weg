@@ -38,7 +38,8 @@ Uses
   Windows,
   wegLibNortonGuide,
   wegLibNGEntry,
-  wegLibNGColours;
+  wegLibNGColours,
+  wegLibNGLineParser;
 
 Type
 
@@ -86,6 +87,10 @@ Type
     aForeHistory : TwegLibNGEntryViewerHistory;
     {** Flag to say if we're navigating the history list }
     bDoingHistory : Boolean;
+    {** Object for paiting b/w lines }
+    oPainter : TwegLibNGLinePainter;
+    {** Object for paiting colour lines }
+    oColourPainter : TwegLibNGLineColourPainter;
 
     {** Handle notification messages }
     Procedure notification( AComponent : TComponent; Operation : TOperation ); Override;
@@ -201,9 +206,8 @@ Implementation
 
 Uses
   Graphics,
-  Messages,
-  wegLibNGLineParser;
-  
+  Messages;
+
 /////
 
 Constructor TwegLibNGEntryViewer.create( AOwner : TComponent );
@@ -214,6 +218,10 @@ Begin
   // Set the default cursors.
   FLinkCursor := crHandPoint;
   FTextCursor := crDefault;
+
+  // Create the painters.
+  oPainter       := TwegLibNGLinePainter.create();
+  oColourPainter := TwegLibNGLineColourPainter.create();
 
   // Initial state of history.
   bDoingHistory := False;
@@ -234,6 +242,10 @@ Begin
     With guideCheck() Do
       freeEntry( FEntry );
 
+  // Free the painters.
+  oPainter.free();
+  oColourPainter.free();
+  
   // Nil out the history arrays.
   aBackHistory := Nil;
   aForeHistory := Nil;
@@ -627,20 +639,10 @@ Begin
   // If the user wants colour...
   Else If DoColour() Then
     // ...it's angry fruit salad time...
-    With TwegLibNGLineColourPainter.create() Do
-      Try
-        parse( FEntry[ iIndex ], Canvas, rRect, FColours, NortonGuide.OEMToANSI );
-      Finally
-        free();
-      End
+    oColourPainter.parse( FEntry[ iIndex ], Canvas, rRect, FColours, NortonGuide.OEMToANSI )
   // Otherwise do mono painting.
   Else
-    With TwegLibNGLinePainter.create() Do
-      Try
-        parse( FEntry[ iIndex ], Canvas, rRect, NortonGuide.OEMToANSI );
-      Finally
-        free();
-      End;
+    oPainter.parse( FEntry[ iIndex ], Canvas, rRect, NortonGuide.OEMToANSI );
 
 End;
 

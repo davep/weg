@@ -5,14 +5,18 @@ $Id$
 Changes since v1.8
 ==================
 
-o Modified the back-track history so that it only adds the current location
-  to the history if the new location is different from the current location
-  (including the highlighted line).
+o Modified the entry viewer component so that it doesn't create and free a
+  painter for each draw action. Instead just create the painters once and
+  reuse them.
 
 Changes since v1.7
 ==================
 
 o Added a TimeStamp property to the Norton Guide class.
+
+o Modified the back-track history so that it only adds the current location
+  to the history if the new location is different from the current location
+  (including the highlighted line).
 
 Changes since v1.6
 ==================
