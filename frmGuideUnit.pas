@@ -886,6 +886,10 @@ Begin
 
   // Show the form.
   frmFinder.show();
+  // Set focus to the input.
+  frmFinder.edtFind.setFocus();
+  // Ensure that any existing text is selected.
+  frmFinder.edtFind.selectAll();
 
 End;
 
