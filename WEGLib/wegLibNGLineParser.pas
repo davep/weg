@@ -1,7 +1,7 @@
 {* File.......: wegLibNGLineParser.pas
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
- * Copyright..: Dave Pearson 2003
+ * Copyright..: Dave Pearson 2004
  * ID.........: $Id$
  * Description: Classes for parsing a line in a Norton Guide.
  * Licence....: GNU General Public Licence (see below)
