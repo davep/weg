@@ -105,7 +105,7 @@ Type
     tbFileGuideManager: TTBItem;
     NGSettings: TwegLibNGSettings;
     actOptionsGuidePreferences: TAction;
-    actOptionsColours: TAction;
+    actOptionsGuideColours: TAction;
     mnuOptions: TTBSubmenuItem;
     mnuOptionsPreferences: TTBItem;
     mnuOptionsColours: TTBItem;
@@ -136,6 +136,8 @@ Type
     actOptionsRecycleFileReOpen: TAction;
     mnuOptionsRecycleFileOpen: TTBItem;
     mnuOptionsRecycleFileReOpen: TTBItem;
+    mnuOptionsSplit1: TTBSeparatorItem;
+    mnuOptionsSplit2: TTBSeparatorItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -151,7 +153,7 @@ Type
     procedure actFileCloseAllExecute(Sender: TObject);
     procedure actFileGuideManagerExecute(Sender: TObject);
     procedure actOptionsGuidePreferencesExecute(Sender: TObject);
-    procedure actOptionsColoursExecute(Sender: TObject);
+    procedure actOptionsGuideColoursExecute(Sender: TObject);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actFileGlobalFindExecute(Sender: TObject);
     procedure actFileBookmarksExecute(Sender: TObject);
@@ -937,7 +939,7 @@ End;
 
 /////
 
-Procedure TfrmMain.actOptionsColoursExecute( Sender : TObject );
+Procedure TfrmMain.actOptionsGuideColoursExecute( Sender : TObject );
 ResourceString
   RSCaption = 'Guide Colours';
 Begin

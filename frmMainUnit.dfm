@@ -142,11 +142,15 @@ object frmMain: TfrmMain
             Action = actOptionsRecycleDragAndDrop
           end
         end
+        object mnuOptionsSplit1: TTBSeparatorItem
+        end
         object mnuOptionsPreferences: TTBItem
           Action = actOptionsGuidePreferences
         end
         object mnuOptionsColours: TTBItem
-          Action = actOptionsColours
+          Action = actOptionsGuideColours
+        end
+        object mnuOptionsSplit2: TTBSeparatorItem
         end
         object mnuOptionsPrinterSetup: TTBItem
           Action = actOptionsPrinterSetup
@@ -301,17 +305,17 @@ object frmMain: TfrmMain
       OnExecute = actFileExitExecute
     end
     object actOptionsGuidePreferences: TAction
-      Caption = '&Guide Preferences...'
+      Caption = 'Guide &Preferences...'
       Hint = 'Edit guide preferences'
       OnExecute = actOptionsGuidePreferencesExecute
     end
-    object actOptionsColours: TAction
-      Caption = '&Colours...'
+    object actOptionsGuideColours: TAction
+      Caption = 'Guide &Colours...'
       Hint = 'Edit colours'
-      OnExecute = actOptionsColoursExecute
+      OnExecute = actOptionsGuideColoursExecute
     end
     object actOptionsPrinterSetup: TAction
-      Caption = 'Printer &Setup...'
+      Caption = 'Pr&inter Setup...'
       Hint = 'Edit the printer setup'
       OnExecute = actOptionsPrinterSetupExecute
     end
