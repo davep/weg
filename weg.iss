@@ -2,7 +2,7 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.0
+AppVerName=Expert Guide for Windows v2.1
 AppCopyright=Copyright © 2003 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
@@ -49,6 +49,7 @@ Source: "WEGLib\*.dof"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Co
 Source: "WEGLib\*.pas"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
 Source: "WEGLib\*.dcr"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
 Source: "WEGLib\*.dfm"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
+Source: "WEGLib\*.txt"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
 
 [Icons]
 Name: "{group}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"
