@@ -58,7 +58,7 @@ Feedback
 ========
 
 Please feel free to send me any feedback, ideas, enhancement requests, bug
-reports, bug fixes (even better) or anything else. I'd appreaciate if you
+reports, bug fixes (even better) or anything else. I'd appreciate it if you
 sent email concerining WEG to weg@davep.org, if you just want a chat then
 use the email address at the start of this file.
 
