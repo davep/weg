@@ -599,6 +599,7 @@ Begin
 
   // If there isn't a cached hint...
   If Item.SubItems.Count = 1 Then
+    // ...load it and cache it.
     With TwegLibNortonGuide.create( Nil ) Do
       Try
         OEMToANSI := True;
@@ -606,7 +607,7 @@ Begin
         If isOpen() Then
         Begin
           If Trim( Credits ) <> '' Then
-            Item.SubItems.add( Item.Caption + #13#10#13#10 + Trim( Credits ) )
+            Item.SubItems.add( Item.Caption + #13#10#13#10 + TrimRight( Credits ) )
           Else
             Item.SubItems.add( Item.Caption );
         End
