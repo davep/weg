@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v1.11
+===================
+
+o Published the OnDragOver and OnDragDrop events of the entry viewer
+  component.
+
 Changes since v1.10
 ===================
 

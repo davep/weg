@@ -193,8 +193,12 @@ Type
     Property Font;
     Property Hint;
     Property MultiSelect;
-    Property OnClick;
     Property PopupMenu;
+
+    // Publish some inherited events.
+    Property OnClick;
+    Property OnDragOver;
+    Property OnDragDrop;
     Property OnKeyPress;
 
   End;
