@@ -2,6 +2,21 @@
 
 $Id$
 
+Changes since v1.3
+==================
+
+o Centralised the parsing of lines in guide entries in a class hierarchy for
+  handling parsing (see wegLibNGLineParser.pas).
+
+o Replaced the parsing code in the entry viewer control with a call to one
+  of the above classes.
+
+o The non-colour mode of the entry viewer now paints monochrome versions of
+  the main control codes (bold, underline, reverse).
+
+o Replaced the guide entry control code stripping code with a call to one of
+  the line parser classes.
+
 Changes since v1.2
 ==================
 

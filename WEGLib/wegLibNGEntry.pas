@@ -171,7 +171,8 @@ Type
 Implementation
 
 Uses
-  wegLibUtils;
+  wegLibUtils,
+  wegLibNGLineParser;
   
 /////
 
@@ -323,10 +324,7 @@ Var
 Begin
 
   For i := 0 To FLineCount - 1 Do
-    If bOEMToANSI Then
-      FLines[ i ].sText := wegLibOEMToANSI( wegLibExpand( wegLibReadStringZ( hNG, MAX_LINE_LENGTH ) ) )
-    Else
-      FLines[ i ].sText := wegLibExpand( wegLibReadStringZ( hNG, MAX_LINE_LENGTH ) );
+    FLines[ i ].sText := wegLibExpand( wegLibReadStringZ( hNG, MAX_LINE_LENGTH ) );
 
 End;
 
@@ -347,67 +345,15 @@ End;
 /////
 
 Function TwegLibNGEntry.stripControls( sRaw : String ) : String;
-Const
-  CTRL_CHAR = '^';
-Var
-  iCtrl : Integer;
 Begin
 
-  // Start off with an empty string.
-  Result := '';
-
-  // Find the first control sequence.
-  iCtrl := Pos( CTRL_CHAR, sRaw );
-
-  // Loop over the string, stripping as we go.
-  While ( iCtrl <> 0 ) And ( iCtrl < Length( sRaw ) ) Do
-  Begin
-
-    // Copy text up to the next control sequence.
-    Result := Result + Copy( sRaw, 1, iCtrl - 1 );
-
-    // Handle the control character.    
-    Case sRaw[ iCtrl + 1 ] Of
-
-      'A', 'a' : Inc( iCtrl, 4 );
-
-      'B', 'b',
-      'N', 'n',
-      'R', 'r',
-      'U', 'u' : Inc( iCtrl, 2 );
-
-      'C', 'c' :
-      Begin
-
-        If bOemToAnsi Then
-          Result := Result + wegLibOEMToANSI( wegLibHex2Char( Copy( sRaw, iCtrl + 2, 2 ) ) )
-        Else
-          Result := Result + wegLibHex2Char( Copy( sRaw, iCtrl + 2, 2 ) );
-
-        Inc( iCtrl, 4 );
-
-      End;
-
-      CTRL_CHAR :
-      Begin
-        Result := Result + CTRL_CHAR;
-        Inc( iCtrl, 2 );
-      End;
-
-      Else
-        Inc( iCtrl );
-
+  With TwegLibNGLineStripper.create() Do
+    Try
+      parse( sRaw, bOEMToANSI );
+      Result := sStripped;
+    Finally
+      free();
     End;
-
-    // Chop what we've done off the front of the string.
-    sRaw := Copy( sRaw, iCtrl, Length( sRaw ) );
-    // Look for the next control character.
-    iCtrl := Pos( CTRL_CHAR, sRaw );
-
-  End;
-
-  // Copy remaining text.
-  Result := Result + sRaw;
 
 End;
 

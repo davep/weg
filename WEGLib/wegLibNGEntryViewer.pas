@@ -197,7 +197,7 @@ Implementation
 Uses
   Graphics,
   Messages,
-  wegLibUtils;
+  wegLibNGLineParser;
   
 /////
 
@@ -212,6 +212,9 @@ Begin
 
   // Initial state of history.
   bDoingHistory := False;
+
+  // We always do our own drawing.
+  Style := lbOwnerDrawFixed;
 
 End;
 
@@ -299,18 +302,6 @@ Begin
 
       // Load the new entry.
       FEntry := loadEntry( lOffset );
-
-      // If we can't see some settings...
-      If FNortonGuide.Settings = Nil Then
-        // ...do colour display by default.
-        Style := lbOwnerDrawFixed
-      // ...otherwise consult the settings.
-      Else If FNortonGuide.Settings.UseColour Then
-        // We're using colour, do our own drawing.
-        Style := lbOwnerDrawFixed
-      Else
-        // We're not using colour, do normal drawing.
-        Style := lbStandard;
 
       // Refresh our display.
       refreshDisplay();
@@ -591,22 +582,21 @@ End;
 /////
 
 Procedure TwegLibNGEntryViewer.drawItem( iIndex : Integer; rRect : TRect; State: TOwnerDrawState );
-Const
-  CTRL_CHAR = '^';
-Type
-  TCtrlMode = ( cmNormal, cmBold, cmUnderline, cmReverse );
-Var
-  cmMode  : TCtrlMode;
-  sRaw    : String;
-  iLeft   : Integer;
-  iCtrl   : Integer;
-  iColour : Integer;
-  sText   : String;
-Begin
 
-  // Starting points.
-  cmMode := cmNormal;
-  iLeft  := rRect.Left;
+  Function DoColour : Boolean;
+  Begin
+
+    // If we don't have any settings...
+    If NortonGuide.Settings = Nil Then
+      // ...do colour drawing...
+      Result := True
+    Else
+      // ...otherwise do whatever the user wants.
+      Result := NortonGuide.Settings.UseColour;
+
+  End;
+  
+Begin
 
   // If the line is selected...
   If odSelected In State Then
@@ -627,184 +617,26 @@ Begin
 
     // Draw the line.
     Canvas.fillRect( rRect );
-    Canvas.textOut( iLeft, rRect.Top, Items[ iIndex ] );
+    Canvas.textOut( rRect.Left, rRect.Top, Items[ iIndex ] );
 
   End
+  // If the user wants colour...
+  Else If DoColour() Then
+    // ...it's angry fruit salad time...
+    With TwegLibNGLineColourPainter.create() Do
+      Try
+        parse( FEntry[ iIndex ], Canvas, rRect, FColours, NortonGuide.OEMToANSI );
+      Finally
+        free();
+      End
+  // Otherwise do mono painting.
   Else
-  // It isn't a selected line so it's angry fruit salad time...
-  Begin
-
-    // Start out with normal colours.
-    Canvas.Brush.Color := FColours[ FColours.NormalBackground ];
-    Canvas.Font.Color  := FColours[ FColours.NormalText ];
-    Canvas.fillRect( rRect );
-
-    // Get the text to display.
-    sRaw := FEntry[ iIndex ];
-
-    // Find the first control sequence.
-    iCtrl := Pos( CTRL_CHAR, sRaw );
-
-    // Loop over the text, dawing it as we go.
-    While ( iCtrl <> 0 ) And ( iCtrl < Length( sRaw ) ) Do
-    Begin
-
-      // Draw the text up to the next control sequence.
-      sText := Copy( sRaw, 1, iCtrl - 1 );
-      Canvas.textOut( iLeft, rRect.Top, sText );
-      Inc( iLeft, Canvas.textWidth( sText ) ); 
-
-      // Deal with the control character.
-      Case sRaw[ iCtrl + 1 ] Of
-
-        // Colour attribute.
-        'A', 'a' :
-        Begin
-
-          // Work out the colour ID.
-          iColour := wegLibHex2Int( Copy( sRaw, iCtrl + 2, 2 ) );
-
-          // Convert the ID into a Windows colour.
-          Canvas.Font.Color  := FColours[ iColour And $F ];
-          Canvas.Brush.Color := FColours[ ( iColour And $F0 ) Shr 4 ];
-
-          // Go to normal mode.
-          cmMode := cmNormal;
-
-          // Skip along the string.
-          Inc( iCtrl, 4 );
-
-        End;
-
-        // Bold mode toggle.
-        'B', 'b' :
-        Begin
-
-          // If we're already bold...
-          If cmMode = cmBold Then
-          Begin
-            // Turn it off
-            Canvas.Font.Color  := FColours[ FColours.NormalText ];
-            Canvas.Brush.Color := FColours[ FColours.NormalBackground ];
-            cmMode             := cmNormal;
-          End
-          Else
-          Begin
-            // Turn it on.
-            Canvas.Font.Color  := FColours[ FColours.BoldText ];
-            Canvas.Brush.Color := FColours[ FColours.BoldBackground ];
-            cmMode             := cmBold;
-          End;
-
-          // Skip along the string.
-          Inc( iCtrl, 2 );
-
-        End;
-        
-        // Character.
-        'C', 'c' :
-        Begin
-
-          // Get the character.
-          If FNortonGuide.OEMToANSI Then
-            sText := wegLibOEMToANSI( wegLibHex2Char( Copy( sRaw, iCtrl + 2, 2 ) ) )
-          Else
-            sText := wegLibHex2Char( Copy( sRaw, iCtrl + 2, 2 ) );
-
-          // Draw the character.
-          Canvas.textOut( iLeft, rRect.Top, sText );
-          Inc( iLeft, Canvas.textWidth( sText ) );
-
-          // Skip along the string.
-          Inc( iCtrl, 4 );
-
-        End;
-
-        // Normal mode.
-        'N', 'n' :
-        Begin
-          Canvas.Font.Color  := FColours[ FColours.NormalText ];
-          Canvas.Brush.Color := FColours[ FColours.NormalBackground ];
-          cmMode             := cmNormal;
-          Inc( iCtrl, 2 );
-        End;
-
-        // Reverse mode toggle.
-        'R', 'r' :
-        Begin
-
-          // If we're already reversed...
-          If cmMode = cmReverse Then
-          Begin
-            // Turn it off
-            Canvas.Font.Color  := FColours[ FColours.NormalText ];
-            Canvas.Brush.Color := FColours[ FColours.NormalBackground ];
-            cmMode             := cmNormal;
-          End
-          Else
-          Begin
-            // Turn it on.
-            Canvas.Font.Color  := FColours[ FColours.ReverseText ];
-            Canvas.Brush.Color := FColours[ FColours.ReverseBackground ];
-            cmMode             := cmReverse;
-          End;
-
-          // Skip along the string.
-          Inc( iCtrl, 2 );
-
-        End;
-
-        // Underline mode toggle.
-        'U', 'u' :
-        Begin
-
-          // If we're already underlined...
-          If cmMode = cmUnderline Then
-          Begin
-            // Turn it off
-            Canvas.Font.Color  := FColours[ FColours.NormalText ];
-            Canvas.Brush.Color := FColours[ FColours.NormalBackground ];
-            cmMode             := cmNormal;
-          End
-          Else
-          Begin
-            // Turn it on.
-            Canvas.Font.Color  := FColours[ FColours.UnderlinedText ];
-            Canvas.Brush.Color := FColours[ FColours.UnderlinedBackground ];
-            cmMode             := cmUnderline;
-          End;
-
-          // Skip along the string.
-          Inc( iCtrl, 2 );
-
-        End;
-
-        // The control character.
-        CTRL_CHAR :
-        Begin
-          // We simply draw it.
-          Canvas.textOut( iLeft, rRect.Top, CTRL_CHAR );
-          Inc( iLeft, Canvas.textWidth( CTRL_CHAR ) );
-          Inc( iCtrl, 2 );
-        End;
-
-        // None of the above, just move along.
-        Else
-          Inc( iCtrl );
-          
+    With TwegLibNGLinePainter.create() Do
+      Try
+        parse( FEntry[ iIndex ], Canvas, rRect, NortonGuide.OEMToANSI );
+      Finally
+        free();
       End;
-
-      // Chop the bits we've done off the raw string.
-      sRaw := Copy( sRaw, iCtrl, Length( sRaw ) );
-      // Find the next control character.
-      iCtrl := Pos( CTRL_CHAR, sRaw );
-      
-    End;
-
-    // Draw anything that's left.
-    Canvas.textOut( iLeft, rRect.Top, sRaw );
-
-  End;
 
 End;
 

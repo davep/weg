@@ -68,6 +68,7 @@ contains
   wegLibNGColoursDialogUnit in 'wegLibNGColoursDialogUnit.pas' {wegLibNGColoursDialog},
   wegLibNGEntryFind in 'wegLibNGEntryFind.pas',
   wegLibNGFindThread in 'wegLibNGFindThread.pas',
-  wegLibNGFind in 'wegLibNGFind.pas';
+  wegLibNGFind in 'wegLibNGFind.pas',
+  wegLibNGLineParser in 'wegLibNGLineParser.pas';
 
 End.
