@@ -446,8 +446,8 @@ Begin
     clear();
 
     // Simply add blank lines for each item in the list. We don't actually
-    // need to put any text in the items list of the list-box because all
-    // if the display is done from the contents of the entry.
+    // need to put any text in the items list of the list-box because
+    // the display is done from the contents of the entry.
     For i := 0 To FEntry.LineCount - 1 Do
       Items.add( '' );
 
