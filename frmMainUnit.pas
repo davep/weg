@@ -81,7 +81,7 @@ Type
     tbFileExit: TTBItem;
     tbFileSep1: TTBSeparatorItem;
     mnuWindows: TTBSubmenuItem;
-    mniWindowsList: TTBMDIWindowItem;
+    mnuWindowsList: TTBMDIWindowItem;
     MDIHandler: TTBMDIHandler;
     NGColours: TwegLibNGColours;
     actWindowCascade: TAction;

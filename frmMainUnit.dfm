@@ -173,7 +173,7 @@ object frmMain: TfrmMain
         end
         object mnuWindowSplit1: TTBSeparatorItem
         end
-        object mniWindowsList: TTBMDIWindowItem
+        object mnuWindowsList: TTBMDIWindowItem
         end
       end
       object mnuHelp: TTBSubmenuItem
