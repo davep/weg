@@ -225,11 +225,13 @@ End;
 /////
 
 Procedure wegFireURL( Const sURL : String );
+ResourceString
+  RSError = 'Unable to invoke URL. Perhaps Windows isn''t configured to handle this type of URL?';
 Begin
   If ShellExecute( Application.MainForm.Handle, nil, PChar( sURL ), PChar( '' ), PChar( '' ), SW_SHOWNORMAL ) <= 32 Then
   Begin
     MessageBeep( MB_ICONERROR );
-    MessageDlg( 'Unable to invoke web browser', mtError, [ mbOk ], 0 );
+    MessageDlg( RSError, mtError, [ mbOk ], 0 );
   End;
 End;
 
