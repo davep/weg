@@ -1,7 +1,7 @@
 -*- mode:flyspell; -*-
 
-                       Expert Guide for Windows v2.9
-                       =============================
+                       Expert Guide for Windows v2.10
+                       ==============================
 
                               By Dave pearson
                              <davep@davep.org>
