@@ -148,6 +148,10 @@ Type
 
     {** Array of results }
     aResults : Array Of TwegLibNGFindHit;
+    {** Count of items found }
+    iHitCount : Integer;
+    {** When the search was started }
+    dtSearchStarted : TDateTime;
 
     {** Save the state of the window }
     Procedure saveWindowState;
@@ -482,12 +486,24 @@ End;
 /////
 
 Procedure TfrmGlobalFind.NGFindFinishedSearch( Sender : TObject );
+
+  Function TimeDiff( dtStart : TDateTime; dtEnd : TDateTime ) : String;
+  Var
+    wHours : Word;
+    wMins  : Word;
+    wSecs  : Word;
+    wMSecs : Word;
+  Begin
+    DecodeTime( dtEnd - dtStart, wHours, wMins, wSecs, wMSecs );
+    Result := Format( '%d:%.2d:%.2d.%d', [ wHours, wMins, wSecs, wMSecs ] );
+  End;
+
 ResourceString
-  RSFinished = 'Search finished';
+  RSFinished = 'Search finished. Found %d items. Time elapsed: %s.';
 Begin
 
   // Update the status bar.
-  sbGlobalFind.Panels[ 1 ].Text := RSFinished;
+  sbGlobalFind.Panels[ 1 ].Text := Format( RSFinished, [ iHitCount, TimeDiff( Now(), dtSearchStarted ) ] );
 
   // Reset the progress bars.
   pbGuides.Position       := 0;
@@ -508,6 +524,10 @@ Begin
   // Size the guides progress bar.
   pbGuides.Min := 0;
   pbGuides.Max := NGFind.GuideCount;
+
+  // Initialise the count and start time.
+  iHitCount       := 0;
+  dtSearchStarted := Now();
   
 End;
 
@@ -541,6 +561,9 @@ Begin
 
   // Add the next of the hit to the list box.
   lbHits.Items.add( rHit.sText );
+
+  // Increase the hit count.
+  Inc( iHitCount );
   
 End;
 

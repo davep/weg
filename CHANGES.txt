@@ -11,6 +11,9 @@ o The file save dialog used for saving source didn't do an overwrite prompt
 o Ensured that the edit control in the in-entry find dialog gets focus and
   that the content is highlighted when the dialog is re-focused.
 
+o When a search finishes in the global finder the status bar now tells you
+  how many items were found and how long the search took.
+
 Changes since v2.8
 ==================
 
