@@ -15,6 +15,11 @@ o You can now drag a bookmark from the bookmark window and drop it on an
 o You can now drag a hit from the global finder and drop it on an open guide
   window and that window will be reused to display the hit.
 
+o The menus and the credits in open guide windows are now fully refreshed
+  when you modify the guide preferences. This has the effect of ensuring
+  that the menus and the credits are reread with the latest OEMToANSI
+  setting.
+
 Changes since v2.12
 ===================
 

@@ -928,11 +928,7 @@ Begin
   // Refresh the guide windows.
   For i := MDIChildCount - 1 DownTo 0 Do
     If MDIChildren[ i ] Is TfrmGuide Then
-      With TfrmGuide( MDIChildren[ i ] ) Do
-      Begin
-        NortonGuide.readSettings();
-        NGEntry.redisplay();
-      End;
+      TfrmGuide( MDIChildren[ i ] ).totalRefresh();
 
   // Refresh the global find window.
   frmGlobalFind.NortonGuide.readSettings();

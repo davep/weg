@@ -242,6 +242,11 @@ Type
     {** Look for URLs in the current entry and populate the list }
     Procedure populateURLList;
 
+  Public
+
+    {** Do a total refresh of the display }
+    Procedure totalRefresh;
+
   End;
 
 Implementation
@@ -1231,6 +1236,17 @@ Begin
   Else If Source = frmGlobalFind.lbHits Then
     frmMain.openGuide( frmGlobalFind.highlightedGuide(), self, frmGlobalFind.highlightedOffset(), frmGlobalFind.highlightedLine() )
 
+End;
+
+/////
+
+Procedure TfrmGuide.totalRefresh;
+Begin
+  NortonGuide.readSettings();
+  NortonGuide.reloadHeader();
+  NortonGuide.reloadMenus();
+  NGEntry.redisplay();
+  populateMenu();
 End;
 
 End.
