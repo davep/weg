@@ -540,7 +540,7 @@ End;
 
 Procedure TfrmGlobalFind.actFindClearResultsUpdate( Sender : TObject );
 Begin
-  actFindClearResults.Enabled := lbHits.Items.Count > 0;
+  actFindClearResults.Enabled := Not NGFind.Finding And ( lbHits.Items.Count > 0 );
 End;
 
 /////
