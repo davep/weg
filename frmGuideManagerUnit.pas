@@ -415,7 +415,7 @@ Begin
       // Ensure that the guides list is empty.
       lvGuides.Items.clear();
 
-      // Write the lists to the registry.
+      // Load the lists from the registry.
       With TRegistry.create() Do
         Try
           If openKey( wegRegistryKey( [ REG_MANAGER_WINDOW, REG_GUIDES ] ), False ) Then
