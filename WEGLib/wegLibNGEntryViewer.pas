@@ -634,7 +634,7 @@ Begin
 
     // Draw the line.
     Canvas.fillRect( rRect );
-    Canvas.textOut( rRect.Left, rRect.Top, Items[ iIndex ] );
+    Canvas.textOut( rRect.Left, rRect.Top, FEntry.StrippedLines[ iIndex ] );
 
   End
   // If the user wants colour...
