@@ -1272,7 +1272,7 @@ object frmGuide: TfrmGuide
     Left = 88
     Top = 72
     object popGuideSeeAlso: TTBSubmenuItem
-      Caption = '&See Also'
+      Caption = 'See &Also'
       Hint = 'See Also'
     end
     object popGuideSplit1: TTBSeparatorItem
