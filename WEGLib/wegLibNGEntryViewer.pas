@@ -356,12 +356,16 @@ End;
 
 Procedure TwegLibNGEntryViewer.redisplay;
 Var
-  iTop : Integer;
+  iTop    : Integer;
+  bSavHis : Boolean;
 Begin
 
   With guideCheck() Do
   Begin
 
+    // Remember what the history suspended status was.
+    bSavHis := FHistorySuspended;
+    
     // Suspend history.
     FHistorySuspended := True;
 
@@ -373,8 +377,8 @@ Begin
       // Reset the top index.
       TopIndex := iTop;
     Finally
-      // Enable history.
-      FHistorySuspended := False;
+      // Restore the history status.
+      FHistorySuspended := bSavHis;
     End;
 
   End;
@@ -491,11 +495,16 @@ End;
 /////
 
 Procedure TwegLibNGEntryViewer.historyMove( Var aThis : TwegLibNGEntryViewerHistory; Var aOther : TwegLibNGEntryViewerHistory );
+Var
+  bSavHis : Boolean;
 Begin
 
   // Remember the current entry in the other history list.
   rememberEntry( aOther );
 
+  // Remember the history suspended status.
+  bSavHis := FHistorySuspended;
+  
   // Suspend history.
   FHistorySuspended := True;
 
@@ -505,8 +514,8 @@ Begin
     // Pop the entry off the array.
     SetLength( aThis, Length( aThis ) - 1 );
   Finally
-    // Restore history.
-    FHistorySuspended := False;
+    // Restore previous history status.
+    FHistorySuspended := bSavHis;
   End;
 
 End;
