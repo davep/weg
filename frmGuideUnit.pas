@@ -928,8 +928,6 @@ Procedure TfrmGuide.NGEntryFindHit( Sender : TObject; iLine : Integer );
 Begin
   // Jump to the line.
   NGEntry.jumpToLine( iLine );
-  // Set focus to us.
-  frmMain.setFocus();
 End;
 
 /////

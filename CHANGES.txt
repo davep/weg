@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.11
+===================
+
+o Changed the in-entry finder so that the find dialog retains focus when the
+  find button is pressed.
+
 Changes since v2.10
 ===================
 
