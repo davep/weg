@@ -3,6 +3,7 @@ object frmGuideCredits: TfrmGuideCredits
   Top = 107
   Width = 500
   Height = 249
+  BorderIcons = [biSystemMenu]
   Caption = 'Credits for'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

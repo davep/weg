@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v2.2
+==================
+
+o Removed the maximise and minimise buttons from the guide credits dialog.
+
 Changes since v2.1
 ==================
 
