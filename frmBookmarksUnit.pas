@@ -374,22 +374,9 @@ Begin
   With TfrmBookmarkName.create( self ) Do
     Try
 
-      // Try and guess an initial value for the caption.
-      With frmMain.focusedViewer() Do
-      Begin
+      // Suggest a default title.
+      edtCaption.Text := frmMain.focusedViewer().entryTitle();
 
-        // Start out with the default as the entry path.
-        edtCaption.Text := entryPath();
-        
-        // If it's a long entry and there's something in it...
-        If Entry.IsLong And ( Entry.LineCount > 0 ) Then
-          // ...and if the first line isn't empty...
-          If Trim( Entry.StrippedLines[ 0 ] ) <> ''  Then
-            // ... use the entry path and the first line.
-            edtCaption.Text := entryPath( Trim( Entry.StrippedLines[ 0 ] ) );
-
-      End;
-            
       // If the user entered something...
       If showModal() = mrOk Then
         // ...add the bookmark to the list.

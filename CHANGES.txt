@@ -19,6 +19,9 @@ o Made the first letter of each main menu title from a guide into an
 o The bookmark manager now makes a better guess at a default title for a
   bookmark.
 
+o The guide printing code now makes a better guess at a good title for a
+  print job.
+
 Changes since v2.5
 ==================
 

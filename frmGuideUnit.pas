@@ -894,7 +894,7 @@ Begin
         Begin
 
           // Set the title of the print job.
-          Title := pnlGuideTitle.Text;
+          Title := NGEntry.entryTitle();
           
           // Start the document.
           beginDoc();

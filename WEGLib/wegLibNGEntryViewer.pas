@@ -163,6 +163,8 @@ Type
     Procedure jumpToLine( iLine : Integer ); Virtual;
     {** Return a "path" for the entry within the guide }
     Function entryPath( Const sAdditional : String = ''; sSeperator : String = '' ) : String; Virtual;
+    {** Like entryPath() but tries to work out the best possible title }
+    Function entryTitle( sSeperator : String = '' ) : String; Virtual;
 
   Published
 
@@ -800,7 +802,7 @@ Begin
 
   // Start out with the title of the guide.
   Result := FNortonGuide.Title;
-  
+
   // If we're looking at something that hangs off a menu...
   If FEntry.validMenu( FEntry.ParentMenu ) Then
   Begin
@@ -817,8 +819,25 @@ Begin
     If sAdditional <> '' Then
       // ...add it.
       Result := Result + sSeperator + sAdditional;
-      
+
   End;
+
+End;
+
+/////
+
+Function TwegLibNGEntryViewer.entryTitle( sSeperator : String = '' ) : String;
+Begin
+
+  // Start out with the default as the entry path.
+  Result := entryPath();
+
+  // If this is a long entry and there's something in it...
+  If FEntry.IsLong And ( FEntry.LineCount > 0 ) Then
+    // ...and if the first line isn't empty...
+    If Trim( FEntry.StrippedLines[ 0 ] ) <> ''  Then
+      // ... use the entry path and the first line.
+      Result := entryPath( Trim( FEntry.StrippedLines[ 0 ] ) );
 
 End;
 

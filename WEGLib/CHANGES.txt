@@ -7,6 +7,8 @@ Changes since v1.6
 
 o Added the entryPath() method to the entry viewer component.
 
+o Added the entryTitle() method to the entry viewer component.
+
 Changes since v1.5
 ==================
 
