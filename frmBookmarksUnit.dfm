@@ -137,6 +137,7 @@ object frmBookmarks: TfrmBookmarks
         Caption = 'Bookmarks'
       end>
     ColumnClick = False
+    DragMode = dmAutomatic
     HideSelection = False
     ReadOnly = True
     RowSelect = True

@@ -158,6 +158,9 @@ Type
     procedure actOptionsPrinterSetupExecute(Sender: TObject);
     procedure ExecuteExecuteMacro(Sender: TObject; Msg: TStrings);
     procedure actOptionsCheckItemExecute(Sender: TObject);
+    procedure FormDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure FormDragDrop(Sender, Source: TObject; X, Y: Integer);
 
   Public
 
@@ -1083,6 +1086,30 @@ End;
 Function TfrmMain.openType( oAction : TAction ) : TfrmMainOpenGuide;
 Begin
   If oAction.Checked Then Result := mogRecycle Else Result := mogNew;
+End;
+
+/////
+
+Procedure TfrmMain.FormDragOver( Sender, Source : TObject; X, Y : Integer; State : TDragState; Var Accept : Boolean );
+Begin
+  // We accept dropped items from the guide manager or the bookmark window.
+  Accept := ( Source = frmGuideManager.lvGuides ) Or ( Source = frmBookmarks.lvBookmarks );
+End;
+
+/////
+
+Procedure TfrmMain.FormDragDrop( Sender, Source : TObject; X, Y : Integer );
+Begin
+
+  // If the user is dropping a guide from the guide manager...
+  If Source = frmGuideManager.lvGuides Then
+    // ...open it.
+    frmGuideManager.actGuidesOpenExecute( Sender )
+  // Perhaps it's from the bookmark window?
+  Else If Source = frmBookmarks.lvBookmarks Then
+    // ...yup, open the bookmark.
+    frmBookmarks.actBookmarksOpenExecute( Sender );
+    
 End;
 
 End.

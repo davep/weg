@@ -177,6 +177,7 @@ object frmGuideManager: TfrmGuideManager
         Width = 300
       end>
     ColumnClick = False
+    DragMode = dmAutomatic
     HideSelection = False
     ReadOnly = True
     RowSelect = True

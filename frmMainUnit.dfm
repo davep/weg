@@ -51,6 +51,8 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnDragDrop = FormDragDrop
+  OnDragOver = FormDragOver
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
