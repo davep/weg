@@ -830,14 +830,14 @@ Function TwegLibNGEntryViewer.entryTitle( sSeperator : String = '' ) : String;
 Begin
 
   // Start out with the default as the entry path.
-  Result := entryPath();
+  Result := entryPath( '', sSeperator );
 
   // If this is a long entry and there's something in it...
   If FEntry.IsLong And ( FEntry.LineCount > 0 ) Then
     // ...and if the first line isn't empty...
     If Trim( FEntry.StrippedLines[ 0 ] ) <> ''  Then
       // ... use the entry path and the first line.
-      Result := entryPath( Trim( FEntry.StrippedLines[ 0 ] ) );
+      Result := entryPath( Trim( FEntry.StrippedLines[ 0 ] ), sSeperator );
 
 End;
 
