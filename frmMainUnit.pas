@@ -138,6 +138,8 @@ Type
     mnuOptionsRecycleFileReOpen: TTBItem;
     mnuOptionsSplit1: TTBSeparatorItem;
     mnuOptionsSplit2: TTBSeparatorItem;
+    actOptionsPrintColour: TAction;
+    mnuOptionsPrintColour: TTBItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -240,6 +242,8 @@ Const
   REG_RECYCLE_COMMAND_LINE_OPENS = 'Recycle Windows on Command Line Open';
   {** Value name for the drag and drop window recycling option }
   REG_RECYCLE_DRAG_AND_DROP_OPENS = 'Recycle Windows on Drag and Drop Open';
+  {** Value name for the colour printing option }
+  REG_COLOUR_PRINTING = 'Colour Printing';
   {** Key name for the child window list }
   REG_CHILDREN = 'Child Windows';
   {** Value name for the guide of a child window }
@@ -509,6 +513,7 @@ Begin
               writeBool( REG_RECYCLE_DDE_OPENS,           actOptionsRecycleDDE.Checked );
               writeBool( REG_RECYCLE_COMMAND_LINE_OPENS,  actOptionsRecycleCommandLine.Checked );
               writeBool( REG_RECYCLE_DRAG_AND_DROP_OPENS, actOptionsRecycleDragAndDrop.Checked );
+              writeBool( REG_COLOUR_PRINTING,             actOptionsPrintColour.Checked );
             Finally
               // Close the preferences key.
               closeKey();
@@ -667,6 +672,7 @@ Begin
             actOptionsRecycleDDE.Checked         := readBool( REG_RECYCLE_DDE_OPENS );
             actOptionsRecycleCommandLine.Checked := readBool( REG_RECYCLE_COMMAND_LINE_OPENS );
             actOptionsRecycleDragAndDrop.Checked := readBool( REG_RECYCLE_DRAG_AND_DROP_OPENS );
+            actOptionsPrintColour.Checked        := readBool( REG_COLOUR_PRINTING );
           Except
             // GNDN.
           End;

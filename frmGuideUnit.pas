@@ -977,10 +977,11 @@ End;
 
 Procedure TfrmGuide.actGuidePrintExecute( Sender : TObject );
 Var
-  i       : Integer;
-  iY      : Integer;
-  slLines : TStringList;
-  rRect   : TRect;
+  i        : Integer;
+  iY       : Integer;
+  slLines  : TStringList;
+  rRect    : TRect;
+  oPainter : TwegLibNGLinePainter;
 Begin
 
   // Check that the user actually wants to print.
@@ -1005,6 +1006,12 @@ Begin
           // Get the lines that are to be printed.
           slLines := TStringList.create();
           NGEntry.getSource( slLines );
+
+          // Create the painter.
+          If frmMain.actOptionsPrintColour.Checked Then
+            oPainter := TwegLibNGLineColourPainter.create()
+          Else
+            oPainter := TwegLibNGLinePainter.create();  
                     
           Try
 
@@ -1023,15 +1030,17 @@ Begin
                 newPage();
               End;
 
-              // Print the line.
-              With TwegLibNGLinePainter.create() Do
-                Try
-                  rRect     := Canvas.ClipRect;
-                  rRect.Top := iY;
-                  parse( slLines[ i ], Canvas, rRect, NortonGuide.OEMToANSI );
-                Finally
-                  free();
-                End;
+              // Populate the rectangle structure for this line.
+              rRect.Top    := iY;
+              rRect.Left   := 0;
+              rRect.Bottom := rRect.Top + Canvas.textHeight( 'X' );
+              rRect.Right  := PageWidth;
+
+              // Paint the line.
+              If oPainter Is TwegLibNGLineColourPainter Then
+                TwegLibNGLineColourPainter( oPainter ).parse( slLines[ i ], Canvas, rRect, frmMain.NGColours, NortonGuide.OEMToANSI )
+              Else
+                oPainter.parse( slLines[ i ], Canvas, rRect, NortonGuide.OEMToANSI );
 
               // Move down a line.
               Inc( iY, Canvas.textHeight( 'X' ) );
@@ -1039,6 +1048,8 @@ Begin
             End;
 
           Finally
+            // Free the painter.
+            oPainter.free();
             // Free the list of lines.
             slLines.free();
             // End the document.

@@ -155,6 +155,9 @@ object frmMain: TfrmMain
         object mnuOptionsPrinterSetup: TTBItem
           Action = actOptionsPrinterSetup
         end
+        object mnuOptionsPrintColour: TTBItem
+          Action = actOptionsPrintColour
+        end
       end
       object mnuWindows: TTBSubmenuItem
         Caption = '&Windows'
@@ -373,6 +376,11 @@ object frmMain: TfrmMain
       Hint = 'Display information about Expert Guide'
       ShortCut = 112
       OnExecute = actHelpAboutExecute
+    end
+    object actOptionsPrintColour: TAction
+      Caption = '&Colour Printing'
+      Hint = 'Should guide entries be printed in colour?'
+      OnExecute = actOptionsCheckItemExecute
     end
   end
   object ilMain: TTBImageList
