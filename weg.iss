@@ -2,7 +2,7 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.6
+AppVerName=Expert Guide for Windows v2.7
 AppCopyright=Copyright © 1998-2004 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
