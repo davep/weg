@@ -62,6 +62,9 @@ Type
 
   Public
 
+    {** Do OEM to ANSI conversion on the text we read? }
+    bOEMToANSI : Boolean;
+
     {** Access to the title of the menu }
     Property Title : String Read FTitle;
     {** Access to the prompts on the menu }
@@ -127,11 +130,17 @@ Begin
   hNG.seek( iPrompts * ( SizeOf( LongInt ) * 2 ), soFromCurrent );
 
   // Load the title for the menu.
-  FTitle := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
+  If bOEMToANSI Then
+    FTitle := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) ) )
+  Else
+    FTitle := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
 
   // Now load the text of each of the prompts on the menu.
   For i := 0 To ( iPrompts - 2 ) Do
-    FPrompts[ i ].sPrompt := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
+    If bOEMToANSI Then
+      FPrompts[ i ].sPrompt := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) ) )
+    Else
+      FPrompts[ i ].sPrompt := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
 
   // Skip a byte (I forget what it is, end of entry marker perhaps?).
   wegLibReadByte( hNG, wlrtNoDecrypt );

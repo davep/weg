@@ -241,7 +241,8 @@ Begin
   FSeeAlso.free();
 
   // Create a new see-also list.
-  FSeeAlso := TwegLibNGSeeAlso.create();
+  FSeeAlso            := TwegLibNGSeeAlso.create();
+  FSeeAlso.bOEMToANSI := bOEMToANSI;
   
   // Read the "header" information from the entry.
   FOffset       := hNG.seek( 0, soFromCurrent );

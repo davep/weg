@@ -385,6 +385,8 @@ Begin
       Begin
         // Create a new menu object.
         FMenus[ i ] := TwegLibNGMenu.create();
+        // Tell it if we should do OEM to ANSI conversion.
+        FMenus[ i ].bOEMToANSI := FOEMToANSI;
         // Load the menu.
         FMenus[ i ].load( hNG );
         // Increase the count of loaded menus.

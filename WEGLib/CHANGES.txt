@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v1.1
+==================
+
+o Fixed some OEM to ANSI problems with menus and see also lists. This should
+  fix a problem that "ZaG" reported with Russian language guides.
+
 Changes since v1.0
 ==================
 

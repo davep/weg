@@ -74,7 +74,10 @@ Begin
 
   // Read the prompts of the see-also entries.
   For i := 0 To iPrompts - 1 Do
-    FPrompts[ i ].sPrompt := wegLibExpand( wegLibReadStringZ( hNG, 50 ) );
+    If bOEMToANSI Then
+      FPrompts[ i ].sPrompt := wegLibOEMToANSI( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) )
+    Else
+      FPrompts[ i ].sPrompt := wegLibExpand( wegLibReadStringZ( hNG, 50 ) );
 
 End;
 
