@@ -815,12 +815,12 @@ Begin
       // ...add the prompt text to the status bar.
       Result := Result + sSeperator + FNortonGuide.Menus[ FEntry.ParentMenu ].Prompts[ FEntry.ParentMenuPrompt ];
 
-    // If there's anya additional text to be added...
-    If sAdditional <> '' Then
-      // ...add it.
-      Result := Result + sSeperator + sAdditional;
-
   End;
+
+  // If there's any additional text to be added...
+  If sAdditional <> '' Then
+    // ...add it.
+    Result := Result + sSeperator + sAdditional;
 
 End;
 
