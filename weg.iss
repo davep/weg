@@ -3,8 +3,8 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.11
-AppVersion=2.11
+AppVerName=Expert Guide for Windows v2.12
+AppVersion=2.12
 AppCopyright=Copyright © 1998-2004 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
@@ -19,7 +19,7 @@ OutputBaseFileName=WEGSetup
 OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
-VersionInfoVersion=2.11
+VersionInfoVersion=2.12
 VersionInfoTextVersion=$Revision$
 WizardSmallImageFile=Images\WEGInstallImage.bmp
 Compression=bzip
@@ -82,7 +82,7 @@ Root: HKCU; SubKey: "Software\davep.org"; Flags: uninsdeletekeyifempty
 Root: HKCU; SubKey: "Software\davep.org\WEG"; Flags: uninsdeletekey
 ; An entry to give other software a hint as to where WEG is located.
 Root: HKCU; SubKey: "Software\davep.org\WEG"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe";
-; Windows' file association information.
+; Windows file association information.
 Root: HKCR; SubKey: ".ng"; ValueType: string; ValueName: ""; ValueData: "org.davep.WEG"; Flags: uninsdeletekey; Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG"; ValueType: string; ValueName: ""; ValueData: "Norton Guide Database"; Flags: uninsdeletekey;  Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe,0";  Tasks: assocngfiles
@@ -92,4 +92,5 @@ Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec"; ValueType: string; Value
 Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec\Topic"; ValueType: string; ValueName: ""; ValueData: "Execute";  Tasks: assocngfiles
 
 [Run]
-Filename: "{app}\WEG.exe"; Description: "Launch Expert Guide for Windows"; Flags: nowait postinstall skipifsilent
+Filename: "notepad"; Parameters: "{app}\CHANGES.txt"; Description: "View CHANGES.txt"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\WEG.exe"; Description: "Launch Expert Guide for Windows"; Flags: nowait postinstall skipifsilent unchecked
