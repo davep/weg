@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v2.1
+==================
+
+Built against v1.2 of WEGLib.
+
 Changes since v2.0
 ==================
 
