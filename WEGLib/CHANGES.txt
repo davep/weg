@@ -8,6 +8,9 @@ Changes since v1.4
 o The entry viewer now properly checks that a given offset is a real short
   or long entry.
 
+o Fixed a bug in the line parser that would cause some parts of some lines
+  to not observe the current OEMToANSI setting.
+
 Changes since v1.3
 ==================
 
