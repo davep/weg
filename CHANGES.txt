@@ -16,6 +16,8 @@ o You can now drag a hit from the global finder and drop it on the
 
 o Implemented a "search" macro for the DDE support.
 
+o Added a clear facility to the bookmarks window.
+
 Changes since v2.7
 ==================
 

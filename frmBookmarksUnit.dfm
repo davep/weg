@@ -62,6 +62,9 @@ object frmBookmarks: TfrmBookmarks
         object mnuBookmarkRemove: TTBItem
           Action = actBookmarksRemove
         end
+        object mnuBookmarkClear: TTBItem
+          Action = actBookmarksClear
+        end
         object mnuBookmarklSep2: TTBSeparatorItem
         end
         object mnuBookmarkClose: TTBItem
@@ -187,6 +190,12 @@ object frmBookmarks: TfrmBookmarks
       Caption = '&Recycle Windows'
       Hint = 'Recycle a window when opening an already open guide?'
       OnExecute = actOptionsRecycleWindowsExecute
+    end
+    object actBookmarksClear: TAction
+      Caption = '&Clear...'
+      Hint = 'Clear all of the bookmarks'
+      OnExecute = actBookmarksClearExecute
+      OnUpdate = actBookmarksClearUpdate
     end
   end
   object ilBookmarks: TImageList

@@ -77,6 +77,8 @@ Type
     mnuOptions: TTBSubmenuItem;
     actOptionsRecycleWindows: TAction;
     mnuOptionsRecycleWindows: TTBItem;
+    actBookmarksClear: TAction;
+    mnuBookmarkClear: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure actBookmarksCloseExecute(Sender: TObject);
@@ -89,6 +91,8 @@ Type
     procedure lvBookmarksChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
     procedure actOptionsRecycleWindowsExecute(Sender: TObject);
+    procedure actBookmarksClearUpdate(Sender: TObject);
+    procedure actBookmarksClearExecute(Sender: TObject);
 
   Protected
 
@@ -498,6 +502,29 @@ End;
 Procedure TfrmBookmarks.actOptionsRecycleWindowsExecute( Sender : TObject );
 Begin
   actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
+End;
+
+/////
+
+Procedure TfrmBookmarks.actBookmarksClearUpdate( Sender : TObject );
+Begin
+  actBookmarksClear.Enabled := lvBookmarks.Items.Count > 0;
+End;
+
+/////
+
+Procedure TfrmBookmarks.actBookmarksClearExecute( Sender : TObject );
+ResourceString
+  RSAreYouSure = 'Clear all boomkarks from the bookmark list, are you sure?';
+Begin
+
+  MessageBeep( MB_ICONQUESTION );
+  If MessageDlg( RSAreYouSure, mtConfirmation, [ mbYes, mbNo ], 0 ) = mrYes Then
+  Begin
+    lvBookmarks.Items.clear();
+    saveBookmarks();
+  End;
+
 End;
 
 End.
