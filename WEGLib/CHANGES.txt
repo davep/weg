@@ -1,0 +1,10 @@
+-*- mode:flyspell; -*-
+
+$Id$
+
+Changes since v1.0
+==================
+
+o Fixed the navigation checking functions in TwegLibNGEntryViewer so that
+  they don't assume that there is an entry object available all of the time.
+  This fixes a bug found by Douglas Woodrow.
