@@ -304,12 +304,13 @@ Begin
       If FNortonGuide.Settings = Nil Then
         // ...do colour display by default.
         Style := lbOwnerDrawFixed
+      // ...otherwise consult the settings.
+      Else If FNortonGuide.Settings.UseColour Then
+        // We're using colour, do our own drawing.
+        Style := lbOwnerDrawFixed
       Else
-        // ...otherwise consult the settings.
-        If FNortonGuide.Settings.UseColour Then
-          Style := lbOwnerDrawFixed
-        Else
-          Style := lbStandard;
+        // We're not using colour, do normal drawing.
+        Style := lbStandard;
 
       // Refresh our display.
       refreshDisplay();
