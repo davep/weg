@@ -721,6 +721,7 @@ object frmGlobalFind: TfrmGlobalFind
     Top = 104
   end
   object popHits: TTBPopupMenu
+    Images = ilGlobalFind
     Left = 88
     Top = 72
     object popHitsOpenResult: TTBItem
