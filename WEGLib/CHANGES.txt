@@ -2,6 +2,13 @@
 
 $Id$
 
+Changes since v1.9
+==================
+
+o Modified the line parsing code so that if a colour attribute is in effect
+  and a new attribute marker of the same value is seen it reverts to the
+  normal text colour.
+
 Changes since v1.8
 ==================
 

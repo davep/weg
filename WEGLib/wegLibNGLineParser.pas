@@ -160,16 +160,19 @@ Procedure TwegLibNGLineParser.parse( sRaw : String; bOEMToANSI : Boolean );
 Const
   CTRL_CHAR = '^';
 Type
-  TCtrlMode = ( cmNormal, cmBold, cmUnderline, cmReverse );
+  TCtrlMode = ( cmNormal, cmBold, cmUnderline, cmReverse, cmColourAttr );
 Var
-  cmMode : TCtrlMode;
-  iCtrl  : Integer;
+  cmMode    : TCtrlMode;
+  iCtrl     : Integer;
+  iAttr     : Integer;
+  iLastAttr : Integer;
 Begin
 
   // Initial mode is normal.
-  cmMode := cmNormal;
+  cmMode    := cmNormal;
+  iLastAttr := -1;
   handleNormal();
-  
+
   // Find the first control sequence.
   iCtrl := Pos( CTRL_CHAR, sRaw );
 
@@ -187,12 +190,25 @@ Begin
       'A', 'a' :
       Begin
 
-        // Handle the colour.
-        handleColour( wegLibHex2Int( Copy( sRaw, iCtrl + 2, 2 ) ) );
-
-        // Go to normal mode.
-        cmMode := cmNormal;
+        // Get the colour attribute.
+        iAttr := wegLibHex2Int( Copy( sRaw, iCtrl + 2, 2 ) );
         
+        // If there's already a colour attribute in effect and the new colour
+        // is the same as the previous colour...
+        If ( cmMode = cmColourAttr ) And ( iAttr = iLastAttr ) Then
+        Begin
+          // ...it signals that we return to "normal".
+          handleNormal();
+          cmMode := cmNormal;
+        End
+        Else
+        Begin
+          // ...otherwise we start a colour attribute.
+          handleColour( iAttr );
+          iLastAttr := iAttr;
+          cmMode    := cmColourAttr;
+        End;
+
         // Skip along the string.
         Inc( iCtrl, 4 );
         
