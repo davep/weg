@@ -149,6 +149,10 @@ Type
     mnuNavigateHome: TTBItem;
     sbNavigateSplit2: TTBSeparatorItem;
     sbNavigateHome: TTBItem;
+    actEditCopyLine: TAction;
+    mnuEditCopyLine: TTBItem;
+    popGuideCopyLine: TTBItem;
+    sbEditCopyLine: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure NortonGuideOpen(Sender: TObject);
     procedure NGEntryNewEntry(Sender: TObject);
@@ -190,6 +194,8 @@ Type
     procedure FormDestroy(Sender: TObject);
     procedure actNavigateHomeExecute(Sender: TObject);
     procedure actNavigateHomeUpdate(Sender: TObject);
+    procedure actEditCopyLineUpdate(Sender: TObject);
+    procedure actEditCopyLineExecute(Sender: TObject);
 
   Protected
 
@@ -1179,6 +1185,20 @@ End;
 Procedure TfrmGuide.actNavigateHomeUpdate( Sender : TObject );
 Begin
   actNavigateHome.Enabled := NGEntry.hasEntry() And ( NGEntry.Entry.Offset <> NortonGuide.FirstEntry );
+End;
+
+/////
+
+Procedure TfrmGuide.actEditCopyLineUpdate( Sender : TObject );
+Begin
+  actEditCopyLine.Enabled := NGEntry.ItemIndex > 0;
+End;
+
+/////
+
+Procedure TfrmGuide.actEditCopyLineExecute( Sender : TObject );
+Begin
+  Clipboard().AsText := NGEntry.Entry.StrippedLines[ NGEntry.ItemIndex ];
 End;
 
 End.
