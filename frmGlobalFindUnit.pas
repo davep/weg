@@ -110,6 +110,8 @@ Type
     popHitsOpenResult: TTBItem;
     actOptionsRecycleWindows: TAction;
     mnuOptionsRecycleWindows: TTBItem;
+    actOptionsFocusWhenFinished: TAction;
+    mnuOptionsFocusWhenFinished: TTBItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actFindCloseExecute(Sender: TObject);
@@ -143,6 +145,7 @@ Type
     procedure lbHitsMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure actOptionsRecycleWindowsExecute(Sender: TObject);
+    procedure actOptionsFocusWhenFinishedExecute(Sender: TObject);
 
   Protected
 
@@ -198,6 +201,8 @@ Const
   REG_OPTION_MATCH_CASE = 'Match Case';
   {** Value name for the guide recycling option }
   REG_OPTION_RECYCLE_WINDOWS = 'Recycle Windows';
+  {** Value name for the focus-when-finished option }
+  REG_OPTION_FOCUS_WHEN_FINISHED = 'Focus When Finished';
 
 {$R *.DFM}
 
@@ -244,13 +249,14 @@ Begin
         If openKey( wegRegistryKey( [ REG_FINDER_WINDOW, REG_OPTIONS ] ), True ) THen
           Try
             // Save the options.
-            writeBool( REG_OPTION_SEARCH_CURRENT,  actOptionsSearchCurrentGuide.Checked );
-            writeBool( REG_OPTION_SEARCH_ALL,      actOptionsSearchAllKnownGuides.Checked );
-            writeBool( REG_OPTION_DO_SHORTS,       wlfsShorts In NGFind.SearchStyle );
-            writeBool( REG_OPTION_DO_LONGS,        wlfsLongs  In NGFind.SearchStyle );
-            writeBool( REG_OPTION_REGEXP,          NGFind.RegExpSearch );
-            writeBool( REG_OPTION_MATCH_CASE,      NGFind.MatchCase );
-            writeBool( REG_OPTION_RECYCLE_WINDOWS, actOptionsRecycleWindows.Checked );
+            writeBool( REG_OPTION_SEARCH_CURRENT,      actOptionsSearchCurrentGuide.Checked );
+            writeBool( REG_OPTION_SEARCH_ALL,          actOptionsSearchAllKnownGuides.Checked );
+            writeBool( REG_OPTION_DO_SHORTS,           wlfsShorts In NGFind.SearchStyle );
+            writeBool( REG_OPTION_DO_LONGS,            wlfsLongs  In NGFind.SearchStyle );
+            writeBool( REG_OPTION_REGEXP,              NGFind.RegExpSearch );
+            writeBool( REG_OPTION_MATCH_CASE,          NGFind.MatchCase );
+            writeBool( REG_OPTION_RECYCLE_WINDOWS,     actOptionsRecycleWindows.Checked );
+            writeBool( REG_OPTION_FOCUS_WHEN_FINISHED, actOptionsFocusWhenFinished.Checked );
           Finally
             // Close the window history key.
             closeKey();
@@ -319,9 +325,10 @@ Begin
               NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsLongs ]
             Else
               NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsLongs ];
-            NGFind.RegExpSearch              := readBool( REG_OPTION_REGEXP );
-            NGFind.MatchCase                 := readBool( REG_OPTION_MATCH_CASE );
-            actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
+            NGFind.RegExpSearch                 := readBool( REG_OPTION_REGEXP );
+            NGFind.MatchCase                    := readBool( REG_OPTION_MATCH_CASE );
+            actOptionsRecycleWindows.Checked    := readBool( REG_OPTION_RECYCLE_WINDOWS );
+            actOptionsFocusWhenFinished.Checked := readBool( REG_OPTION_FOCUS_WHEN_FINISHED );
           Except
             // GNDN.
           End;
@@ -508,6 +515,19 @@ Begin
   // Reset the progress bars.
   pbGuides.Position       := 0;
   pbCurrentGuide.Position := 0;
+
+  // If the user wants us to grab focus when we're finished...
+  If actOptionsFocusWhenFinished.Checked Then
+  Begin
+    // ...ensure the application is visible.
+    Application.restore();
+    // Ensure that this window is visible.
+    If WindowState = wsMinimized Then WindowState := wsNormal;
+    // Grab the focus.
+    setFocus();
+    // And do the information sound.
+    MessageBeep( MB_ICONINFORMATION );
+  End;
   
 End;
 
@@ -736,6 +756,13 @@ End;
 Procedure TfrmGlobalFind.actOptionsRecycleWindowsExecute( Sender : TObject );
 Begin
   actOptionsRecycleWindows.Checked := Not actOptionsRecycleWindows.Checked;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.actOptionsFocusWhenFinishedExecute( Sender : TObject );
+Begin
+  actOptionsFocusWhenFinished.Checked := Not actOptionsFocusWhenFinished.Checked;
 End;
 
 End.

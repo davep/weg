@@ -87,6 +87,9 @@ object frmGlobalFind: TfrmGlobalFind
         object mnuOptionsRecycleWindows: TTBItem
           Action = actOptionsRecycleWindows
         end
+        object mnuOptionsFocusWhenFinished: TTBItem
+          Action = actOptionsFocusWhenFinished
+        end
       end
     end
     object tbGlobalFind: TTBToolbar
@@ -316,6 +319,11 @@ object frmGlobalFind: TfrmGlobalFind
       Caption = '&Recycle Windows'
       Hint = 'Recycle a window when opening a hit from the same guide?'
       OnExecute = actOptionsRecycleWindowsExecute
+    end
+    object actOptionsFocusWhenFinished: TAction
+      Caption = '&Focus When Finished'
+      Hint = 'Set focus to this window when a search finishes?'
+      OnExecute = actOptionsFocusWhenFinishedExecute
     end
   end
   object ilGlobalFind: TTBImageList

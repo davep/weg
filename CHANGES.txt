@@ -11,6 +11,10 @@ o Added a panel to the guide window status bar that shows if the entry
 o Added "Home" navigation to the guide window. This takes you to the first
   entry in a guide.
 
+o Added a "Focus When Finished" option to the global finder window. When set
+  the global finder will display itself and grab focus when a find operation
+  has finished.
+
 Changes since v2.9
 ==================
 
