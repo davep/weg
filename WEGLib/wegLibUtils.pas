@@ -66,7 +66,7 @@ Function wegLibReadStringZ( h : TStream; wLen : Word; wlrt : TwegLibReadType = w
 {** Convert OEM text to ANSI text }
 Function wegLibOEMToANSI( Const s : String ) : String;
 {** Convert a hex string into an integer }
-Function wegLibHex2Int( s : String ) : Integer;
+Function wegLibHex2Int( Const s : String ) : Integer;
 {** Convert a hex string into a character}
 Function wegLibHex2Char( Const s : String ) : Char;
 
@@ -284,30 +284,9 @@ End;
 
 /////
 
-Function wegLibHex2Int( s : String ) : Integer;
-Var
-  i     : Integer;
-  iMult : Integer;
+Function wegLibHex2Int( Const s : String ) : Integer;
 Begin
-
-  // Initial setup.
-  s      := AnsiUpperCase( s );
-  Result := 0;
-  iMult  := 1;
-
-  // Loop from the end of the string to the start, working things out.
-  For i := Length( s ) DownTo 1 Do
-  Begin
-
-    Case s[ i ] Of
-      '0'..'9' : Result := Result + ( ( Ord( s[ i ] ) - Ord( '0' ) ) * iMult );
-      'A'..'F' : Result := Result + ( ( Ord( s[ i ] ) - Ord( '7' ) ) * iMult );
-    End;
-
-    iMult := iMult * $10;
-    
-  End;
-
+  Result := StrToInt( '$' + s );
 End;
 
 /////
