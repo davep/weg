@@ -1029,6 +1029,9 @@ Begin
     openGuide( acFileName, openType( actOptionsRecycleDragAndDrop ) );
   End;
 
+  // Free associated data.
+  DragFinish( msg.WParam );
+
 End;
 
 /////

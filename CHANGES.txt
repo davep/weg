@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.14
+===================
+
+o WEG's shell-oriented drag-and-drop support wasn't calling DragFinish()
+  after a drop message had been processed. Fixed.
+
 Changes since v2.13
 ===================
 
