@@ -3,8 +3,8 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.12
-AppVersion=2.12
+AppVerName=Expert Guide for Windows v2.13
+AppVersion=2.13
 AppCopyright=Copyright © 1998-2004 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
@@ -19,7 +19,7 @@ OutputBaseFileName=WEGSetup
 OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
-VersionInfoVersion=2.12
+VersionInfoVersion=2.13
 VersionInfoTextVersion=$Revision$
 WizardSmallImageFile=Images\WEGInstallImage.bmp
 Compression=bzip
