@@ -254,7 +254,7 @@ Begin
 
       // Also, if the panel deals with one of the darker colours, make sure
       // that the text colour is white.
-      If i In [ 0, 1, 8, 9 ] Then
+      If i In [ 0, 1, 2, 3, 4, 5, 6, 8, 9 ] Then
         pnl.Font.Color := clWhite;
 
     End;
