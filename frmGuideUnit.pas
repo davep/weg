@@ -930,7 +930,7 @@ Begin
 
           // Get the lines that are to be printed.
           slLines := TStringList.create();
-          NGEntry.getText( slLines );
+          NGEntry.getSource( slLines );
                     
           Try
 
