@@ -4,7 +4,7 @@ object frmAbout: TfrmAbout
   BorderStyle = bsDialog
   Caption = 'About Expert Guide'
   ClientHeight = 151
-  ClientWidth = 313
+  ClientWidth = 318
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,10 +17,11 @@ object frmAbout: TfrmAbout
   PixelsPerInch = 96
   TextHeight = 13
   object imIcon: TImage
-    Left = 272
+    Left = 277
     Top = 8
     Width = 32
     Height = 32
+    Anchors = [akTop, akRight]
     AutoSize = True
     Picture.Data = {
       055449636F6E0000010002002020100000000000E80200002600000010101000
@@ -138,10 +139,11 @@ object frmAbout: TfrmAbout
     OnClick = lblFireURL
   end
   object btnOK: TButton
-    Left = 229
+    Left = 234
     Top = 120
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = '&OK'
     Default = True
     ModalResult = 1
