@@ -85,6 +85,7 @@ object frmGuide: TfrmGuide
       DockMode = dmCannotFloat
       DockPos = 0
       DockRow = 1
+      ShrinkMode = tbsmWrap
       TabOrder = 0
     end
     object tbWindowMenu: TTBToolbar
