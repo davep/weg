@@ -103,6 +103,8 @@ Type
     Procedure historyMove( Var aThis : TwegLibNGEntryViewerHistory; Var aOther : TwegLibNGEntryViewerHistory ); Virtual;
     {** Add a horizontal scroll bar } 
     Procedure addHorizontalScrollBar; Virtual;
+    {** Do we have an entry yet? }
+    Function hasEntry : Boolean; Virtual;
 
     {** Handle a click }
     Procedure click; Override;
@@ -437,11 +439,12 @@ Function TwegLibNGEntryViewer.linkIsOk( lOffset : LongInt ) : Boolean;
 Begin
 
   // See if the offset is valid.
-  If FEntry = Nil Then
-    // If we've not got an entry yet we assume that the link is valid.
-    Result := True
+  If hasEntry() Then
+    // We've got an entry, see if the offset is valid.
+    Result := FEntry.validOffset( lOffset )
   Else
-    Result := FEntry.validOffset( lOffset );
+    // If we've not got an entry yet we assume that the link is valid.
+    Result := True;
 
   // If it isn't and if we've got a callback for this...
   If ( Not Result ) And Assigned( FOnInvalidLink ) Then
@@ -456,7 +459,7 @@ Procedure TwegLibNGEntryViewer.rememberEntry( Var aHistory : TwegLibNGEntryViewe
 Begin
 
   // If there's something to remember...
-  If FEntry <> Nil Then
+  If hasEntry() Then
   Begin
     // ...remember the current location in the history list.
     SetLength( aHistory, Length( aHistory ) + 1 );
@@ -513,6 +516,13 @@ Begin
   // Add the scroll bar.
   SendMessage( Handle, LB_SETHORIZONTALEXTENT, iPixels, 0 );
   
+End;
+
+/////
+
+Function TwegLibNGentryViewer.hasEntry : Boolean;
+Begin
+  Result := FEntry <> Nil;
 End;
 
 /////
@@ -801,28 +811,28 @@ End;
 
 Function TwegLibNGEntryViewer.canNavigateUp : Boolean;
 Begin
-  Result := FEntry.HasParent;
+  Result := hasEntry() And FEntry.HasParent;
 End;
 
 /////
 
 Function TwegLibNGEntryViewer.canNavigateDown : Boolean;
 Begin
-  Result := ( ItemIndex > -1 ) And FEntry.HasChild[ ItemIndex ];
+  Result := ( ItemIndex > -1 ) And hasEntry() And FEntry.HasChild[ ItemIndex ];
 End;
 
 /////
 
 Function TwegLibNGEntryViewer.canNavigatePrevious : Boolean;
 Begin
-  Result := FEntry.HasPrevious;
+  Result := hasEntry() And FEntry.HasPrevious;
 End;
 
 /////
 
 Function TwegLibNGEntryViewer.canNavigateNext : Boolean;
 Begin
-  Result := FEntry.HasNext;
+  Result := hasEntry() And FEntry.HasNext;
 End;
 
 /////
