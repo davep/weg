@@ -55,6 +55,8 @@ Type
     FMagic : Integer;
     {** Remember the physical size of the guide }
     FSize : LongInt;
+    {** Remember the time stamp of the guide }
+    FTimeStamp : TDateTime;
     {** Count of menus in the guide }
     FMenuCount : Integer;
     {** The credits for the guide }
@@ -120,6 +122,8 @@ Type
     Property Magic : Integer Read FMagic;
     {** Read-only access to the physical size of the guide }
     Property Size : LongInt Read FSize;
+    {** Read-only access to the time-stamp of the guide }
+    Property TimeStamp : TDateTime Read FTimeStamp;
     {** Read-only access to the count of menus in the guide }
     Property MenuCount : Integer Read FMenuCount;
     {** Read-only access to the credits of the guide }
@@ -290,7 +294,7 @@ Begin
         // The first entry should be where we are now.
         FFirstEntry := hNG.seek( 0, soFromCurrent );
 
-        // Also work out the size.
+        // Work out the size.
         Try
           // Get the position of the last byte.
           FSize := hNG.seek( 0, soFromEnd );
@@ -298,6 +302,9 @@ Begin
           // Go back to the start.
           goTop();
         End;
+
+        // Remember the time-stamp of the file.
+        FTimeStamp := FileDateToDateTime( FileGetDate( hNG.Handle ) );
 
         // Handle any callback.
         If Assigned( FOnOpen ) Then
@@ -443,6 +450,7 @@ Begin
     FTitle     := '';
     FMagic     := 0;
     FSize      := 0;
+    FTimeStamp := 0;
     FMenuCount := 0;
     FCredits   := '';
 

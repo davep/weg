@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v1.7
+==================
+
+o Added a TimeStamp property to the Norton Guide class.
+
 Changes since v1.6
 ==================
 
