@@ -276,6 +276,16 @@ object frmMain: TfrmMain
       ShortCut = 32856
       OnExecute = actFileExitExecute
     end
+    object actEditPreferences: TAction
+      Caption = '&Preferences...'
+      Hint = 'Edit WEG preferences'
+      OnExecute = actEditPreferencesExecute
+    end
+    object actEditColours: TAction
+      Caption = '&Colours...'
+      Hint = 'Edit colours'
+      OnExecute = actEditColoursExecute
+    end
     object actWindowCascade: TAction
       Caption = '&Cascade'
       Hint = 'Cascade windows'
@@ -296,16 +306,6 @@ object frmMain: TfrmMain
       ImageIndex = 4
       OnExecute = actWindowTileVerticalExecute
       OnUpdate = actWindowUpdate
-    end
-    object actEditPreferences: TAction
-      Caption = '&Preferences...'
-      Hint = 'Edit WEG preferences'
-      OnExecute = actEditPreferencesExecute
-    end
-    object actEditColours: TAction
-      Caption = '&Colours...'
-      Hint = 'Edit colours'
-      OnExecute = actEditColoursExecute
     end
     object actHelpAbout: TAction
       Caption = '&About...'
