@@ -757,9 +757,9 @@ End;
 
 Procedure TfrmGuide.actEditCopyTextUpdate( Sender : TObject );
 ResourceString
-  RSCopyCaption         = 'Copy &Text...';
+  RSCopyCaption         = 'Copy &Text';
   RSCopyHint            = 'Copy the text to the clipboard';
-  RSCopySelectedCaption = 'Copy Selected &Text...';
+  RSCopySelectedCaption = 'Copy Selected &Text';
   RSCopySelectedHint    = 'Copy the selected text to the clipboard';
 Begin
 
@@ -780,11 +780,11 @@ End;
 
 /////
 
-Procedure TfrmGuide.actEditCopySourceUpdate(Sender: TObject);
+Procedure TfrmGuide.actEditCopySourceUpdate( Sender : TObject );
 ResourceString
-  RSCopyCaption         = 'Copy &Source...';
+  RSCopyCaption         = 'Copy &Source';
   RSCopyHint            = 'Copy the guide source to the clipboard';
-  RSCopySelectedCaption = 'Copy Selected &Source...';
+  RSCopySelectedCaption = 'Copy Selected &Source';
   RSCopySelectedHint    = 'Copy the selected guide source to the clipboard';
 Begin
 
