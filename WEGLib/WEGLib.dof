@@ -59,7 +59,7 @@ RootDir=
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
-MinorVer=11
+MinorVer=12
 Release=0
 Build=0
 Debug=0
@@ -72,13 +72,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dave Pearson <http://www.davep.org>
 FileDescription=WEGLib - Norton Guide Library for Delphi
-FileVersion=1.11.0.0
+FileVersion=1.12.0.0
 InternalName=WEGLib
 LegalCopyright=Copyright © 2003, 2004 Dave Pearson
 LegalTrademarks=
 OriginalFilename=WEGLib
 ProductName=WEGLib
-ProductVersion=1.11
+ProductVersion=1.12
 Comments=Licenced under the GPL
 [HistoryLists\hlUnitAliases]
 Count=1
