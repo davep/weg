@@ -8,3 +8,8 @@ Things TODO to WEG:
 o Have the in-entry finder dialog remember the regexp and case-sensitivity
   settings.
 
+o Add a "stay-on-top" option to the guide manager.
+
+o Add a "stay-on-top" option to the bookmarks window.
+
+o Add a "stay-on-top" option to the global finder.
