@@ -1,10 +1,9 @@
 object frmGuideCredits: TfrmGuideCredits
   Left = 192
   Top = 107
-  BorderStyle = bsDialog
+  Width = 500
+  Height = 249
   Caption = 'Credits for'
-  ClientHeight = 222
-  ClientWidth = 492
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,6 +20,7 @@ object frmGuideCredits: TfrmGuideCredits
     Top = 192
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = '&OK'
     Default = True
     ModalResult = 1
@@ -32,6 +32,7 @@ object frmGuideCredits: TfrmGuideCredits
     Width = 482
     Height = 177
     Cursor = crArrow
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       'No credits available for this guide.')
     ReadOnly = True
