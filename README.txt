@@ -17,6 +17,15 @@ WEG is released, under the GPL, with full source code. Please take the time
 to read the file COPYING if you want to further enhance this software, in
 fact, why not take the time to read it anyway?
 
+Licence
+=======
+
+WEG is released under the terms of the GPL, see the file COPYING which
+should accompany this file. However, because WEG makes use of Delphi's VCL
+and Toolbar2000 you should consider the VCL and Toolbar2000 to be "system
+software" in regard to the "special exception" mentioned in section 3 of the
+GPL.
+
 Latest Release
 ==============
 
