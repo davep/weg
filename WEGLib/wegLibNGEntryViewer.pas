@@ -653,7 +653,7 @@ Begin
           // Work out the colour ID.
           iColour := wegLibHex2Int( Copy( sRaw, iCtrl + 2, 2 ) );
 
-          // Convert the ID into a Wndows colour.
+          // Convert the ID into a Windows colour.
           Canvas.Font.Color  := FColours[ iColour And $F ];
           Canvas.Brush.Color := FColours[ ( iColour And $F0 ) Shr 4 ];
 

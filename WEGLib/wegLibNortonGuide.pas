@@ -637,8 +637,6 @@ End;
 
 /////
 
-/////
-
 Function TwegLibNortonGuide.getCurrentOffset : LongInt;
 Begin
   Result := hNG.seek( 0, soFromCurrent );
