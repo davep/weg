@@ -76,7 +76,7 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Expert Guide for W
 ; Application settings.
 Root: HKCU; SubKey: "Software\davep.org"; Flags: uninsdeletekeyifempty
 Root: HKCU; SubKey: "Software\davep.org\WEG"; Flags: uninsdeletekey
-; An entry to give other software a hint as to where NG is located.
+; An entry to give other software a hint as to where WEG is located.
 Root: HKCU; SubKey: "Software\davep.org\WEG"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe";
 ; Windows' file association information.
 Root: HKCR; SubKey: ".ng"; ValueType: string; ValueName: ""; ValueData: "org.davep.WEG"; Flags: uninsdeletekey; Tasks: assocngfiles
