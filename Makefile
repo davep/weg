@@ -1,4 +1,4 @@
 # $Id$
 
 clean:
-	rm -f .cvsignore~ *~ *.~* WEGLib/*~ WEGLib/*.~*
+	rm -f WEGSetup.exe .cvsignore~ *~ *.~* WEGLib/*~ WEGLib/*.~*
