@@ -15,6 +15,9 @@ o Modified the TFileStream oriented functions in wegLibUtils.pas so that
 o Modified the Entry, Menu and See-Also classes so that they work on TStream
   rather than TFileStream.
 
+o Increased the max read line length from 512 to 1024 to stay consistent
+  with the limits mentioned in the Expert Help Compiler manual.
+
 Changes since v1.8 
 ==================
 

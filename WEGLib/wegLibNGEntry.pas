@@ -337,7 +337,7 @@ End;
 
 Procedure TwegLibNGEntry.readText( hNG : TStream );
 Const
-  MAX_LINE_LENGTH = 512;
+  MAX_LINE_LENGTH = 1024;
 Var
   i : Integer;
 Begin
