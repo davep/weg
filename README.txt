@@ -62,9 +62,7 @@ To build WEG you'll need Delphi. I developed WEG and WEGLib with Delphi 5, I
 don't know if this code will build with later versions of Delphi (I'm pretty
 certain that it won't build with Kylix). You'll then need to build and
 install WEGLib. You will also need to get and install Toolbar2000. You can
-get it from <URL:http://www.jrsoftware.org/>. Note that Toolbar2000 is free
-to use as long as you're building free software (well, "non-profit" software
-anyway).
+get it from <URL:http://www.jrsoftware.org/>.
 
 DDE
 ===
