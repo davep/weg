@@ -10,6 +10,8 @@ AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
 AppSupportURL=http://www.davep.org/
 AppUpdatesURL=http://www.davep.org/norton-guides/
+AlwaysShowDirOnReadyPage=Yes
+AlwaysShowGroupOnReadyPage=Yes
 DefaultDirName={pf}\Expert Guide for Windows
 DefaultGroupName=Expert Guide for Windows
 LicenseFile=COPYING
@@ -20,6 +22,8 @@ VersionInfoCompany=davep.org <http://www.davep.org/>
 VersionInfoVersion=2.11
 VersionInfoTextVersion=$Revision$
 WizardSmallImageFile=Images\WEGInstallImage.bmp
+Compression=bzip
+SolidCompression=Yes
 
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
@@ -34,7 +38,7 @@ Name: "WEGLibSources"; Description: "WEGLib Sources"; Types: full
 ; Main application files.
 Source: "WEG.exe";     DestDir: "{app}"; Flags: ignoreversion
 Source: "COPYING";     DestDir: "{app}"; Flags: ignoreversion
-Source: "README.txt";  DestDir: "{app}"; Flags: ignoreversion
+Source: "README.txt";  DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "TODO.txt";    DestDir: "{app}"; Flags: ignoreversion
 Source: "BUGS.txt";    DestDir: "{app}"; Flags: ignoreversion
