@@ -317,7 +317,7 @@ Begin
 
   End;
 
-  // Handle any remaining text. anything that's left.
+  // Handle any remaining text.
   handleText( WithOEMToANSI( sRaw ) );
   
 End;
