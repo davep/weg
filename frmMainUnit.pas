@@ -1081,8 +1081,7 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
         frmGlobalFind.cbSearchFor.Text := slParams[ 0 ];
 
         // Search all known guides.
-        frmGlobalFind.actOptionsSearchCurrentGuide.Checked   := False;
-        frmGlobalFind.actOptionsSearchAllKnownGuides.Checked := True;
+        frmGlobalFind.setSearchAll();
 
         // Start the search.
         frmGlobalFind.actFindStartExecute( self );
@@ -1119,8 +1118,7 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
           frmGlobalFind.cbSearchFor.Text := slParams[ 1 ];
 
           // Only search the guide we've just opened.
-          frmGlobalFind.actOptionsSearchCurrentGuide.Checked   := True;
-          frmGlobalFind.actOptionsSearchAllKnownGuides.Checked := False;
+          frmGlobalFind.setSearchCurrent();
 
           // Start the search.
           frmGlobalFind.actFindStartExecute( self );

@@ -161,6 +161,21 @@ Type
     {** Load the state of the window }
     Procedure loadWindowState;
 
+  Public
+
+    {** Set the search parameters so that all guides are searched }
+    Procedure setSearchAll;
+    {** Set the search parameters so that only the current guide is searched }
+    Procedure setSearchCurrent;
+    {** Set if we should look in short entries or not }
+    Procedure setShortSearch( bOn : Boolean );
+    {** Set if we should look in long entries or not }
+    Procedure setLongSearch( bOn : Boolean );
+    {** Set if we should do a regular expression search or not }
+    Procedure setRegExpSearch( bOn : Boolean );
+    {** Set if we should do a case sensitive search or not }
+    Procedure setMatchCase( bOn : Boolean );
+
   End;
 
 Var
@@ -478,16 +493,14 @@ End;
 
 Procedure TfrmGlobalFind.actOptionsSearchCurrentGuideExecute( Sender : TObject );
 Begin
-  actOptionsSearchCurrentGuide.Checked   := True;
-  actOptionsSearchAllKnownGuides.Checked := False;
+  setSearchCurrent();
 End;
 
 /////
 
 Procedure TfrmGlobalFind.actOptionsSearchAllKnownGuidesExecute( Sender : TObject );
 Begin
-  actOptionsSearchCurrentGuide.Checked   := False;
-  actOptionsSearchAllKnownGuides.Checked := True;
+  setSearchAll();
 End;
 
 /////
@@ -632,24 +645,14 @@ End;
 
 Procedure TfrmGlobalFind.actOptionsLookInShortsExecute( Sender : TObject );
 Begin
-
-  If wlfsShorts In NGFind.SearchStyle Then
-    NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsShorts ]
-  Else
-    NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsShorts ];
-
+  setShortSearch( Not ( wlfsShorts In NGFind.SearchStyle ) );
 End;
 
 /////
 
 Procedure TfrmGlobalFind.actOptionsLookInLongsExecute( Sender : TObject );
 Begin
-
-  If wlfsLongs In NGFind.SearchStyle Then
-    NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsLongs ]
-  Else
-    NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsLongs ];
-      
+  setLongSearch( Not ( wlfsLongs In NGFind.SearchStyle ) );
 End;
 
 /////
@@ -664,7 +667,7 @@ End;
 
 Procedure TfrmGlobalFind.actOptionsRegexpSearchExecute( Sender : TObject );
 Begin
-  NGFind.RegExpSearch := Not NGFind.RegExpSearch;
+  setRegExpSearch( Not NGFind.RegExpSearch );
 End;
 
 /////
@@ -705,7 +708,7 @@ End;
 
 Procedure TfrmGlobalFind.actOptionsMatchCaseExecute( Sender : TObject );
 Begin
-  NGFind.MatchCase := Not NGFind.MatchCase;
+  setMatchCase( Not NGFind.MatchCase );
 End;
 
 /////
@@ -763,6 +766,60 @@ End;
 Procedure TfrmGlobalFind.actOptionsFocusWhenFinishedExecute( Sender : TObject );
 Begin
   actOptionsFocusWhenFinished.Checked := Not actOptionsFocusWhenFinished.Checked;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setSearchAll;
+Begin
+  actOptionsSearchCurrentGuide.Checked   := False;
+  actOptionsSearchAllKnownGuides.Checked := True;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setSearchCurrent;
+Begin
+  actOptionsSearchCurrentGuide.Checked   := True;
+  actOptionsSearchAllKnownGuides.Checked := False;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setShortSearch( bOn : Boolean );
+Begin
+
+  If bOn Then
+    NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsShorts ]
+  Else
+    NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsShorts ];
+
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setLongSearch( bOn : Boolean );
+Begin
+
+  If bOn  Then
+    NGFind.SearchStyle := NGFind.SearchStyle + [ wlfsLongs ]
+  Else
+    NGFind.SearchStyle := NGFind.SearchStyle - [ wlfsLongs ];
+
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setRegExpSearch( bOn : Boolean );
+Begin
+  NGFind.RegExpSearch := bOn;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.setMatchCase( bOn : Boolean );
+Begin
+  NGFind.MatchCase := bOn;
 End;
 
 End.
