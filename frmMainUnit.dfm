@@ -127,6 +127,9 @@ object frmMain: TfrmMain
         object mniEditColours: TTBItem
           Action = actEditColours
         end
+        object mnuEditPrinterSetup: TTBItem
+          Action = actEditPrinterSetup
+        end
       end
       object mnuWindows: TTBSubmenuItem
         Caption = '&Windows'
@@ -285,6 +288,11 @@ object frmMain: TfrmMain
       Caption = '&Colours...'
       Hint = 'Edit colours'
       OnExecute = actEditColoursExecute
+    end
+    object actEditPrinterSetup: TAction
+      Caption = 'Printer &Setup...'
+      Hint = 'Edit the printer setup'
+      OnExecute = actEditPrinterSetupExecute
     end
     object actWindowCascade: TAction
       Caption = '&Cascade'
@@ -777,5 +785,9 @@ object frmMain: TfrmMain
     SingleClickJump = False
     Left = 56
     Top = 144
+  end
+  object psdGuide: TPrinterSetupDialog
+    Left = 56
+    Top = 112
   end
 end

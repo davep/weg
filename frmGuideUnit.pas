@@ -136,6 +136,14 @@ Type
     tbSearch: TTBToolbar;
     sbSearchFind: TTBItem;
     sbSearchFindAgain: TTBItem;
+    pdGuide: TPrintDialog;
+    actGuidePrint: TAction;
+    mnuGuideSplit3: TTBSeparatorItem;
+    mnuGuidePrint: TTBItem;
+    sbGuideSplit3: TTBSeparatorItem;
+    tbGuidePrint: TTBItem;
+    popGuideSplit5: TTBSeparatorItem;
+    popGuidePrint: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure NortonGuideOpen(Sender: TObject);
     procedure NGEntryNewEntry(Sender: TObject);
@@ -171,6 +179,7 @@ Type
     procedure actSearchFindAgainExecute(Sender: TObject);
     procedure NGEntryClick(Sender: TObject);
     procedure NGEntryFindBadRegExp(Sender: TObject);
+    procedure actGuidePrintExecute(Sender: TObject);
 
   Protected
 
@@ -208,7 +217,10 @@ Implementation
 
 Uses
   ClipBrd,
+  Printers,
   wegLibUtils,
+  wegLibNGLineParser,
+  wegUtils,
   frmMainUnit,
   frmGuideCreditsUnit;
 
@@ -884,6 +896,76 @@ ResourceString
 Begin
   MessageBeep( MB_ICONERROR );
   MessageDlg( RSBadRegExp, mtError, [ mbOk ], 0 );
+End;
+
+/////
+
+Procedure TfrmGuide.actGuidePrintExecute( Sender : TObject );
+Var
+  i  : Integer;
+  iY : Integer;
+Begin
+
+  // Check that the user actually wants to print.
+  If pdGuide.execute() Then
+    With TwegBusyCursor.create() Do
+      Try
+
+        With Printer() Do
+        Begin
+
+          // Set the title of the print job.
+          Title := pnlGuideTitle.Text;
+          
+          // Start the document.
+          beginDoc();
+
+          // Initialise the font for the printer.
+          Canvas.Font       := NGEntry.Font;
+          Canvas.Font.Color := clBlack;
+          Canvas.Font.Pitch := fpFixed;
+          
+          Try
+
+            // Starting at position 0.
+            iY := 0;
+
+            // Print each line in the entry...
+            For i := 0 To NGEntry.Entry.LineCount - 1 Do
+            Begin
+
+              // Will we print off the page?
+              If ( iY + Canvas.textHeight( 'X' ) ) > PageHeight Then
+              Begin
+                // Yes, start a new page.
+                iY := 0;
+                newPage();
+              End;
+
+              // Print the line.
+              With TwegLibNGLinePainter.create() Do
+                Try
+                  parse( NGEntry.Entry.Lines[ i ], Canvas, iY, 0, NortonGuide.OEMToANSI );
+                Finally
+                  free();
+                End;
+
+              // Move down a line.
+              Inc( iY, Canvas.textHeight( 'X' ) );
+
+            End;
+
+          Finally
+            // End the document.
+            endDoc();
+          End;
+
+        End;
+
+      Finally
+        free();
+      End;
+
 End;
 
 End.

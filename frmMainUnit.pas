@@ -115,6 +115,9 @@ Type
     mnuFileSplit4: TTBSeparatorItem;
     tbFileBookmarks: TTBItem;
     tbFileSep3: TTBSeparatorItem;
+    psdGuide: TPrinterSetupDialog;
+    actEditPrinterSetup: TAction;
+    mnuEditPrinterSetup: TTBItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -134,6 +137,7 @@ Type
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actFileGlobalFindExecute(Sender: TObject);
     procedure actFileBookmarksExecute(Sender: TObject);
+    procedure actEditPrinterSetupExecute(Sender: TObject);
 
   Public
 
@@ -826,6 +830,13 @@ End;
 Procedure TfrmMain.actFileBookmarksExecute( Sender : TObject );
 Begin
   frmBookmarks.show();
+End;
+
+/////
+
+Procedure TfrmMain.actEditPrinterSetupExecute( Sender : TObject );
+Begin
+  psdGuide.execute();
 End;
 
 End.
