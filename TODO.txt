@@ -13,12 +13,3 @@ o Associating .NG files doesn't work so well with WEG now that it is an MDI
   instance exists.
 
 o URL scanner (was in WEG 1.x)
-
-o When closing down, remember if the guide manager was open and open it the
-  next time WEG is run.
-
-o When closing down, remember if the bookmarks window was open and open it
-  the next time WEG is run.
-
-o When closing down, remember if the global finder was open and open it the
-  next time WEG is run.

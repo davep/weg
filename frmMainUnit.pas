@@ -210,6 +210,12 @@ Const
   REG_LINE = 'Line';
   {** Value name for the line visible at the top of the window }
   REG_TOP_LINE = 'TopLine';
+  {** Value name for remembering if the guide manager was open }
+  REG_GUIDE_MANAGER_OPEN = 'Guide Manager Open';
+  {** Value name for remembering if the bookmark manager was open }
+  REG_BOOMKARK_MANAGER_OPEN = 'Bookmark Manager Open';
+  {** Value name for remembering if the global finder was open }
+  REG_GLOBAL_FINDER_OPEN = 'Global Finder Open';
   {** Key name for the main window's MRU data }
   REG_MRU = 'MRU';
   {** The file names of the guides in the MRU }
@@ -370,6 +376,15 @@ Begin
                 wegSaveWindowState( MDIChildren[ i ], oReg, sPrefix );
               End;
 
+              // Remember if the guide manager was open.
+              writeBool( REG_GUIDE_MANAGER_OPEN, frmGuideManager.Visible );
+
+              // Remember if the bookmark manager was open.
+              writeBool( REG_BOOMKARK_MANAGER_OPEN, frmBookmarks.Visible );
+
+              // Remember if the global finder was open.
+              writeBool( REG_GLOBAL_FINDER_OPEN, frmGlobalFind.Visible );
+
             Finally
               // Close the child windows key.
               closeKey();
@@ -477,6 +492,33 @@ Begin
               bDone := True;
             End;
 
+            Try
+              // If the guide manager was previously open...
+              If readBool( REG_GUIDE_MANAGER_OPEN ) Then
+                // ...open it.
+                frmGuideManager.show();
+            Except
+              // GNDN.
+            End;
+
+            Try
+              // If the bookmark manager was previously open...
+              If readBool( REG_BOOMKARK_MANAGER_OPEN ) Then
+                // ...open it.
+                frmBookmarks.show();
+            Except
+              // GNDN.
+            End;
+
+            Try
+              // If the global finder was previously open...
+              If readBool( REG_GLOBAL_FINDER_OPEN ) Then
+                // ...open it.
+                frmGlobalFind.show();
+            Except
+              // GNDN.
+            End;
+
         Finally
           // Close the child window key.
           closeKey();
@@ -513,14 +555,14 @@ End;
 
 Procedure TfrmMain.FormClose( Sender : TObject; Var Action : TCloseAction );
 Begin
+  // Save the state of the window.
+  saveWindowState();
   // Ensure that the guide manager gets to save its data.
   frmGuideManager.close();
   // Ensure that the global finder gets to save its data.
   frmGlobalFind.close();
   // Ensure that the bookmarks window gets to save its data.
   frmBookmarks.close();
-  // Save the state of the window.
-  saveWindowState();
 End;
 
 /////
