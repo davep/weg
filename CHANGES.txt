@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.15
+===================
+
+o Added the ability to view the credits of a selected guide in the guide
+  manager.
+
 Changes since v2.14
 ===================
 

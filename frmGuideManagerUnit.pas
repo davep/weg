@@ -88,6 +88,10 @@ Type
     mnuOptionsShowHint: TTBItem;
     actOptionsRecycleWindows: TAction;
     mnuOptionsRecycleWindows: TTBItem;
+    actGuidesCredits: TAction;
+    mnuGuidesCredits: TTBItem;
+    popGuidesCredits: TTBItem;
+    tbGuidesCredits: TTBItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actGuidesAddExecute(Sender: TObject);
@@ -103,6 +107,7 @@ Type
     procedure actOptionsShowHintUpdate(Sender: TObject);
     procedure actOptionsShowHintExecute(Sender: TObject);
     procedure actOptionsRecycleWindowsExecute(Sender: TObject);
+    procedure actGuidesCreditsExecute(Sender: TObject);
 
   Protected
 
@@ -142,6 +147,7 @@ Uses
   ShellAPI,
   Registry,
   frmMainUnit,
+  frmGuideCreditsUnit,
   wegLibNortonGuide,
   wegUtils;
 
@@ -690,6 +696,36 @@ Begin
     Result := ''
   Else
     Result := lvGuides.Selected.SubItems[ 0 ];
+End;
+
+/////
+
+Procedure TfrmGuideManager.actGuidesCreditsExecute( Sender : TObject );
+Var
+  oGuide : TwegLibNortonGuide;
+Begin
+
+  // Create a guide object.
+  oGuide := TwegLibNortonGuide.create( Nil );
+
+  Try
+
+    // Configure it and open the guide.
+    oGuide.Settings := frmMain.NGSettings;
+    oGuide.Guide    := lvGuides.Selected.SubItems[ 0 ];
+    If oGuide.isOpen() Then
+      With TfrmGuideCredits.create( self ) Do
+        Try
+          oNortonGuide := oGuide;
+          showModal();
+        Finally
+          free();
+        End;
+
+  Finally
+    oGuide.free();
+  End;
+
 End;
 
 End.
