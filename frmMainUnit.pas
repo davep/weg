@@ -142,6 +142,11 @@ Type
     mnuOptionsPrintColour: TTBItem;
     actOptionsBOLShortSearch: TAction;
     mnuOptionsBOLShortSearch: TTBItem;
+    actHelpViewREADME: TAction;
+    mnuHelpViewREADME: TTBItem;
+    mnuHelpSep0: TTBSeparatorItem;
+    actHelpViewCHANGES: TAction;
+    mnuHelpViewCHANGES: TTBItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -167,6 +172,8 @@ Type
     procedure FormDragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
     procedure FormDragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure actHelpViewREADMEExecute(Sender: TObject);
+    procedure actHelpViewCHANGESExecute(Sender: TObject);
 
   Public
 
@@ -1222,6 +1229,20 @@ Begin
     // ..that's it, open the hit.
     frmGlobalFind.actFindOpenExecute( Sender );
     
+End;
+
+/////
+
+Procedure TfrmMain.actHelpViewREADMEExecute( Sender : TObject );
+Begin
+  wegFireURL( IncludeTrailingBackslash( ExtractFilePath( Application.ExeName ) ) + 'README.txt' );
+End;
+
+/////
+
+Procedure TfrmMain.actHelpViewCHANGESExecute( Sender : TObject );
+Begin
+  wegFireURL( IncludeTrailingBackslash( ExtractFilePath( Application.ExeName ) ) + 'CHANGES.txt' );
 End;
 
 End.

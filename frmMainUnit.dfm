@@ -182,6 +182,14 @@ object frmMain: TfrmMain
       object mnuHelp: TTBSubmenuItem
         Caption = '&Help'
         Hint = 'Help menu'
+        object mnuHelpViewREADME: TTBItem
+          Action = actHelpViewREADME
+        end
+        object mnuHelpViewCHANGES: TTBItem
+          Action = actHelpViewCHANGES
+        end
+        object mnuHelpSep0: TTBSeparatorItem
+        end
         object mnuHelpAbout: TTBItem
           Action = actHelpAbout
         end
@@ -357,6 +365,11 @@ object frmMain: TfrmMain
         'in preference to in-text searching?'
       OnExecute = actOptionsCheckItemExecute
     end
+    object actOptionsPrintColour: TAction
+      Caption = '&Colour Printing'
+      Hint = 'Should guide entries be printed in colour?'
+      OnExecute = actOptionsCheckItemExecute
+    end
     object actWindowCascade: TAction
       Caption = '&Cascade'
       Hint = 'Cascade windows'
@@ -381,16 +394,21 @@ object frmMain: TfrmMain
       OnExecute = actWindowTileVerticalExecute
       OnUpdate = actWindowUpdate
     end
+    object actHelpViewREADME: TAction
+      Caption = 'View &README.txt'
+      Hint = 'View WEG'#39's README file'
+      OnExecute = actHelpViewREADMEExecute
+    end
+    object actHelpViewCHANGES: TAction
+      Caption = 'View &CHANGES.txt'
+      Hint = 'View WEG'#39's changes document'
+      OnExecute = actHelpViewCHANGESExecute
+    end
     object actHelpAbout: TAction
       Caption = '&About...'
       Hint = 'Display information about Expert Guide'
       ShortCut = 112
       OnExecute = actHelpAboutExecute
-    end
-    object actOptionsPrintColour: TAction
-      Caption = '&Colour Printing'
-      Hint = 'Should guide entries be printed in colour?'
-      OnExecute = actOptionsCheckItemExecute
     end
   end
   object ilMain: TTBImageList
