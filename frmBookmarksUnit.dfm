@@ -129,6 +129,7 @@ object frmBookmarks: TfrmBookmarks
         Caption = 'Bookmarks'
       end>
     ColumnClick = False
+    HideSelection = False
     ReadOnly = True
     RowSelect = True
     PopupMenu = popBookmarks
