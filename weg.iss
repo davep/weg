@@ -17,7 +17,7 @@ OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
 VersionInfoVersion=2.8
-VersionInfoTextVersion=$Id$
+VersionInfoTextVersion=$Revision$
 
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
