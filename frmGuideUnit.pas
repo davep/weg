@@ -796,7 +796,7 @@ Begin
     frmFinder := TfrmGuideEntryFind.create( self );
 
     // Configure it.
-    frmFinder.Caption                     := Format( RSCaption, [ NortonGuide.Title ] );
+    frmFinder.Caption                     := Format( RSCaption, [ NGEntry.entryTitle() ] );
     frmFinder.cbRegularExpression.Enabled := NGEntryFind.CanRegExp;
     frmFinder.btnFind.OnClick             := findClick;
 
