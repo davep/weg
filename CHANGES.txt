@@ -5,6 +5,8 @@ $Id$
 Changes since v2.6
 ==================
 
+o Built with Toolbar2000 v2.1.4.
+
 o The compatibility keystroke for pulling up the guide information should
   have been "?", not "v". Changed.
 
