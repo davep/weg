@@ -43,7 +43,7 @@ Const
   {** ID of a menu entry }
   wegLib_ENTRY_MENU = 2;
   {** Version of WEGLib }
-  wegLib_VERSION = '1.0';
+  wegLib_VERSION = '1.1';
 
 Type
   {** Types of reads that can take place }
