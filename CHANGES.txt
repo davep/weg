@@ -8,6 +8,9 @@ Changes since v2.14
 o WEG's shell-oriented drag-and-drop support wasn't calling DragFinish()
   after a drop message had been processed. Fixed.
 
+o Added an installer option for making sure that WEG is in your machine's
+  path.
+
 Changes since v2.13
 ===================
 

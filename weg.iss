@@ -28,7 +28,8 @@ SolidCompression=Yes
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 Name: "quicklaunchicon"; Description: "Create a &Quick Launch icon"; GroupDescription: "Additional icons:"; Flags: unchecked
-Name: "assocngfiles";    Description: "Associate Expert Guide with Norton Guides"; GroupDescription: "Associations"
+Name: "assocngfiles";    Description: "&Associate Expert Guide with Norton Guides"; GroupDescription: "Associations"
+Name: "addapppath";      Description: "Add WEG to your machine's &PATH"; GroupDescription: "Other";
 
 [Components]
 Name: "WEGSources";    Description: "WEG Sources"; Types: full
@@ -90,6 +91,9 @@ Root: HKCR; SubKey: "org.davep.WEG\shell"; ValueType: string; ValueName: ""; Val
 Root: HKCR; SubKey: "org.davep.WEG\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\WEG.exe""";  Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec"; ValueType: string; ValueName: ""; ValueData: "open,""%1""";  Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec\Topic"; ValueType: string; ValueName: ""; ValueData: "Execute";  Tasks: assocngfiles
+; Application path
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\WEG.exe"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe"; Flags: uninsdeletekey; Tasks: addapppath
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\WEG.exe"; ValueType: string; ValueName: "Path"; ValueData: "{app}" ; Flags: uninsdeletekey; Tasks: addapppath
 
 [Run]
 Filename: "notepad"; Parameters: "{app}\CHANGES.txt"; Description: "View CHANGES.txt"; Flags: nowait postinstall skipifsilent
