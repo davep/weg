@@ -582,7 +582,7 @@ Begin
 
   // If we've got a pointer to a settings component...
   If FSettings <> Nil Then
-    // ..get the sttings from it.
+    // ..get the settings from it.
     FOEMToANSI := FSettings.OEMToANSI;
 
 End;
