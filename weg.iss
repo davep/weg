@@ -14,6 +14,9 @@ LicenseFile=COPYING
 OutputBaseFileName=WEGSetup
 OutputDir=.
 ChangesAssociations=Yes
+VersionInfoCompany=davep.org <http://www.davep.org/>
+VersionInfoVersion=2.7
+VersionInfoTextVersion=$Id$
 
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
