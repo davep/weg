@@ -250,7 +250,7 @@ Begin
 
   // If there is an MDI child kicking about...
   If ActiveMDIChild <> Nil Then
-    // ...return a pointer to it's Norton Guide component.
+    // ...return a pointer to its Norton Guide component.
     Result := TfrmGuide( ActiveMDIChild ).NortonGuide
   Else
     // ...otherwise return Nil.
