@@ -59,7 +59,7 @@ RootDir=
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
-MinorVer=0
+MinorVer=8
 Release=0
 Build=0
 Debug=0
@@ -72,13 +72,14 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dave Pearson <http://www.davep.org>
 FileDescription=WEGLib - Norton Guide Library for Delphi
-FileVersion=1.0.0.0
+FileVersion=1.8.0.0
 InternalName=WEGLib
-LegalCopyright=Copyright © 2003 Dave Pearson
+LegalCopyright=Copyright © 2003, 2004 Dave Pearson
 LegalTrademarks=
 OriginalFilename=WEGLib
 ProductName=WEGLib
-ProductVersion=1.0
+ProductVersion=1.8
 Comments=Licenced under the GPL
-[Excluded Packages]
-$(DELPHI)\Projects\Bpl\heT2TIPOS.bpl=Hermes Top2Toe IPOS Library
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
