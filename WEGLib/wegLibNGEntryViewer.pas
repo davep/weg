@@ -164,7 +164,7 @@ Type
     {** Return a "path" for the entry within the guide }
     Function entryPath( Const sAdditional : String = ''; sSeperator : String = '' ) : String; Virtual;
     {** Like entryPath() but tries to work out the best possible title }
-    Function entryTitle( sSeperator : String = '' ) : String; Virtual;
+    Function entryTitle( Const sSeperator : String = '' ) : String; Virtual;
 
   Published
 
@@ -826,7 +826,7 @@ End;
 
 /////
 
-Function TwegLibNGEntryViewer.entryTitle( sSeperator : String = '' ) : String;
+Function TwegLibNGEntryViewer.entryTitle( Const sSeperator : String = '' ) : String;
 Begin
 
   // Start out with the default as the entry path.
