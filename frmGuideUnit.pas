@@ -1191,7 +1191,7 @@ End;
 
 Procedure TfrmGuide.actEditCopyLineUpdate( Sender : TObject );
 Begin
-  actEditCopyLine.Enabled := NGEntry.ItemIndex > 0;
+  actEditCopyLine.Enabled := NGEntry.ItemIndex > -1;
 End;
 
 /////
