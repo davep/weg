@@ -134,7 +134,7 @@ End;
 
 /////
 
-Procedure wegSaveWindowState( oForm : TCustomForm; oReg : TRegistry; Const sPrefix : String = '' );
+Procedure wegSaveWindowState( oForm : TCustomForm; oReg : TRegistry; Const sPrefix : String );
 Var
   wsSave : TWindowState;
 Begin
@@ -165,7 +165,7 @@ End;
 
 /////
 
-Procedure wegRestoreWindowState( oForm : TCustomForm; oReg : TRegistry; Const sPrefix : String = '' );
+Procedure wegRestoreWindowState( oForm : TCustomForm; oReg : TRegistry; Const sPrefix : String );
 Begin
 
   // Try and load the size and location of the window.
@@ -178,10 +178,9 @@ Begin
     // We don't do anything.
   End;
 
-  // Try the maximized flag too.
+  // Try the maximized flag.
   Try
-    If oReg.readBool( sPrefix + REG_FORM_MAXIMIZED ) Then
-      oForm.WindowState := wsMaximized;
+    If oReg.readBool( sPrefix + REG_FORM_MAXIMIZED ) Then oForm.WindowState := wsMaximized;
   Except
     // We don't do anything.
   End;
