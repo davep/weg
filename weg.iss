@@ -38,13 +38,13 @@ Source: "BUGS.txt";    DestDir: "{app}"; Flags: ignoreversion
 Source: "website.url"; DestDir: "{app}"; Flags: ignoreversion
 Source: "email.url";   DestDir: "{app}"; Flags: ignoreversion
 ; Optional WEG sources.
-Source: "*.dpr";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
-Source: "*.res";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
-Source: "*.dof";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
-Source: "*.pas";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
-Source: "*.dfm";      DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
-Source: "Icons\*.*";  DestDir: "{app}\Source\WEG\Icons";  Flags: ignoreversion; Components: WEGSources
-Source: "Images\*.*"; DestDir: "{app}\Source\WEG\Images"; Flags: ignoreversion; Components: WEGSources
+Source: "*.dpr";        DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.res";        DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.dof";        DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.pas";        DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "*.dfm";        DestDir: "{app}\Source\WEG";        Flags: ignoreversion; Components: WEGSources
+Source: "Icons\*.ico";  DestDir: "{app}\Source\WEG\Icons";  Flags: ignoreversion; Components: WEGSources
+Source: "Images\*.bmp"; DestDir: "{app}\Source\WEG\Images"; Flags: ignoreversion; Components: WEGSources
 ; Optional WEGLib sources.
 Source: "WEGLib\*.dpk"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
 Source: "WEGLib\*.res"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
