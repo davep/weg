@@ -9,6 +9,8 @@ o Added the entryPath() method to the entry viewer component.
 
 o Added the entryTitle() method to the entry viewer component.
 
+o Increased the max length of a menu and see-also title.
+
 Changes since v1.5
 ==================
 

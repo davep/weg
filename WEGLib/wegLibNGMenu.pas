@@ -31,6 +31,10 @@ Interface
 Uses
   Classes;
 
+Const
+  {** Max length of a menu item }
+  wegLib_MAX_MENU_ITEM_LEN = 128;
+
 Type
 
   {** Norton Guide menu item }
@@ -131,16 +135,16 @@ Begin
 
   // Load the title for the menu.
   If bOEMToANSI Then
-    FTitle := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) ) )
+    FTitle := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, wegLib_MAX_MENU_ITEM_LEN ) ) ) )
   Else
     FTitle := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
 
   // Now load the text of each of the prompts on the menu.
   For i := 0 To ( iPrompts - 2 ) Do
     If bOEMToANSI Then
-      FPrompts[ i ].sPrompt := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) ) )
+      FPrompts[ i ].sPrompt := wegLibOEMToANSI( Trim( wegLibExpand( wegLibReadStringZ( hNG, wegLib_MAX_MENU_ITEM_LEN ) ) ) )
     Else
-      FPrompts[ i ].sPrompt := Trim( wegLibExpand( wegLibReadStringZ( hNG, 50 ) ) );
+      FPrompts[ i ].sPrompt := Trim( wegLibExpand( wegLibReadStringZ( hNG, wegLib_MAX_MENU_ITEM_LEN ) ) );
 
   // Skip a byte (I forget what it is, end of entry marker perhaps?).
   wegLibReadByte( hNG, wlrtNoDecrypt );
