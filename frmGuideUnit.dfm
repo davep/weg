@@ -81,12 +81,9 @@ object frmGuide: TfrmGuide
       Left = 0
       Top = 23
       Caption = 'tbGuideMenu'
-      CloseButton = False
       DockMode = dmCannotFloat
       DockPos = 0
       DockRow = 1
-      MenuBar = True
-      ProcessShortCuts = True
       TabOrder = 0
     end
     object tbWindowMenu: TTBToolbar

@@ -8,6 +8,14 @@ Changes since v2.6
 o The compatibility keystroke for pulling up the guide information should
   have been "?", not "v". Changed.
 
+o Made sure that any "&" in the title of a menu from a guide is escaped so
+  as not to be confused with a Windows' menu accelerator key.
+
+o Made the first letter of each main menu title from a guide into an
+  accelerator key. This could cause clashes with other accelerator keys but,
+  if someone is trying to use just the keyboard, they're probably more
+  interested in getting at the guide's menu that any of the other menus.
+
 Changes since v2.5
 ==================
 

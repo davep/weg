@@ -387,7 +387,7 @@ Begin
     Begin
 
       // Set the caption of the menu title.
-      Caption := NortonGuide.Menus[ i ].Title;
+      Caption := '&' + StringReplace( NortonGuide.Menus[ i ].Title, '&', '&&', [ rfReplaceAll ] );
       // Set the tag to the menu number.
       Tag := i;
 
