@@ -85,6 +85,7 @@ ResourceString
                  'Please note that because WEG makes use of Delphi''s VCL and Toolbar2000 you should consider the VCL and Toolbar2000 to be "system software" in regard to the "special exception" mentioned in section 3 of the GPL.'#13#10#13#10 +
                  'You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.';
 Begin
+  MessageBeep( MB_ICONINFORMATION );
   MessageDlg( LICENCE_TEXT, mtInformation, [ mbOk ], 0 );
 End;
 
@@ -95,6 +96,7 @@ ResourceString
   WARRANTY_TEXT = 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.'#13#10#13#10 +
                   'You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.';
 Begin
+  MessageBeep( MB_ICONINFORMATION );
   MessageDlg( WARRANTY_TEXT, mtInformation, [ mbOk ], 0 );
 End;
 
