@@ -101,6 +101,7 @@ object frmGuide: TfrmGuide
       TabOrder = 1
       object mnuGuide: TTBSubmenuItem
         Caption = '&Guide'
+        Hint = 'Guide menu'
         object mnuGuideSaveText: TTBItem
           Action = actGuideSaveText
         end
@@ -135,6 +136,7 @@ object frmGuide: TfrmGuide
       end
       object mnuSearch: TTBSubmenuItem
         Caption = '&Search'
+        Hint = 'Search menu'
         object mnuSearchFind: TTBItem
           Action = actSearchFind
         end
