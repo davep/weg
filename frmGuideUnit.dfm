@@ -316,6 +316,7 @@ object frmGuide: TfrmGuide
     MultiSelect = True
     OnClick = NGEntryClick
     PopupMenu = popGuide
+    OnKeyPress = NGEntryKeyPress
   end
   object NortonGuide: TwegLibNortonGuide
     OEMToANSI = True

@@ -180,6 +180,7 @@ Type
     procedure NGEntryClick(Sender: TObject);
     procedure NGEntryFindBadRegExp(Sender: TObject);
     procedure actGuidePrintExecute(Sender: TObject);
+    procedure NGEntryKeyPress(Sender: TObject; var Key: Char);
 
   Protected
 
@@ -965,6 +966,27 @@ Begin
       Finally
         free();
       End;
+
+End;
+
+/////
+
+Procedure TfrmGuide.NGEntryKeyPress( Sender : TObject; Var Key : Char );
+Begin
+
+  // Handle some of the key strokes from the DOS/Linux version of EG.
+  Case Key Of
+    'Q', 'q' : If NGEntry.canNavigateUp()       Then actNavigateUpExecute( Nil );
+    '-'      : If NGEntry.canNavigatePrevious() Then actNavigatePreviousExecute( Nil );
+    '+'      : If NGEntry.canNavigateNext()     Then actNavigateNextExecute( Nil );
+    '/', '\' :                                       actSearchFindExecute( Nil );
+    'n'      :                                       actSearchFindAgainExecute( Nil );
+    'S'      :                                       actGuideSaveSourceExecute( Nil );
+    's'      :                                       actGuideSaveTextExecute( Nil );
+    'r'      :                                       frmMain.actFileOpenExecute( Nil );
+    'd', 'D' :                                       frmMain.actFileGuideManagerExecute( Nil );
+    'v'      :                                       actGuideCreditsExecute( Nil );
+  End;
 
 End;
 

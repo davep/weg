@@ -9,6 +9,10 @@ o Added a "right-click" menu to the bookmarks window.
 
 o Added printing support.
 
+o Added support for many of the keystrokes that were supported by the DOS,
+  GNU/Linux and OS/2 versions of EG. This support was also in WEG 1.x and
+  I'd forgotten to add it to WEG 2.x.
+
 Changes since v2.2
 ==================
 
