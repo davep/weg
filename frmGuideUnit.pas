@@ -144,6 +144,11 @@ Type
     tbGuidePrint: TTBItem;
     popGuideSplit5: TTBSeparatorItem;
     popGuidePrint: TTBItem;
+    actNavigateHome: TAction;
+    mnuNavigateSplit2: TTBSeparatorItem;
+    mnuNavigateHome: TTBItem;
+    sbNavigateSplit2: TTBSeparatorItem;
+    sbNavigateHome: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure NortonGuideOpen(Sender: TObject);
     procedure NGEntryNewEntry(Sender: TObject);
@@ -183,6 +188,8 @@ Type
     procedure NGEntryKeyPress(Sender: TObject; var Key: Char);
     procedure actGuidePrintUpdate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure actNavigateHomeExecute(Sender: TObject);
+    procedure actNavigateHomeUpdate(Sender: TObject);
 
   Protected
 
@@ -1143,6 +1150,20 @@ Begin
     
   End;
 
+End;
+
+/////
+
+Procedure TfrmGuide.actNavigateHomeExecute( Sender : TObject );
+Begin
+  NGEntry.displayFirstEntry();
+End;
+
+/////
+
+Procedure TfrmGuide.actNavigateHomeUpdate( Sender : TObject );
+Begin
+  actNavigateHome.Enabled := NGEntry.hasEntry() And ( NGEntry.Entry.Offset <> NortonGuide.FirstEntry );
 End;
 
 End.
