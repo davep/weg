@@ -157,7 +157,6 @@ Type
     procedure actWindowTileVerticalExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure mnuFileReOpenPopup(Sender: TTBCustomItem; FromLink: Boolean);
     procedure actFileCloseAllUpdate(Sender: TObject);
     procedure actFileCloseAllExecute(Sender: TObject);
     procedure actFileGuideManagerExecute(Sender: TObject);
@@ -866,12 +865,6 @@ Begin
     // ...deal with the call.
     openGuide( slMRUFiles[ TTBItem( oSender ).Tag ], openType( actOptionsRecycleFileReOpen ) );
 
-End;
-
-/////
-
-Procedure TfrmMain.mnuFileReOpenPopup( Sender : TTBCustomItem; FromLink : Boolean );
-Begin
 End;
 
 /////

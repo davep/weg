@@ -94,7 +94,6 @@ object frmMain: TfrmMain
           Caption = '&Reopen'
           Hint = 'Reopen a previously opened file'
           ImageIndex = 0
-          OnPopup = mnuFileReOpenPopup
         end
         object mnuFileGuideManager: TTBItem
           Action = actFileGuideManager
