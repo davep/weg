@@ -337,6 +337,7 @@ object frmGuide: TfrmGuide
     Font.Style = []
     MultiSelect = True
     PopupMenu = popGuide
+    TabOrder = 5
     OnClick = NGEntryClick
     OnDragOver = NGEntryDragOver
     OnDragDrop = NGEntryDragDrop
