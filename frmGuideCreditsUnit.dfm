@@ -78,6 +78,7 @@ object frmGuideCredits: TfrmGuideCredits
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
+    Cancel = True
     Caption = '&OK'
     Default = True
     ModalResult = 1
