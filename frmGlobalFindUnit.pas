@@ -47,7 +47,7 @@ Uses
   ImgList,
   TB2ToolWindow,
   wegLibNortonGuide,
-  wegLibNGFindThread;
+  wegLibNGFindThread, Menus;
 
 Type
 
@@ -105,6 +105,9 @@ Type
     mnuFindOpen: TTBItem;
     actOptionsMatchCase: TAction;
     mnuOptionsMatchCase: TTBItem;
+    popHits: TTBPopupMenu;
+    popHitsClearResults: TTBItem;
+    popHitsOpenResult: TTBItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actFindCloseExecute(Sender: TObject);

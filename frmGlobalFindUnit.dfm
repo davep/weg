@@ -177,6 +177,7 @@ object frmGlobalFind: TfrmGlobalFind
     Height = 397
     Align = alClient
     ItemHeight = 13
+    PopupMenu = popHits
     TabOrder = 5
     OnDblClick = actFindOpenExecute
   end
@@ -705,5 +706,15 @@ object frmGlobalFind: TfrmGlobalFind
     Settings = frmMain.NGSettings
     Left = 24
     Top = 104
+  end
+  object popHits: TTBPopupMenu
+    Left = 88
+    Top = 72
+    object popHitsOpenResult: TTBItem
+      Action = actFindOpen
+    end
+    object popHitsClearResults: TTBItem
+      Action = actFindClearResults
+    end
   end
 end
