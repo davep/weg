@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.9
+==================
+
+o The file save dialog used for saving source didn't do an overwrite prompt
+  check. Fixed.
+
 Changes since v2.8
 ==================
 

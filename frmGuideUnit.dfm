@@ -1265,7 +1265,7 @@ object frmGuide: TfrmGuide
   object sdSource: TSaveDialog
     DefaultExt = 'txt'
     Filter = 'Text Files|*.txt|All Files|*.*'
-    Options = [ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofNoReadOnlyReturn, ofEnableSizing]
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofNoReadOnlyReturn, ofEnableSizing]
     Title = 'Save source to file'
     Left = 56
     Top = 136
