@@ -163,6 +163,8 @@ Type
 
   Public
 
+    {** Set the text to search for }
+    Procedure setSearchText( Const s : String );
     {** Set the search parameters so that all guides are searched }
     Procedure setSearchAll;
     {** Set the search parameters so that only the current guide is searched }
@@ -175,6 +177,8 @@ Type
     Procedure setRegExpSearch( bOn : Boolean );
     {** Set if we should do a case sensitive search or not }
     Procedure setMatchCase( bOn : Boolean );
+    {** Start a search }
+    Procedure startSearch;
 
   End;
 
@@ -410,54 +414,8 @@ End;
 /////
 
 Procedure TfrmGlobalFind.actFindStartExecute( Sender : TObject );
-Var
-  slGuides : TStringList;
-  i        : Integer;
-  sFind    : String;
 Begin
-
-  // Create the string list to hold the list of guids to search.
-  slGuides := TStringList.create();
-
-  With TwegBusyCursor.create() Do
-    Try
-
-      // If the user is searching the current guide...
-      If actOptionsSearchCurrentGuide.Checked Then
-      Begin
-        // ...use only that...
-        If frmMain.focusedGuide() <> Nil Then
-          slGuides.add( frmMain.focusedGuide().Guide );
-      End
-      Else
-        // ...otherwise get the guide list from the guide manager.
-        frmGuideManager.getGuideNames( slGuides );
-
-      // Remember what we're looking for.
-      sFind := cbSearchFor.Text;
-
-      // Start the search.
-      NGFind.start( sFind, slGuides );
-
-      // Remember what we've looked for.
-      i := cbSearchFor.Items.indexOf( sFind );
-      If i > -1 Then
-        // The text is in the list, delete it from its current location.
-        cbSearchFor.Items.delete( i )
-      // Reached the max memory?
-      Else If cbSearchFor.Items.Count = 20 Then
-        // Delete the last item on the list.
-        cbSearchFor.Items.delete( cbSearchFor.Items.Count - 1 );
-
-      // Put the search term at the top of the memory.
-      cbSearchFor.Items.insert( 0, sFind );
-      cbSearchFor.Text := sFind;
-
-    Finally
-      slGuides.free();
-      free();
-    End;
-  
+  startSearch();
 End;
 
 /////
@@ -770,6 +728,13 @@ End;
 
 /////
 
+Procedure TfrmGlobalFind.setSearchText( Const s : String );
+Begin
+  cbSearchFor.Text := s;
+End;
+
+/////
+
 Procedure TfrmGlobalFind.setSearchAll;
 Begin
   actOptionsSearchCurrentGuide.Checked   := False;
@@ -820,6 +785,59 @@ End;
 Procedure TfrmGlobalFind.setMatchCase( bOn : Boolean );
 Begin
   NGFind.MatchCase := bOn;
+End;
+
+/////
+
+Procedure TfrmGlobalFind.startSearch;
+Var
+  slGuides : TStringList;
+  i        : Integer;
+  sFind    : String;
+Begin
+
+  // Create the string list to hold the list of guids to search.
+  slGuides := TStringList.create();
+
+  With TwegBusyCursor.create() Do
+    Try
+
+      // If the user is searching the current guide...
+      If actOptionsSearchCurrentGuide.Checked Then
+      Begin
+        // ...use only that...
+        If frmMain.focusedGuide() <> Nil Then
+          slGuides.add( frmMain.focusedGuide().Guide );
+      End
+      Else
+        // ...otherwise get the guide list from the guide manager.
+        frmGuideManager.getGuideNames( slGuides );
+
+      // Remember what we're looking for.
+      sFind := cbSearchFor.Text;
+
+      // Start the search.
+      NGFind.start( sFind, slGuides );
+
+      // Remember what we've looked for.
+      i := cbSearchFor.Items.indexOf( sFind );
+      If i > -1 Then
+        // The text is in the list, delete it from its current location.
+        cbSearchFor.Items.delete( i )
+      // Reached the max memory?
+      Else If cbSearchFor.Items.Count = 20 Then
+        // Delete the last item on the list.
+        cbSearchFor.Items.delete( cbSearchFor.Items.Count - 1 );
+
+      // Put the search term at the top of the memory.
+      cbSearchFor.Items.insert( 0, sFind );
+      cbSearchFor.Text := sFind;
+
+    Finally
+      slGuides.free();
+      free();
+    End;
+  
 End;
 
 End.

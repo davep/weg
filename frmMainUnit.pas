@@ -1072,21 +1072,17 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
 
       // If there isn't a find in progress.
       If Not frmGlobalFind.NGFind.Finding Then
-      Begin
-
-        // Ensure that the global finder is visible.
-        frmGlobalFind.show();
-
-        // Set the search string.
-        frmGlobalFind.cbSearchFor.Text := slParams[ 0 ];
-
-        // Search all known guides.
-        frmGlobalFind.setSearchAll();
-
-        // Start the search.
-        frmGlobalFind.actFindStartExecute( self );
-
-      End;
+        With frmGlobalFind Do
+        Begin
+          // Ensure that the global finder is visible.
+          show();
+          // Set the search string.
+          setSearchText( slParams[ 0 ] );
+          // Search all known guides.
+          setSearchAll();
+          // Start the search.
+          startSearch();
+        End;
 
     End
     Else
@@ -1109,21 +1105,17 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
       If Not frmGlobalFind.NGFind.Finding Then
         // Try and open the guide.
         If openGuide( slParams[ 0 ], openType( actOptionsRecycleDDE ) ) <> Nil Then
-        Begin
-
-          // Ensure that the global finder is visible.
-          frmGlobalFind.show();
-
-          // Set the search string.
-          frmGlobalFind.cbSearchFor.Text := slParams[ 1 ];
-
-          // Only search the guide we've just opened.
-          frmGlobalFind.setSearchCurrent();
-
-          // Start the search.
-          frmGlobalFind.actFindStartExecute( self );
-
-        End;
+          With frmGlobalFind Do
+          Begin
+            // Ensure that the global finder is visible.
+            show();
+            // Set the search string.
+            setSearchText( slParams[ 1 ] );
+            // Only search the guide we've just opened.
+            setSearchCurrent();
+            // Start the search.
+            startSearch();
+          End;
       
     End
     Else
