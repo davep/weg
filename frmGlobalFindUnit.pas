@@ -138,7 +138,8 @@ Type
     procedure actOptionsMatchCaseUpdate(Sender: TObject);
     procedure actOptionsMatchCaseExecute(Sender: TObject);
     procedure NGFindBadRegExp(Sender: TObject);
-    procedure lbHitsClick(Sender: TObject);
+    procedure lbHitsMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
 
   Protected
 
@@ -666,14 +667,28 @@ End;
 
 /////
 
-Procedure TfrmGlobalFind.lbHitsClick( Sender : TObject );
+Procedure TfrmGlobalFind.lbHitsMouseMove( Sender : TObject; Shift : TShiftState; X, Y : Integer );
 ResourceString
   RSFoundIn = 'Found in ''%s''';
+Var
+  rPoint : TPoint;
+  iLine  : Integer;
 Begin
 
-  If Not NGFind.Finding Then
-    If lbHits.ItemIndex <> -1 Then
-      sbGlobalFind.Panels[ 1 ].Text := Format( RSFoundIn, [ aResults[ lbHits.ItemIndex ].sTitle ] );
+  // Populate a point record for the mouse location.
+  rPoint.X := X;
+  rPoint.Y := Y;
+
+  // Figure out what line in the list the cursor is over.
+  iLine := lbHits.itemAtPos( rPoint, True );
+
+  // If there is no line...
+  If iLine = -1 Then
+    // ...empty the hint
+    Hint := ''
+  Else
+    // ...there is a line, set the hint to tell the user the guide.
+    Hint := Format( RSFoundIn, [ aResults[ iLine ].sTitle ] );
 
 End;
 

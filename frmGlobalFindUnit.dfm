@@ -189,10 +189,12 @@ object frmGlobalFind: TfrmGlobalFind
     Height = 397
     Align = alClient
     ItemHeight = 13
+    ParentShowHint = False
     PopupMenu = popHits
+    ShowHint = True
     TabOrder = 5
-    OnClick = lbHitsClick
     OnDblClick = actFindOpenExecute
+    OnMouseMove = lbHitsMouseMove
   end
   object pbGuides: TProgressBar
     Left = 0
