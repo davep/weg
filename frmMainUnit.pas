@@ -292,68 +292,77 @@ Var
   sPrefix : String;
 Begin
 
-  oReg := TRegistry.create();
-
-  With oReg Do
+  // Show a busy cursor while we're doing this.
+  With TwegBusyCursor.create() Do
     Try
 
-      // Open the registry key for remembering the window position. Create
-      // it if it doesn't exist.
-      If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_POSITION ] ), True ) Then
-        Try
-          // Save the size and location of the window.
-          wegSaveWindowState( self, oReg );
-        Finally
-          // Close the window position/size key.
-          closeKey();
-        End;
+      oReg := TRegistry.create();
 
-      // Save the toolbar positions.
-      TBRegSavePositions( self, HKEY_CURRENT_USER, wegRegistryKey( [ REG_MAIN_WINDOW, REG_POSITION, REG_TOOLBARS ] ) );
-
-      // Now save the colours.
-      NGColours.saveToRegistry( wegRegistryKey( REG_COLOURS ), oReg );
-
-      // Now save the preferences.
-      NGSettings.saveToRegistry( wegRegistryKey( REG_PREFERENCES ), oReg );
-
-      // Now save the details of the open child windows. First, if there is
-      // already a key of that name, delete it.
-      If keyExists( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ) ) Then
-        deleteKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ) );
-
-      // Now re-create the key and write the child window list.
-      If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ), True ) Then
+      With oReg Do
         Try
 
-          // Loop over the child windows, saving their state.
-          For i := 0 To MDIChildCount - 1 Do
-          Begin
-            sPrefix := IntToStr( ( MDIChildCount - 1 ) - i ) + '.';
-            writeString(  sPrefix + REG_GUIDE,    TfrmGuide( MDIChildren[ i ] ).NortonGuide.Guide );
-            writeInteger( sPrefix + REG_ENTRY,    TfrmGuide( MDIChildren[ i ] ).NGEntry.Entry.Offset );
-            writeInteger( sPrefix + REG_LINE,     TfrmGuide( MDIChildren[ i ] ).NGEntry.ItemIndex );
-            writeInteger( sPrefix + REG_TOP_LINE, TfrmGuide( MDIChildren[ i ] ).NGEntry.TopIndex );
-            wegSaveWindowState( MDIChildren[ i ], oReg, sPrefix );
-          End;
+          // Open the registry key for remembering the window position. Create
+          // it if it doesn't exist.
+          If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_POSITION ] ), True ) Then
+            Try
+              // Save the size and location of the window.
+              wegSaveWindowState( self, oReg );
+            Finally
+              // Close the window position/size key.
+              closeKey();
+            End;
+
+          // Save the toolbar positions.
+          TBRegSavePositions( self, HKEY_CURRENT_USER, wegRegistryKey( [ REG_MAIN_WINDOW, REG_POSITION, REG_TOOLBARS ] ) );
+
+          // Now save the colours.
+          NGColours.saveToRegistry( wegRegistryKey( REG_COLOURS ), oReg );
+
+          // Now save the preferences.
+          NGSettings.saveToRegistry( wegRegistryKey( REG_PREFERENCES ), oReg );
+
+          // Now save the details of the open child windows. First, if there is
+          // already a key of that name, delete it.
+          If keyExists( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ) ) Then
+            deleteKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ) );
+
+          // Now re-create the key and write the child window list.
+          If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN ] ), True ) Then
+            Try
+
+              // Loop over the child windows, saving their state.
+              For i := 0 To MDIChildCount - 1 Do
+              Begin
+                sPrefix := IntToStr( ( MDIChildCount - 1 ) - i ) + '.';
+                writeString(  sPrefix + REG_GUIDE,    TfrmGuide( MDIChildren[ i ] ).NortonGuide.Guide );
+                writeInteger( sPrefix + REG_ENTRY,    TfrmGuide( MDIChildren[ i ] ).NGEntry.Entry.Offset );
+                writeInteger( sPrefix + REG_LINE,     TfrmGuide( MDIChildren[ i ] ).NGEntry.ItemIndex );
+                writeInteger( sPrefix + REG_TOP_LINE, TfrmGuide( MDIChildren[ i ] ).NGEntry.TopIndex );
+                wegSaveWindowState( MDIChildren[ i ], oReg, sPrefix );
+              End;
+
+            Finally
+              // Close the child windows key.
+              closeKey();
+            End;
+
+          // Save the MRU lists.
+          If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_MRU ] ), True ) Then
+            Try
+              writeString( REG_MRU_NAMES,  slMRUFiles.CommaText );
+              writeString( REG_MRU_TITLES, slMRUTitles.CommaText );
+            Finally
+              // Close the MRU key.
+              closeKey();
+            End;
 
         Finally
-          // Close the child windows key.
-          closeKey();
+          // Free the registry object.
+          free();
         End;
 
-      // Save the MRU lists.
-      If openKey( wegRegistryKey( [ REG_MAIN_WINDOW, REG_MRU ] ), True ) Then
-        Try
-          writeString( REG_MRU_NAMES,  slMRUFiles.CommaText );
-          writeString( REG_MRU_TITLES, slMRUTitles.CommaText );
-        Finally
-          // Close the MRU key.
-          closeKey();
-        End;
-        
     Finally
-      // Free the registry object.
+      // Restore the old cursor.
       free();
     End;
 
