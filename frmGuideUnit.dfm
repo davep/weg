@@ -1155,6 +1155,7 @@ object frmGuide: TfrmGuide
       ImageIndex = 18
       ShortCut = 16464
       OnExecute = actGuidePrintExecute
+      OnUpdate = actGuidePrintUpdate
     end
     object actGuideCredits: TAction
       Caption = '&Credits...'

@@ -181,6 +181,7 @@ Type
     procedure NGEntryFindBadRegExp(Sender: TObject);
     procedure actGuidePrintExecute(Sender: TObject);
     procedure NGEntryKeyPress(Sender: TObject; var Key: Char);
+    procedure actGuidePrintUpdate(Sender: TObject);
 
   Protected
 
@@ -903,8 +904,9 @@ End;
 
 Procedure TfrmGuide.actGuidePrintExecute( Sender : TObject );
 Var
-  i  : Integer;
-  iY : Integer;
+  i       : Integer;
+  iY      : Integer;
+  slLines : TStringList;
 Begin
 
   // Check that the user actually wants to print.
@@ -925,14 +927,18 @@ Begin
           Canvas.Font       := NGEntry.Font;
           Canvas.Font.Color := clBlack;
           Canvas.Font.Pitch := fpFixed;
-          
+
+          // Get the lines that are to be printed.
+          slLines := TStringList.create();
+          NGEntry.getText( slLines );
+                    
           Try
 
             // Starting at position 0.
             iY := 0;
 
             // Print each line in the entry...
-            For i := 0 To NGEntry.Entry.LineCount - 1 Do
+            For i := 0 To slLines.Count - 1 Do
             Begin
 
               // Will we print off the page?
@@ -946,7 +952,7 @@ Begin
               // Print the line.
               With TwegLibNGLinePainter.create() Do
                 Try
-                  parse( NGEntry.Entry.Lines[ i ], Canvas, iY, 0, NortonGuide.OEMToANSI );
+                  parse( slLines[ i ], Canvas, iY, 0, NortonGuide.OEMToANSI );
                 Finally
                   free();
                 End;
@@ -957,6 +963,8 @@ Begin
             End;
 
           Finally
+            // Free the list of lines.
+            slLines.free();
             // End the document.
             endDoc();
           End;
@@ -986,6 +994,31 @@ Begin
     'r'      :                                       frmMain.actFileOpenExecute( Nil );
     'd', 'D' :                                       frmMain.actFileGuideManagerExecute( Nil );
     'v'      :                                       actGuideCreditsExecute( Nil );
+  End;
+
+End;
+
+/////
+
+Procedure TfrmGuide.actGuidePrintUpdate( Sender : TObject );
+ResourceString
+  RSPrintCaption         = '&Print...';
+  RSPrintHint            = 'Print the current entry';
+  RSPrintSelectedCaption = '&Print Selected...';
+  RSPrintSelectedHint    = 'Print the selected text';
+Begin
+
+  // Set the caption and the hint of the print action depending on the
+  // select state of the guide entry viewer.
+  If NGEntry.SelCount > 1 Then
+  Begin
+    actGuidePrint.Caption := RSPrintSelectedCaption;
+    actGuidePrint.Hint    := RSPrintSelectedHint;
+  End
+  Else
+  Begin
+    actGuidePrint.Caption := RSPrintCaption;
+    actGuidePrint.Hint    := RSPrintHint;
   End;
 
 End;

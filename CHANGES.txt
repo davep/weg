@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.4
+==================
+
+o Changed printing support so that it only prints selected text if there is
+  a selection available.
+
 Changes since v2.3
 ==================
 
