@@ -82,6 +82,7 @@ End;
 Procedure TfrmAbout.btnLicenceClick( Sender : TObject );
 ResourceString
   LICENCE_TEXT = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the license, or (at your option) any later version.'#13#10#13#10 +
+                 'Please note that because WEG makes use of Delphi''s VCL and Toolbar2000 you should consider the VCL and Toolbar2000 to be "system software" in regard to the "special exception" mentioned in section 3 of the GPL.'#13#10#13#10 +
                  'You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.';
 Begin
   MessageDlg( LICENCE_TEXT, mtInformation, [ mbOk ], 0 );
