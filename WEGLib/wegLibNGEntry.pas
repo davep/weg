@@ -30,7 +30,8 @@ Interface
 
 Uses
   Classes,
-  wegLibNGSeeAlso;
+  wegLibNGSeeAlso,
+  wegLibNGLineParser;
 
 Type
 
@@ -80,6 +81,8 @@ Type
     iType : Integer;
     {** The size of the entry }
     iSize : Integer;
+    {** Control code stripping object }
+    oStripper : TwegLibNGLineStripper;
 
     {** Get a line from the entry }
     Function getLine( i : Integer ) : String; Virtual;
@@ -152,6 +155,9 @@ Type
     {** Is there a child entry? }
     Property HasChild[ i : Integer ] : Boolean Read getHasChild;
 
+    {** Constructor }
+    Constructor create; Virtual;
+    
     {** Destructor }
     Destructor destroy; Override;
 
@@ -171,9 +177,20 @@ Type
 Implementation
 
 Uses
-  wegLibUtils,
-  wegLibNGLineParser;
+  wegLibUtils;
+
+/////
+
+Constructor TwegLibNGEntry.create;
+Begin
+
+  Inherited;
   
+  // Create the line stripper.
+  oStripper := TwegLibNGLineStripper.create();
+  
+End;
+
 /////
 
 Destructor TwegLibNGEntry.destroy;
@@ -183,6 +200,8 @@ Begin
   FLines := Nil;
   // Free any see-also list we've got.
   FSeeAlso.free();
+  // Free the line stripper.
+  oStripper.free();
 
   Inherited;
   
@@ -347,13 +366,11 @@ End;
 Function TwegLibNGEntry.stripControls( sRaw : String ) : String;
 Begin
 
-  With TwegLibNGLineStripper.create() Do
-    Try
-      parse( sRaw, bOEMToANSI );
-      Result := sStripped;
-    Finally
-      free();
-    End;
+  With oStripper Do
+  Begin
+    parse( sRaw, bOEMToANSI );
+    Result := sStripped;
+  End;
 
 End;
 
