@@ -131,6 +131,7 @@ object frmBookmarks: TfrmBookmarks
     ColumnClick = False
     ReadOnly = True
     RowSelect = True
+    PopupMenu = popBookmarks
     SortType = stText
     TabOrder = 5
     ViewStyle = vsReport
@@ -579,5 +580,21 @@ object frmBookmarks: TfrmBookmarks
       800300008000001FC1FE800100018FF1E3FEEFFF11FFFFF9FFF5EFFFF8FFFF75
       FFF3FFFFFC7FFF8FFFF1FFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object popBookmarks: TTBPopupMenu
+    Images = ilBookmarks
+    Left = 80
+    Top = 80
+    object popBookmarksOpen: TTBItem
+      Action = actBookmarksOpen
+    end
+    object popBookmarksSplit1: TTBSeparatorItem
+    end
+    object popBookmarksAdd: TTBItem
+      Action = actBookmarksAdd
+    end
+    object popBookmarksRemove: TTBItem
+      Action = actBookmarksRemove
+    end
   end
 end

@@ -36,7 +36,7 @@ Uses
   Graphics,
   Controls,
   Forms,
-  Dialogs, TB2Dock, TB2Toolbar, ActnList, ImgList, ComCtrls, TB2Item;
+  Dialogs, TB2Dock, TB2Toolbar, ActnList, ImgList, ComCtrls, TB2Item, Menus;
 
 Type
 
@@ -69,6 +69,11 @@ Type
     mnuBookmarklSep2: TTBSeparatorItem;
     tbBookmarksOpen: TTBItem;
     tbBookmarksSplit2: TTBSeparatorItem;
+    popBookmarks: TTBPopupMenu;
+    popBookmarksOpen: TTBItem;
+    popBookmarksSplit1: TTBSeparatorItem;
+    popBookmarksAdd: TTBItem;
+    popBookmarksRemove: TTBItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure actBookmarksCloseExecute(Sender: TObject);

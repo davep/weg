@@ -2,6 +2,11 @@
 
 $Id$
 
+Changes since v2.3
+==================
+
+o Added a "right-click" menu to the bookmarks window.
+
 Changes since v2.2
 ==================
 
