@@ -192,6 +192,8 @@ Type
     pnlGuideType : TStatusPanel;
     {** Pointer to the guide name panel }
     pnlGuideName : TStatusPanel;
+    {** Pointer to the entry type panel }
+    pnlEntryType : TStatusPanel;
     {** Pointer to the guide title panel }
     pnlGuideTitle : TStatusPanel;
     {** Pointer to the finder form. }
@@ -252,6 +254,7 @@ End;
 
 Procedure TfrmGuide.refreshStatusBar;
 Begin
+  pnlEntryType.Text  := NGEntry.Entry.TypeName;
   pnlGuideTitle.Text := NGEntry.entryPath();
 End;
 
@@ -650,7 +653,8 @@ Begin
   // Give some useful names to each of the panels in the status bar.
   pnlGuideType  := sbGuide.Panels[ 0 ];
   pnlGuideName  := sbGuide.Panels[ 1 ];
-  pnlGuideTitle := sbGuide.Panels[ 2 ];
+  pnlEntryType  := sbGuide.Panels[ 2 ];
+  pnlGuideTitle := sbGuide.Panels[ 3 ];
 
   // Create the string list for holding the URLs found in an entry.
   slURLs := TStringList.create();

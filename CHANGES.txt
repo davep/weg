@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v2.10
+===================
+
+o Added a panel to the guide window status bar that shows if the entry
+  you're viewing is a short or a long.
+
 Changes since v2.9
 ==================
 

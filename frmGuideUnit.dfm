@@ -67,6 +67,9 @@ object frmGuide: TfrmGuide
         Width = 100
       end
       item
+        Width = 40
+      end
+      item
         Width = 50
       end>
     ParentShowHint = False
