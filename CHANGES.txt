@@ -12,6 +12,12 @@ o The see also menu of a guide entry will, where possible, include any URLs
   the menu the URL will be passed to the operating system so that your URL
   handler of choice is used.
 
+o Added a DDE server and implemented the "open" macro.
+
+o Changed the file associations in the installer so that DDE is used. This
+  means that a single instance of WEG can be used to handle open requests
+  via file associations in Windows.
+
 Changes since v2.6
 ==================
 

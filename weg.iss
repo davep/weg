@@ -70,12 +70,17 @@ Name: "{userdesktop}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: quicklaunchicon
 
 [Registry]
+; Application settings.
 Root: HKCU; SubKey: "Software\davep.org"; Flags: uninsdeletekeyifempty
 Root: HKCU; SubKey: "Software\davep.org\WEG"; Flags: uninsdeletekey
+; Windows' file association information.
 Root: HKCR; SubKey: ".ng"; ValueType: string; ValueName: ""; ValueData: "org.davep.WEG"; Flags: uninsdeletekey; Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG"; ValueType: string; ValueName: ""; ValueData: "Norton Guide Database"; Flags: uninsdeletekey;  Tasks: assocngfiles
 Root: HKCR; SubKey: "org.davep.WEG\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\WEG.exe,0";  Tasks: assocngfiles
-Root: HKCR; SubKey: "org.davep.WEG\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\WEG.exe"" ""%1""";  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\shell"; ValueType: string; ValueName: ""; ValueData: "open";  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\WEG.exe""";  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec"; ValueType: string; ValueName: ""; ValueData: "open,""%1""";  Tasks: assocngfiles
+Root: HKCR; SubKey: "org.davep.WEG\shell\open\ddeexec\Topic"; ValueType: string; ValueName: ""; ValueData: "Execute";  Tasks: assocngfiles
 
 [Run]
 Filename: "{app}\WEG.exe"; Description: "Launch Expert Guide for Windows"; Flags: nowait postinstall skipifsilent

@@ -793,4 +793,9 @@ object frmMain: TfrmMain
     Left = 56
     Top = 112
   end
+  object Execute: TDdeServerConv
+    OnExecuteMacro = ExecuteExecuteMacro
+    Left = 24
+    Top = 176
+  end
 end

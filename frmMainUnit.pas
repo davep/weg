@@ -50,7 +50,7 @@ Uses
   wegLibNGEntryViewer,
   wegLibNGColours,
   wegLibNGSettings,
-  Menus;
+  Menus, DdeMan;
 
 Type
 
@@ -119,6 +119,7 @@ Type
     psdGuide: TPrinterSetupDialog;
     actEditPrinterSetup: TAction;
     mnuEditPrinterSetup: TTBItem;
+    Execute: TDdeServerConv;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -139,6 +140,7 @@ Type
     procedure actFileGlobalFindExecute(Sender: TObject);
     procedure actFileBookmarksExecute(Sender: TObject);
     procedure actEditPrinterSetupExecute(Sender: TObject);
+    procedure ExecuteExecuteMacro(Sender: TObject; Msg: TStrings);
 
   Public
 
@@ -897,6 +899,70 @@ End;
 Procedure TfrmMain.actEditPrinterSetupExecute( Sender : TObject );
 Begin
   psdGuide.execute();
+End;
+
+/////
+
+Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
+
+  Procedure DDEOpenFile( slParams : TStringList );
+  ResourceString
+    RSNoFileGiven = 'DDE Error:'#13#10#13#10'No file given for "open" macro.';
+  Begin
+
+    If slParams.Count > 0 Then
+      openGuide( slParams[ 0 ] )
+    Else
+    Begin
+      MessageBeep( MB_ICONERROR );
+      MessageDlg( RSNoFileGiven, mtError, [ mbOk ], 0 );
+    End;
+      
+  End;
+  
+ResourceString
+  RSNoMessage = 'DDE error.'#13#10#13#10'No message passed for topic Execute';
+Var
+  slCall    : TStringList;
+  sFunction : String;
+Begin
+
+  // Ensure the user can see the application.
+  Application.restore();
+
+  // If we've got something to execute...
+  If Msg.Count > 0 Then
+  Begin
+
+    // Create a string list to hold the macro call.
+    slCall := TStringList.create();
+
+    Try
+
+      // Create a string list out of the macro.
+      slCall.CommaText := Msg[ 0 ];
+
+      // Extract the function.
+      sFunction := AnsiLowerCase( slCall[ 0 ] );
+      slCall.delete( 0 );
+
+      // Act on the function.
+      If sFunction = 'open' Then
+        DDEOpenFile( slCall );
+        
+    Finally
+      // Free the string list used for breaking up the call.
+      slCall.free();
+    End;
+
+  End
+  Else
+  Begin
+    // Nothing passed for execution, tell the user.
+    MessageBeep( MB_ICONERROR );
+    MessageDlg( RSNoMessage, mtError, [ mbOk ], 0 );
+  End;
+
 End;
 
 End.

@@ -66,6 +66,20 @@ get it from <URL:http://www.jrsoftware.org/>. Note that Toolbar2000 is free
 to use as long as you're building free software (well, "non-profit" software
 anyway).
 
+DDE
+===
+
+You can talk to WEG via DDE. The details are:
+
+Application: {path-to-weg}\weg
+Service....: weg
+Topic......: Execute
+
+WEG currently implements a single macro called "open"; this lets you ask WEG
+to open a guide for you. The format is "open,{file-name}". For example, if
+you wanted to open c:\ng\foo.ng you'd execute a macro whose content is
+"open,c:\ng\foo.ng".
+
 Feedback
 ========
 
