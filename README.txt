@@ -81,7 +81,13 @@ Syntax: open,<filename>
 Usage.: Opens a guide. <filename> should be the full path to the guide.
 
 Syntax: search,<searchstring>
-Usage.: Opens the global finder and starts a search using <searchstring>.
+Usage.: Opens the global finder, sets the search options to look at all
+        known guides and starts a search using <searchstring>.
+
+Syntax: searchguide,<filename>,<searchstring>
+Usage.: Opens the NG <filename>, opens the global finder, sets the search
+        options to only look at the current guide and starts a search using
+        <searchstring>.
 
 Feedback
 ========

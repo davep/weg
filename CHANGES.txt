@@ -24,6 +24,8 @@ o Added an option that changes the way in-entry searches in short entries
   used to work (albeit WEG does further searching whereas the old NG reader
   only ever used to find the first hit).
 
+o Implemented a "searchguide" macro for the DDE support.
+
 Changes since v2.9
 ==================
 

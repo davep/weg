@@ -1061,6 +1061,10 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
         // Set the search string.
         frmGlobalFind.cbSearchFor.Text := slParams[ 0 ];
 
+        // Search all known guides.
+        frmGlobalFind.actOptionsSearchCurrentGuide.Checked   := False;
+        frmGlobalFind.actOptionsSearchAllKnownGuides.Checked := True;
+
         // Start the search.
         frmGlobalFind.actFindStartExecute( self );
 
@@ -1072,6 +1076,44 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
       MessageBeep( MB_ICONERROR );
       MessageDlg( RSNoSearchStringGiven, mtError, [ mbOk ], 0 );
     End;
+
+  End;
+
+  Procedure DDESearchGuide( slParams : TStringList );
+  ResourceString
+    RSInvalidArguments = 'DDE Error:'#13#10#13#10'A guide and a search string must be provided.';
+  Begin
+
+    If slParams.Count > 1 Then
+    Begin
+
+      // If there isn't a find in progress.
+      If Not frmGlobalFind.NGFind.Finding Then
+        // Try and open the guide.
+        If openGuide( slParams[ 0 ], openType( actOptionsRecycleDDE ) ) <> Nil Then
+        Begin
+
+          // Ensure that the global finder is visible.
+          frmGlobalFind.show();
+
+          // Set the search string.
+          frmGlobalFind.cbSearchFor.Text := slParams[ 1 ];
+
+          // Only search the guide we've just opened.
+          frmGlobalFind.actOptionsSearchCurrentGuide.Checked   := True;
+          frmGlobalFind.actOptionsSearchAllKnownGuides.Checked := False;
+
+          // Start the search.
+          frmGlobalFind.actFindStartExecute( self );
+
+        End;
+      
+    End
+    Else
+    Begin
+      MessageBeep( MB_ICONERROR );
+      MessageDlg( RSInvalidArguments, mtError, [ mbOk ], 0 );
+    End
 
   End;
   
@@ -1105,7 +1147,9 @@ Begin
       If sFunction = 'open' Then
         DDEOpenFile( slCall )
       Else If sFunction = 'search' Then
-        DDESearch( slCall );  
+        DDESearch( slCall )
+      Else If sFunction = 'searchguide' Then
+        DDESearchGuide( slCall );    
         
     Finally
       // Free the string list used for breaking up the call.
