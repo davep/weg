@@ -80,13 +80,13 @@ Type
     FOnInvalidLink : TNotifyEvent;
     {** Should we jump to a linked entry on a single click? }
     FSingleClickJump : Boolean;
+    {** Is history support suspended? }
+    FHistorySuspended : Boolean;
 
     {** Backtrack history }
     aBackHistory : TwegLibNGEntryViewerHistory;
     {** Foretrack history }
     aForeHistory : TwegLibNGEntryViewerHistory;
-    {** Flag to say if we're navigating the history list }
-    bDoingHistory : Boolean;
     {** Object for paiting b/w lines }
     oPainter : TwegLibNGLinePainter;
     {** Object for paiting colour lines }
@@ -122,6 +122,8 @@ Type
 
     {** Read-only access to the current entry }
     Property Entry : TwegLibNGEntry Read FEntry;
+    {** Is history support suspended? }
+    Property HistorySuspended : Boolean Read FHistorySuspended Write FHistorySuspended;
 
     {** Constructor }
     Constructor create( AOwner : TComponent ); Override;
@@ -160,6 +162,8 @@ Type
     Procedure historyNext; Virtual;
     {** Move backwards in the history list }
     Procedure historyPrevious; Virtual;
+    {** Clear the history }
+    Procedure clearHistory; Virtual;
     {** Populate the passed list with text, only do selected text if a range is selected }
     Procedure getText( sl : TStringList ); Virtual;
     {** Populate the passed list with source, only do selected text if a range is selected }
@@ -228,7 +232,7 @@ Begin
   oColourPainter := TwegLibNGLineColourPainter.create();
 
   // Initial state of history.
-  bDoingHistory := False;
+  FHistorySuspended := False;
 
   // We always do our own drawing.
   Style := lbOwnerDrawFixed;
@@ -250,9 +254,8 @@ Begin
   oPainter.free();
   oColourPainter.free();
   
-  // Nil out the history arrays.
-  aBackHistory := Nil;
-  aForeHistory := Nil;
+  // Clear down the history.
+  clearHistory();
 
   Inherited;
 
@@ -309,8 +312,8 @@ Begin
     If linkIsOk( lOffset ) Then
     Begin
 
-      // If we're not doing a history thing.
-      If Not bDoingHistory Then
+      // If history isn't suspended...
+      If Not FHistorySuspended Then
         // If this won't result in being in the same place as we are now.
         If ( FEntry = Nil ) Or ( lOffset <> FEntry.Offset ) Or ( iStartingLine <> ItemIndex ) Then
         Begin
@@ -359,9 +362,8 @@ Begin
   With guideCheck() Do
   Begin
 
-    // Ok, we're not really doing history, but this ensures that the current
-    // item doesn't get added to the history list.
-    bDoingHistory := True;
+    // Suspend history.
+    FHistorySuspended := True;
 
     Try
       // Remember the top index.
@@ -371,8 +373,8 @@ Begin
       // Reset the top index.
       TopIndex := iTop;
     Finally
-      // Reset the "doing history" flag.
-      bDoingHistory := False;
+      // Enable history.
+      FHistorySuspended := False;
     End;
 
   End;
@@ -494,8 +496,8 @@ Begin
   // Remember the current entry in the other history list.
   rememberEntry( aOther );
 
-  // We're doing a history movement.
-  bDoingHistory := True;
+  // Suspend history.
+  FHistorySuspended := True;
 
   Try
     // Jump to the entry at the top of this history.
@@ -503,7 +505,8 @@ Begin
     // Pop the entry off the array.
     SetLength( aThis, Length( aThis ) - 1 );
   Finally
-    bDoingHistory := False;
+    // Restore history.
+    FHistorySuspended := False;
   End;
 
 End;
@@ -734,6 +737,14 @@ End;
 Procedure TwegLibNGEntryViewer.historyPrevious;
 Begin
   If canHistoryPrevious() Then historyMove( aBackHistory, aForeHistory );
+End;
+
+/////
+
+Procedure TwegLibNGEntryViewer.clearHistory;
+Begin
+  aBackHistory := Nil;
+  aForeHistory := Nil;
 End;
 
 /////

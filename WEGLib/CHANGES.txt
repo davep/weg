@@ -10,6 +10,12 @@ o Published the OnDragOver and OnDragDrop events of the entry viewer
 
 o Added methods for reloading the header and the menus of a guide.
 
+o Added a public property to the entry viewer component that controls if the
+  recording of back/fore-history is suspended.
+
+o Added a public method to the entry viewer component that lets a caller
+  clear the back/fore-history.
+
 Changes since v1.10
 ===================
 
