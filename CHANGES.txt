@@ -17,6 +17,13 @@ o Added a "Focus When Finished" option to the global finder window. When set
 
 o Added optional colour printing.
 
+o Added an option that changes the way in-entry searches in short entries
+  happens. If the option is turned on a beginning-of-line hit is always
+  found in preferences to an in-line hit. This lets users configure things
+  so that short-searching is a little more like the way the old NG reader
+  used to work (albeit WEG does further searching whereas the old NG reader
+  only ever used to find the first hit).
+
 Changes since v2.9
 ==================
 

@@ -909,6 +909,9 @@ End;
 Procedure TfrmGuide.findClick( Sender : TObject );
 Begin
 
+  // Ensure that the finder component has the latest BOL-search setting.
+  NGEntryFind.BOLSearchFirstInShorts := frmMain.actOptionsBOLShortSearch.Checked;
+  
   // If we're not already searching this guide...
   If Not NGEntryFind.Searching Then
     // ...start the search.

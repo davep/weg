@@ -142,6 +142,9 @@ object frmMain: TfrmMain
             Action = actOptionsRecycleDragAndDrop
           end
         end
+        object mnuOptionsBOLShortSearch: TTBItem
+          Action = actOptionsBOLShortSearch
+        end
         object mnuOptionsSplit1: TTBSeparatorItem
         end
         object mnuOptionsPreferences: TTBItem
@@ -345,6 +348,13 @@ object frmMain: TfrmMain
     object actOptionsRecycleDragAndDrop: TAction
       Caption = 'Dr&ag and Drop Open Request'
       Hint = 'Recycle guide windows when opening a guide via drag and drop?'
+      OnExecute = actOptionsCheckItemExecute
+    end
+    object actOptionsBOLShortSearch: TAction
+      Caption = 'BOL Search First in Shorts'
+      Hint = 
+        'When searching in short entries, do start-of-line searching in p' +
+        'reference to in-text searching?'
       OnExecute = actOptionsCheckItemExecute
     end
     object actWindowCascade: TAction

@@ -140,6 +140,8 @@ Type
     mnuOptionsSplit2: TTBSeparatorItem;
     actOptionsPrintColour: TAction;
     mnuOptionsPrintColour: TTBItem;
+    actOptionsBOLShortSearch: TAction;
+    mnuOptionsBOLShortSearch: TTBItem;
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -244,6 +246,8 @@ Const
   REG_RECYCLE_DRAG_AND_DROP_OPENS = 'Recycle Windows on Drag and Drop Open';
   {** Value name for the colour printing option }
   REG_COLOUR_PRINTING = 'Colour Printing';
+  {** Value name for the BOL first short searching option }
+  REG_BOL_SHORT_SEARCHING = 'BOL First Searching in Short Entries';
   {** Key name for the child window list }
   REG_CHILDREN = 'Child Windows';
   {** Value name for the guide of a child window }
@@ -514,6 +518,7 @@ Begin
               writeBool( REG_RECYCLE_COMMAND_LINE_OPENS,  actOptionsRecycleCommandLine.Checked );
               writeBool( REG_RECYCLE_DRAG_AND_DROP_OPENS, actOptionsRecycleDragAndDrop.Checked );
               writeBool( REG_COLOUR_PRINTING,             actOptionsPrintColour.Checked );
+              writeBool( REG_BOL_SHORT_SEARCHING,         actOptionsBOLShortSearch.Checked );
             Finally
               // Close the preferences key.
               closeKey();
@@ -673,6 +678,7 @@ Begin
             actOptionsRecycleCommandLine.Checked := readBool( REG_RECYCLE_COMMAND_LINE_OPENS );
             actOptionsRecycleDragAndDrop.Checked := readBool( REG_RECYCLE_DRAG_AND_DROP_OPENS );
             actOptionsPrintColour.Checked        := readBool( REG_COLOUR_PRINTING );
+            actOptionsBOLShortSearch.Checked     := readBool( REG_BOL_SHORT_SEARCHING );
           Except
             // GNDN.
           End;
