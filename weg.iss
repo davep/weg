@@ -56,7 +56,7 @@ Source: "WEGLib\*.dfm"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Co
 Source: "WEGLib\*.txt"; DestDir: "{app}\Source\WEGLib"; Flags: ignoreversion; Components: WEGLibSources
 
 [Icons]
-Name: "{group}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"
+Name: "{group}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Comment: "Run Expert Guide for Windows"
 Name: "{group}\View README.txt"; Filename: "{app}\README.txt"; Comment: "View the README file for WEG"
 Name: "{group}\View Licence"; Filename: "Notepad"; Parameters: "{app}\COPYING"; Comment: "View the licence for WEG"
 Name: "{group}\View CHANGES.txt"; Filename: "{app}\CHANGES.txt"; Comment: "View the change documentation for WEG"
@@ -66,9 +66,9 @@ Name: "{group}\Visit www.davep.org"; Filename: "{app}\website.url"; Comment: "Vi
 Name: "{group}\Email the author"; Filename: "{app}\email.url"; Comment: "Send an email to the author"
 Name: "{group}\WEG Sources"; Filename: "{app}\Source\WEG"; Components: WEGSources; Comment: "View the sources for WEG"
 Name: "{group}\WEGLib Sources"; Filename: "{app}\Source\WEGLib"; Components: WEGLibSources; Comment: "View the sources for WEGLib"
-Name: "{group}\Uninstall Expert Guide for Windows"; Filename: "{uninstallexe}"
-Name: "{userdesktop}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: quicklaunchicon
+Name: "{group}\Uninstall Expert Guide for Windows"; Filename: "{uninstallexe}"; Comment: "Uninstall Expert Guide for Windows"
+Name: "{userdesktop}\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: desktopicon; Comment: "Run Expert Guide for Windows"
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Expert Guide for Windows"; Filename: "{app}\WEG.exe"; Tasks: quicklaunchicon; Comment: "Run Expert Guide for Windows"
 
 [Registry]
 ; Application settings.
