@@ -645,6 +645,11 @@ Procedure TwegLibNGEntryViewer.drawItem( iIndex : Integer; rRect : TRect; State:
       Result := NortonGuide.Settings.UseColour;
 
   End;
+
+  Function ChooseColour( clrColour : TColor; clrMono : TColor ) : TColor;
+  Begin
+    If DoColour() Then Result := clrColour Else Result := clrMono;
+  End;
   
 Begin
 
@@ -655,14 +660,14 @@ Begin
     // If the current line is focused...
     If odFocused In State Then
     Begin
-      Canvas.Font.Color  := FColours[ FColours.FocusedText ];
-      Canvas.Brush.Color := FColours[ FColours.FocusedBackground ];
+      Canvas.Font.Color  := ChooseColour( FColours[ FColours.FocusedText ],       clHighlightText );
+      Canvas.Brush.Color := ChooseColour( FColours[ FColours.FocusedBackground ], clHighlight );
     End
     // Nope, it's selected but not focused.
     Else
     Begin
-      Canvas.Font.Color  := FColours[ FColours.SelectedText ];
-      Canvas.Brush.Color := FColours[ FColours.SelectedBackground ];
+      Canvas.Font.Color  := ChooseColour( FColours[ FColours.SelectedText ],       clHighlightText );
+      Canvas.Brush.Color := ChooseColour( FColours[ FColours.SelectedBackground ], clHighlight );
     End;
 
     // Draw the line.

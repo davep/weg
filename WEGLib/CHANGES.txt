@@ -2,6 +2,13 @@
 
 $Id$
 
+Changes since v1.12
+===================
+
+o Modified the drawing code of the entry viewing component so that when
+  we're in mono mode it paints the highlight bar in the normal Windows'
+  colour.
+
 Changes since v1.11
 ===================
 
