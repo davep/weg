@@ -13,3 +13,5 @@ o Add a "stay-on-top" option to the guide manager.
 o Add a "stay-on-top" option to the bookmarks window.
 
 o Add a "stay-on-top" option to the global finder.
+
+o Scripting via the Windows scripting host?
