@@ -2,6 +2,12 @@
 
 $Id$
 
+Changes since v1.2
+==================
+
+o Added a function to TwegLibNortonGuide that lets you check if a given
+  offset looks like a short or long entry.
+
 Changes since v1.1
 ==================
 

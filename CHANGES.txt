@@ -9,6 +9,10 @@ o Removed the maximise and minimise buttons from the guide credits dialog.
 
 o Added bookmarks.
 
+o Added an extra check when loading a guide on startup that ensures that the
+  entry we're supposed to be loading is still valid. This fixes a bug
+  reported by Martin Verheij.
+
 Changes since v2.1
 ==================
 

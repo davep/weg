@@ -238,7 +238,7 @@ Begin
       Result := Nil;
     End
     // Otherwise, if we're supposed to load a certain entry...
-    Else If lEntry > -1 Then
+    Else If ( lEntry > -1 ) And NortonGuide.isOffsetValidEntry( lEntry ) Then
       // ...try and load it.
       NGEntry.display( lEntry, iStartingLine )
     Else

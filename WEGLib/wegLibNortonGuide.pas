@@ -162,6 +162,8 @@ Type
     Procedure readSettings; Virtual;
     {** Does it look like we're at the end of the file? }
     Function isEOF : Boolean; Virtual;
+    {** Is the passed offset a valid entry? }
+    Function isOffsetValidEntry( lOffset : LongInt ) : Boolean; Virtual;
 
   Published
 
@@ -604,6 +606,31 @@ Begin
     // Otherwise we see if we're looking at a short or a long and, if not,
     // we assume we're at EOF.
     Result := ( Not LookingAtShort ) And ( Not LookingAtLong );
+
+End;
+
+/////
+
+Function TwegLibNortonGuide.isOffsetValidEntry( lOffset : LongInt ) : Boolean;
+Var
+  lSavOff : LongInt;
+Begin
+
+  // Save our current location.
+  lSavOff := hNG.seek( 0, soFromCurrent );
+
+  Try
+
+    // Jump to the offset given.
+    hNG.seek( lOffset, soFromBeginning );
+
+    // Are we looking at a short or long entry?
+    Result := LookingAtShort Or LookingAtLong;
+
+  Finally
+    // Restore the location.
+    hNG.seek( lSavOff, soFromBeginning );
+  End;
 
 End;
 
