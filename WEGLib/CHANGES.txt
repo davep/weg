@@ -9,6 +9,10 @@ o Added the TypeName property to TwegLibNGEntry.
 
 o Made TwegLibNGEntryViewer.hasEntry() public.
 
+o Added the BOLSearchFirstInShorts property to the TwegLibNGEntryFind
+  component. Setting this to True makes the search system work something
+  similar to the search system in the original NG.exe.
+
 Changes since v1.9
 ==================
 

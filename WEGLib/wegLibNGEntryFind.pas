@@ -55,6 +55,8 @@ Type
     FOnMiss : TNotifyEvent;
     {** Procedure called when a bad regular expression is given }
     FOnBadRegExp : TNotifyEvent;
+    {** Should we do beginning-of-line searching first in shorts? }
+    FBOLSearchFirstInShorts : Boolean;
     {** Have we done the init stuff? }
     bInitDone : Boolean;
     {** Flag to record if we can or can't do regular expressions }
@@ -106,6 +108,8 @@ Type
     Property OnMiss : TNotifyEvent Read FOnMiss Write FOnMiss;
     {** Procedure called when a bad regular expression is given }
     Property OnBadRegExp : TNotifyEvent Read FOnBadRegExp Write FOnBadRegExp;
+    {** Should we do beginning-of-line searching first in shorts? }
+    Property BOLSearchFirstInShorts : Boolean Read FBOLSearchFirstInShorts Write FBOLSearchFirstInShorts;
 
   End;
 
@@ -125,8 +129,9 @@ Begin
   Inherited;
 
   // Initial values.
-  bInitDone  := False;
-  bCanRegExp := False;
+  bInitDone               := False;
+  bCanRegExp              := False;
+  FBOLSearchFirstInShorts := False;
 
 End;
 
@@ -210,6 +215,14 @@ Procedure TwegLibNGEntryFind.find( Const sFind : String; bCaseSensitive : Boolea
       Result := Pos( AnsiUpperCase( sFind ), AnsiUpperCase( s ) ) > 0;
   End;
 
+  Function BeginsWithText( Const s : String ) : Boolean;
+  Begin
+    If bCaseSensitive Then
+      Result := Copy( s, 1, Length( sFind ) ) = sFind
+    Else
+      Result := AnsiUpperCase( Copy( s, 1, Length( sFind ) ) ) = AnsiUpperCase( sFind );  
+  End;
+
   Function Contains( Const s : String ) : Boolean;
   Begin
     If bRegExp Then
@@ -248,16 +261,33 @@ Begin
   // Look for the next hit.
   Try
 
+    // Initialise the hit status.
     bHit := False;
     iHit := -1;
-    For i := iNextLine To oEntry.LineCount - 1 Do
-      If Contains( oEntry.StrippedLines[ i ] ) Then
-      Begin
-        bHit      := True;
-        iHit      := i;
-        iNextLine := ( iHit + 1 );
-        Break;
-      End;
+
+    // First, if we're supposed to do BOL searching in shorts and this isn't a
+    // regular expression search and if the entry we're searching is a short...
+    If FBOLSearchFirstInShorts And ( Not bRegExp ) And oEntry.IsShort Then
+      For i := iNextLine To oEntry.LineCount - 1 Do
+        If BeginsWithText( TrimLeft( oEntry.StrippedLines[ i ] ) ) Then
+        Begin
+          bHit      := True;
+          iHit      := i;
+          iNextLine := ( iHit + 1 );
+          Break;
+        End;
+
+    // If the above wasn't relevant or we didn't find anything...
+    If Not bHit Then
+      // See if we can find a line that contains the search text.
+      For i := iNextLine To oEntry.LineCount - 1 Do
+        If Contains( oEntry.StrippedLines[ i ] ) Then
+        Begin
+          bHit      := True;
+          iHit      := i;
+          iNextLine := ( iHit + 1 );
+          Break;
+        End;
 
     // Call any callback procedures.
     If bHit Then
