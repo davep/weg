@@ -85,6 +85,8 @@ object frmGuide: TfrmGuide
       DockMode = dmCannotFloat
       DockPos = 0
       DockRow = 1
+      MenuBar = True
+      ProcessShortCuts = True
       TabOrder = 0
     end
     object tbWindowMenu: TTBToolbar
@@ -125,7 +127,7 @@ object frmGuide: TfrmGuide
         end
       end
       object mnuEdit: TTBSubmenuItem
-        Caption = '&Edit'
+        Caption = 'E&dit'
         Hint = 'Edit menu'
         object mnuEditCopyText: TTBItem
           Action = actEditCopyText
