@@ -2,7 +2,7 @@
 
 [Setup]
 AppName=Expert Guide for Windows
-AppVerName=Expert Guide for Windows v2.7
+AppVerName=Expert Guide for Windows v2.8
 AppCopyright=Copyright © 1998-2004 Dave Pearson
 AppPublisher=Dave Pearson
 AppPublisherURL=http://www.davep.org/
@@ -15,7 +15,7 @@ OutputBaseFileName=WEGSetup
 OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
-VersionInfoVersion=2.7
+VersionInfoVersion=2.8
 VersionInfoTextVersion=$Id$
 
 [Tasks]
