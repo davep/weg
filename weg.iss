@@ -18,6 +18,7 @@ ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
 VersionInfoVersion=2.11
 VersionInfoTextVersion=$Revision$
+WizardSmallImageFile=Images\WEGInstallImage.bmp
 
 [Tasks]
 Name: "desktopicon";     Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
