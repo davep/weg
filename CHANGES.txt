@@ -20,6 +20,9 @@ o The menus and the credits in open guide windows are now fully refreshed
   that the menus and the credits are reread with the latest OEMToANSI
   setting.
 
+o Manually stopping a global search no longer causes the "focus when
+  finished" action to take place.
+
 Changes since v2.12
 ===================
 

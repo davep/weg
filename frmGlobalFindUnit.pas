@@ -155,6 +155,8 @@ Type
     iHitCount : Integer;
     {** When the search was started }
     dtSearchStarted : TDateTime;
+    {** Did the user stop the search? }
+    bStopped : Boolean;
 
     {** Save the state of the window }
     Procedure saveWindowState;
@@ -421,6 +423,7 @@ End;
 
 Procedure TfrmGlobalFind.actFindStartExecute( Sender : TObject );
 Begin
+  bStopped := False;
   startSearch();
 End;
 
@@ -431,6 +434,7 @@ Begin
 
   With TwegBusyCursor.create() Do
     Try
+      bStopped := True;
       NGFind.stop();
     Finally
       free();
@@ -493,8 +497,9 @@ Begin
   pbGuides.Position       := 0;
   pbCurrentGuide.Position := 0;
 
-  // If the user wants us to grab focus when we're finished...
-  If actOptionsFocusWhenFinished.Checked Then
+  // If the user didn't stop the search and they want us to grab focus when
+  // we're finished...
+  If Not bStopped And actOptionsFocusWhenFinished.Checked Then
   Begin
     // ...ensure the application is visible.
     Application.restore();
