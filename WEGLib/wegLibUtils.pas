@@ -286,7 +286,7 @@ End;
 
 Function wegLibHex2Int( Const s : String ) : Integer;
 Begin
-  Result := StrToInt( '$' + s );
+  Result := StrToIntDef( '$' + s, 0 )
 End;
 
 /////
