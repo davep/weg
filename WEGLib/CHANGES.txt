@@ -10,6 +10,9 @@ o Improved the code in the entry viewer that worked out how wide a
 
 o Improved the code in the entry viewer that worked out how tall an a line
   is for a given font.
+
+o The global finder now records the title of the guide as well as the name
+  of the file.
   
 Changes since v1.4
 ==================

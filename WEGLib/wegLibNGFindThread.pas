@@ -38,6 +38,8 @@ Type
   TwegLibNGFindHit = Record
     {** Name of the guide the hit was found in }
     sGuide : String;
+    {** Title of the guide the hit was found in }
+    sTitle : String;
     {** The text of the line the hit was found in }
     sText : String;
     {** The offset of the entry the hit was found in }
@@ -273,6 +275,7 @@ Begin
 
                       // Fill in the hit record.
                       sGuide := oNG.Guide;
+                      sTitle := oNG.Title;
                       sText  := oEntry.StrippedLines[ i ];
                       lEntry := oEntry.Offset;
                       iLine  := i;
