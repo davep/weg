@@ -41,7 +41,7 @@ Fonts
 
 WEG, for obvious reasons, only lets you select fixed pitch fonts for
 displaying the content of a guide. By default WEG will attempt to make use
-of "Fixedsys" and the Guide reading code will do OEM to ANSI translation.
+of "Fixedsys" and the guide reading code will do OEM to ANSI translation.
 Personally, for the types of guides I read (US/UK English with lots of line
 drawing characters), I've found that "MS Linedraw" with OEM to ANSI
 translation turned off works best. I'd suggest that you try and track down a
