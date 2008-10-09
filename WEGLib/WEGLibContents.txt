@@ -1,0 +1,6 @@
+WEGLib Documentation=
+ Changes=../CHANGES.txt
+ =@Legend
+ All Units=@Units
+ =@Classes
+ Classified Lists=@Overview

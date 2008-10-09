@@ -1,0 +1,11 @@
+*.dcu
+*.~*
+*.*~
+*.exe
+*.chm
+.cvsignore
+Thumbs.db
+CVS/*
+Icons/CVS/*
+Images/CVS/*
+WEGLib/CVS/*

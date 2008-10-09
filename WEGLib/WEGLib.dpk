@@ -1,0 +1,74 @@
+{* File.......: WEGLib.dpk
+ * System.....: WEGLib - Norton Guide Reader Library for Delphi.
+ * Author.....: Dave Pearson <davep@davep.org>
+ * Copyright..: Dave Pearson 2003
+ * ID.........: $Id: WEGLib.dpk,v 1.2 2004/02/26 17:29:24 davep Exp $
+ * Description: WEGLib package.
+ * Licence....: GNU General Public Licence (see below)
+ *
+ * WEGLib - Norton Guide Reader Library for Delphi.
+ * Copyright (C) 2003 Dave Pearson <davep@davep.org>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the license, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *}
+
+Package WEGLib;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Norton Guide Database Reading Library for Delphi'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  Vclx50;
+
+contains
+  wegLibNortonGuide in 'wegLibNortonGuide.pas',
+  wegLibUtils in 'wegLibUtils.pas',
+  wegLibNGMenu in 'wegLibNGMenu.pas',
+  wegLibNGEntryViewer in 'wegLibNGEntryViewer.pas',
+  wegLibNGEntry in 'wegLibNGEntry.pas',
+  wegLibNGSeeAlso in 'wegLibNGSeeAlso.pas',
+  wegLibNGColours in 'wegLibNGColours.pas',
+  wegLibNGSettings in 'wegLibNGSettings.pas',
+  wegLibNGSettingsDialogUnit in 'wegLibNGSettingsDialogUnit.pas' {wegLibNGSettingsDialog},
+  wegLibNGColoursDialogUnit in 'wegLibNGColoursDialogUnit.pas' {wegLibNGColoursDialog},
+  wegLibNGEntryFind in 'wegLibNGEntryFind.pas',
+  wegLibNGFindThread in 'wegLibNGFindThread.pas',
+  wegLibNGFind in 'wegLibNGFind.pas',
+  wegLibNGLineParser in 'wegLibNGLineParser.pas';
+
+End.

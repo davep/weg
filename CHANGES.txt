@@ -1,0 +1,254 @@
+-*- mode:flyspell; -*-
+
+$Id: CHANGES.txt,v 1.52 2004/04/06 09:02:46 davep Exp $
+
+Changes since v2.15
+===================
+
+o Added the ability to view the credits of a selected guide in the guide
+  manager.
+
+Changes since v2.14
+===================
+
+o WEG's shell-oriented drag-and-drop support wasn't calling DragFinish()
+  after a drop message had been processed. Fixed.
+
+o Added an installer option for making sure that WEG is in your machine's
+  path.
+
+Changes since v2.13
+===================
+
+o You can now drag a guide from the guide manager and drop it on an open
+  guide window and that window will be reused to display the new guide.
+
+o You can now drag a bookmark from the bookmark window and drop it on an
+  open guide window and that window will be reused to display the bookmarked
+  entry.
+
+o You can now drag a hit from the global finder and drop it on an open guide
+  window and that window will be reused to display the hit.
+
+o The menus and the credits in open guide windows are now fully refreshed
+  when you modify the guide preferences. This has the effect of ensuring
+  that the menus and the credits are reread with the latest OEMToANSI
+  setting.
+
+o Manually stopping a global search no longer causes the "focus when
+  finished" action to take place.
+
+Changes since v2.12
+===================
+
+o Added a help menu item for viewing README.txt
+
+o Added a help menu item for viewing CHANGES.txt.
+
+o The toolbar configuration of each of the guide windows is now saved and
+  restored between WEG sessions.
+
+o Added the ability to copy just the highlighted line of an entry to the
+  clipboard.
+
+o Added a copy button to the guide information dialog so that you can copy
+  a guide's credits to the clipboard.
+
+Changes since v2.11
+===================
+
+o Changed the in-entry finder so that the find dialog retains focus when the
+  find button is pressed.
+
+o When a guide name is provided on the command line or via DDE and it
+  doesn't have a path attached and it isn't in whatever Windows thinks is
+  the current directory the file will be looked for in the default guide
+  directory.
+
+o Re-worked the DDE macros that deal with the global search window to make
+  controlling searches a lot more flexible. Please note that this isn't a
+  backward compatible change. See README.txt for details of the new macros.
+
+o DDE support now handles multi-line macros.
+
+Changes since v2.10
+===================
+
+o Added a panel to the guide window status bar that shows if the entry
+  you're viewing is a short or a long.
+
+o Added "Home" navigation to the guide window. This takes you to the first
+  entry in a guide.
+
+o Added a "Focus When Finished" option to the global finder window. When set
+  the global finder will display itself and grab focus when a find operation
+  has finished.
+
+o Added optional colour printing.
+
+o Added an option that changes the way in-entry searches in short entries
+  happens. If the option is turned on a beginning-of-line hit is always
+  found in preferences to an in-line hit. This lets users configure things
+  so that short-searching is a little more like the way the old NG reader
+  used to work (albeit WEG does further searching whereas the old NG reader
+  only ever used to find the first hit).
+
+o Implemented a "searchguide" macro for the DDE support.
+
+Changes since v2.9
+==================
+
+o The file save dialog used for saving source didn't do an overwrite prompt
+  check. Fixed.
+
+o Ensured that the edit control in the in-entry find dialog gets focus and
+  that the content is highlighted when the dialog is re-focused.
+
+o When a search finishes in the global finder the status bar now tells you
+  how many items were found and how long the search took.
+
+Changes since v2.8
+==================
+
+o You can now drag a guide from the guide manager and drop it on the
+  background of the main window to open a guide.
+
+o You can now drag a bookmark from the bookmark window and drop it on the
+  background of the main window to open a bookmark.
+
+o You can now drag a hit from the global finder and drop it on the
+  background of the main window to open the hit.
+
+o Implemented a "search" macro for the DDE support.
+
+o Added a clear facility to the bookmarks window.
+
+Changes since v2.7
+==================
+
+o Added physical information about a guide to the guide information dialog.
+
+o The see also menu of a guide entry will, where possible, include any URLs
+  found in the entry in the see-also menu. When you select such an item from
+  the menu the URL will be passed to the operating system so that your URL
+  handler of choice is used.
+
+o Added a DDE server and implemented the "open" macro.
+
+o Changed the file associations in the installer so that DDE is used. This
+  means that a single instance of WEG can be used to handle open requests
+  via file associations in Windows.
+
+o Renamed the main "Edit" menu to "Options".
+
+o Added a window recycling option to the global finder.
+
+o Added a window recycling option to the guide manager.
+
+o Added a window recycling option for opening guides file the file/open menu
+  option.
+
+o Added a window recycling option for opening guides file the file/reopen
+  menu option.
+
+o Added a window recycling option for opening guides via DDE.
+
+o Added a window recycling option for opening guides via the command line.
+
+o Added a window recycling option for opening guides via drag and drop.
+
+o The entry find dialog now gives up focus to the guide window when a find
+  option has happened.
+
+Changes since v2.6
+==================
+
+o Built with Toolbar2000 v2.1.4.
+
+o The compatibility keystroke for pulling up the guide information should
+  have been "?", not "v". Changed.
+
+o Made sure that any "&" in the title of a menu from a guide is escaped so
+  as not to be confused with a Windows' menu accelerator key.
+
+o Made the first letter of each main menu title from a guide into an
+  accelerator key. This could cause clashes with other accelerator keys but,
+  if someone is trying to use just the keyboard, they're probably more
+  interested in getting at the guide's menu that any of the other menus.
+
+o The bookmark manager now makes a better guess at a default title for a
+  bookmark.
+
+o The guide printing code now makes a better guess at a good title for a
+  print job.
+
+o Added short-cuts for each of the window oriented menu items.
+
+Changes since v2.5
+==================
+
+o The global finder now tells you -- in the status bar and as a hint -- the
+  name of the guide that a hit was found in.
+
+o WEG now remembers if the guide manager, bookmarks manager or the global
+  finder windows were open and when you next run WEG opens them for you.
+
+Changes since v2.4
+==================
+
+o Changed printing support so that it only prints selected text if there is
+  a selection available.
+
+Changes since v2.3
+==================
+
+o Added a "right-click" menu to the bookmarks window.
+
+o Added printing support.
+
+o Added support for many of the keystrokes that were supported by the DOS,
+  GNU/Linux and OS/2 versions of EG. This support was also in WEG 1.x and
+  I'd forgotten to add it to WEG 2.x.
+
+Changes since v2.2
+==================
+
+o Removed the maximise and minimise buttons from the guide credits dialog.
+
+o Added bookmarks.
+
+o Added an extra check when loading a guide on startup that ensures that the
+  entry we're supposed to be loading is still valid. This fixes a bug
+  reported by Martin Verheij.
+
+Changes since v2.1
+==================
+
+Built against v1.2 of WEGLib.
+
+Changes since v2.0
+==================
+
+Built against v1.1 of WEGLib.
+
+Changes since v1.0.15
+=====================
+
+WEG 2.0 is a ground-up re-write of WEG, as such everything has changed. Some
+of the more significant changes since WEG v1.0.15 are:
+
+o Large parts of WEG are now implemented in a library for Delphi called
+  WEGLib. If you're so inclined you can use WEGLib to develop your own
+  Norton Guide reader (be sure to understand the licence before you do).
+
+o On machines that have the VBScript regular expression class installed you
+  can do regular expression searching.
+
+o WEG is now an MDI application.
+
+o Every aspect of the colour setup is now configurable by the user.
+
+o WEG now uses a proper installer.
+
+o Guide menus and see-also lists are now proper menus (WEG 1.x used a tree
+  to navigate guides).

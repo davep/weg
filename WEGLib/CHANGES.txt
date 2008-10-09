@@ -1,0 +1,146 @@
+-*- mode:flyspell; -*-
+
+$Id: CHANGES.txt,v 1.30 2004/04/07 11:20:38 davep Exp $
+
+Changes since v1.12
+===================
+
+o Modified the drawing code of the entry viewing component so that when
+  we're in mono mode it paints the highlight bar in the normal Windows'
+  colour.
+
+Changes since v1.11
+===================
+
+o Published many more of the entry viewer component's inherited events and
+  properties.
+
+o Added methods for reloading the header and the menus of a guide.
+
+o Added a public property to the entry viewer component that controls if the
+  recording of back/fore-history is suspended.
+
+o Added a public method to the entry viewer component that lets a caller
+  clear the back/fore-history.
+
+Changes since v1.10
+===================
+
+o Added the TypeName property to TwegLibNGEntry.
+
+o Made TwegLibNGEntryViewer.hasEntry() public.
+
+o Added the BOLSearchFirstInShorts property to the TwegLibNGEntryFind
+  component. Setting this to True makes the search system work something
+  similar to the search system in the original NG.exe.
+
+Changes since v1.9
+==================
+
+o Modified the line parsing code so that if a colour attribute is in effect
+  and a new attribute marker of the same value is seen it reverts to the
+  normal text colour.
+
+o Modified the TFileStream oriented functions in wegLibUtils.pas so that
+  they work on a TStream instead of a TFileStream.
+
+o Modified the Entry, Menu and See-Also classes so that they work on TStream
+  rather than TFileStream.
+
+o Increased the max read line length from 512 to 1024 to stay consistent
+  with the limits mentioned in the Expert Help Compiler manual.
+
+o Limited the max number of read see-also entries to 20 to stay consistent
+  with the limits mentioned in the Expert Help Compiler manual. This change
+  also helps guard against corrupt guides.
+
+Changes since v1.8 
+==================
+
+o Modified the entry viewer component so that it doesn't create and free a
+  painter for each draw action. Instead just create the painters once and
+  reuse them.
+
+o Modified the entry class so that it doesn't create and free a line
+  stripper object for each line in the entry. Instead just create the
+  stripper once and reuse it.
+
+o Modified wegLibExpand() so that it tries to do something sensible if an
+  author of a guide has used two consecutive "hard spaces" (which would
+  result in 255 spaces being inserted when the author probably wanted two
+  consecutive spaces).
+
+Changes since v1.7
+==================
+
+o Added a TimeStamp property to the Norton Guide class.
+
+o Modified the back-track history so that it only adds the current location
+  to the history if the new location is different from the current location
+  (including the highlighted line).
+
+Changes since v1.6
+==================
+
+o Added the entryPath() method to the entry viewer component.
+
+o Added the entryTitle() method to the entry viewer component.
+
+o Increased the max length of a menu and see-also title.
+
+Changes since v1.5
+==================
+
+o Improved the code in the entry viewer that worked out how wide a
+  horizontal scrollbar should be.
+
+o Improved the code in the entry viewer that worked out how tall an a line
+  is for a given font.
+
+o The global finder now records the title of the guide as well as the name
+  of the file.
+  
+Changes since v1.4
+==================
+
+o The entry viewer now properly checks that a given offset is a real short
+  or long entry.
+
+o Fixed a bug in the line parser that would cause some parts of some lines
+  to not observe the current OEMToANSI setting.
+
+Changes since v1.3
+==================
+
+o Centralised the parsing of lines in guide entries in a class hierarchy for
+  handling parsing (see wegLibNGLineParser.pas).
+
+o Replaced the parsing code in the entry viewer control with a call to one
+  of the above classes.
+
+o The non-colour mode of the entry viewer now paints monochrome versions of
+  the main control codes (bold, underline, reverse).
+
+o Replaced the guide entry control code stripping code with a call to one of
+  the line parser classes.
+
+o Exposed the OnKeyPress property of TwegLibNGEntryViewer.
+
+Changes since v1.2
+==================
+
+o Added a function to TwegLibNortonGuide that lets you check if a given
+  offset looks like a short or long entry.
+
+Changes since v1.1
+==================
+
+o Fixed some OEM to ANSI problems with menus and see also lists. This should
+  fix a problem that "ZaG" reported with Russian language guides.
+
+Changes since v1.0
+==================
+
+o Fixed the navigation checking functions in TwegLibNGEntryViewer so that
+  they don't assume that there is an entry object available all of the time.
+  This fixes a bug found by Douglas Woodrow.

@@ -1,0 +1,171 @@
+object frmAbout: TfrmAbout
+  Left = 273
+  Top = 211
+  BorderStyle = bsDialog
+  Caption = 'About Expert Guide'
+  ClientHeight = 151
+  ClientWidth = 318
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object imIcon: TImage
+    Left = 277
+    Top = 8
+    Width = 32
+    Height = 32
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    Picture.Data = {
+      055449636F6E0000010002002020100000000000E80200002600000010101000
+      00000000280100000E0300002800000020000000400000000100040000000000
+      8002000000000000000000000000000000000000000000000000800000800000
+      00808000800000008000800080800000C0C0C000808080000000FF0000FF0000
+      00FFFF00FF000000FF00FF00FFFF0000FFFFFF00000000000000CCCCCCCC0000
+      00000000000000000CCCCCCCCCCCCCC0000000000000000CCCCCCCCCCCCCCCCC
+      C0000000000000CCCCCCCCCCCCCCCCCCCC00000000000CCCCCCCCCCCCCCCCCCC
+      CCC000000000CCCCCCCCCCCCCCCCCCCCCCCC0000000CCCCCCCCCCCCCCCCCCCCC
+      CCCCC00000CCCCCCCCCCCCCCCCCCCCCCCCCCCC0000CCCCCCCCCCCCCCCCCCCCCC
+      CCCCCC000CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC00CCCCCCCCCCCCCCCCCCCCCCC
+      CCCCCCC00CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC0CCCCCCCC9999999CCC9999CC
+      CCCCCCCCCCCCCCCCC99CCC9CC99CC99CCCCCCCCCCCCCCCCCC99CCCCC99CCC99C
+      CCCCCCCCCCCCCCCCC99C9CCC99CC9999CCCCCCCCCCCCCCCCC9999CCC99CCCCCC
+      CCCCCCCCCCCCCCCCC99C9CCC99CCCCCCCCCCCCCCCCCCCCCCC99CCCCC99CCCC9C
+      CCCCCCCCCCCCCCCCC99CCC9CC99CC99CCCCCCCCC0CCCCCCC9999999CCC999C9C
+      CCCCCCC00CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC00CCCCCCCCCCCCCCCCCCCCCCC
+      CCCCCCC000CCCCCCCCCCCCCCCCCCCCCCCCCCCC0000CCCCCCCCCCCCCCCCCCCCCC
+      CCCCCC00000CCCCCCCCCCCCCCCCCCCCCCCCCC0000000CCCCCCCCCCCCCCCCCCCC
+      CCCC000000000CCCCCCCCCCCCCCCCCCCCCC00000000000CCCCCCCCCCCCCCCCCC
+      CC0000000000000CCCCCCCCCCCCCCCCCC0000000000000000CCCCCCCCCCCCCC0
+      00000000000000000000CCCCCCCC000000000000FFF00FFFFF8001FFFE00007F
+      FC00003FF800001FF000000FE0000007C0000003C00000038000000180000001
+      8000000100000000000000000000000000000000000000000000000000000000
+      00000000800000018000000180000001C0000003C0000003E0000007F000000F
+      F800001FFC00003FFE00007FFF8001FFFFF00FFF280000001000000020000000
+      0100040000000000C00000000000000000000000000000000000000000000000
+      000080000080000000808000800000008000800080800000C0C0C00080808000
+      0000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0000000CCC
+      CCC00000000CCCCCCCCCC00000CCCCCCCCCCCC000CCCCCCCCCCCCCC00CCCCCCC
+      CCCCCCC0CCCCCCCCCCCCCCCCCCC999CC9999CCCCCCC9CCC9CCC9CCCCCCC999C9
+      CC999CCCCCC9CCC9CCCCCCCCCCC999CC9999CCCC0CCCCCCCCCCCCCC00CCCCCCC
+      CCCCCCC000CCCCCCCCCCCC00000CCCCCCCCCC00000000CCCCCC00000F81F0000
+      E0070000C0030000800100008001000000000000000000000000000000000000
+      00000000000000008001000080010000C0030000E0070000F81F0000}
+  end
+  object lblTitle: TLabel
+    Left = 8
+    Top = 8
+    Width = 251
+    Height = 20
+    Caption = 'Expert Guide For Windows v%s'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblCopyright: TLabel
+    Left = 8
+    Top = 32
+    Width = 216
+    Height = 13
+    Caption = 'Copyright © 1998-2004 Dave Pearson'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblHomePage: TLabel
+    Left = 8
+    Top = 80
+    Width = 59
+    Height = 13
+    Caption = '&Home Page:'
+  end
+  object lblSupport: TLabel
+    Left = 27
+    Top = 96
+    Width = 40
+    Height = 13
+    Caption = '&Support:'
+  end
+  object lblWEGLib: TLabel
+    Left = 8
+    Top = 56
+    Width = 107
+    Height = 13
+    Caption = 'Built with WEGLib v%s'
+  end
+  object lblHomePageURL: TLabel
+    Left = 72
+    Top = 80
+    Width = 180
+    Height = 13
+    Cursor = crHandPoint
+    Hint = 'http://www.davep.org/norton-guides/'
+    Caption = 'http://www.davep.org/norton-guides/'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    OnClick = lblFireURL
+  end
+  object lblSupportURL: TLabel
+    Left = 72
+    Top = 96
+    Width = 79
+    Height = 13
+    Cursor = crHandPoint
+    Hint = 'mailto:weg@davep.org'
+    Caption = 'weg@davep.org'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    OnClick = lblFireURL
+  end
+  object btnOK: TButton
+    Left = 234
+    Top = 120
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = '&OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btnLicence: TButton
+    Left = 8
+    Top = 120
+    Width = 75
+    Height = 25
+    Caption = '&Licence'
+    TabOrder = 1
+    OnClick = btnLicenceClick
+  end
+  object btnWarranty: TButton
+    Left = 88
+    Top = 120
+    Width = 75
+    Height = 25
+    Caption = '&Warranty'
+    TabOrder = 2
+    OnClick = btnWarrantyClick
+  end
+end
