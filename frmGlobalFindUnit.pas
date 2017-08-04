@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Global finder.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -200,7 +199,7 @@ Uses
   wegUtils,
   frmMainUnit,
   frmGuideManagerUnit;
-  
+
 Const
   {** Registry key for the global finder data }
   REG_FINDER_WINDOW = 'Global Finder';
@@ -323,7 +322,7 @@ Begin
           closeKey();
         End;
 
-      // Open the registry key for remembering the history. 
+      // Open the registry key for remembering the history.
       If openKey( wegRegistryKey( [ REG_FINDER_WINDOW, REG_HISTORY ] ), False ) THen
         Try
           // Save the search term history.
@@ -384,7 +383,7 @@ Begin
 
   // Use the guide font for the hits list.
   lbHits.Font := frmMain.NGSettings.GuideFont;
-  
+
 End;
 
 /////
@@ -439,7 +438,7 @@ Begin
     Finally
       free();
     End;
-    
+
 End;
 
 /////
@@ -510,7 +509,7 @@ Begin
     // And do the information sound.
     MessageBeep( MB_ICONINFORMATION );
   End;
-  
+
 End;
 
 /////
@@ -530,7 +529,7 @@ Begin
   // Initialise the count and start time.
   iHitCount       := 0;
   dtSearchStarted := Now();
-  
+
 End;
 
 /////
@@ -549,7 +548,7 @@ Begin
   // Size the current guide progress bar.
   pbCurrentGuide.Min := 0;
   pbCurrentGuide.Max := NortonGuide.Size;
-  
+
 End;
 
 /////
@@ -566,7 +565,7 @@ Begin
 
   // Increase the hit count.
   Inc( iHitCount );
-  
+
 End;
 
 /////
@@ -655,9 +654,9 @@ Procedure TfrmGlobalFind.actFindOpenExecute( Sender : TObject );
     If actOptionsRecycleWindows.Checked Then
       Result := mogRecycle
     Else
-      Result := mogNew;  
+      Result := mogNew;
   End;
-  
+
 Begin
 
   If lbHits.ItemIndex > -1 Then
@@ -693,7 +692,7 @@ Begin
   // Moan.
   MessageBeep( MB_ICONERROR );
   MessageDlg( RSBadRegExp, mtError, [ mbOk ], 0 );
-  
+
 End;
 
 /////
@@ -848,7 +847,7 @@ Begin
       slGuides.free();
       free();
     End;
-  
+
 End;
 
 /////

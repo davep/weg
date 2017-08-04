@@ -1,7 +1,5 @@
 -*- mode:flyspell; -*-
 
-$Id$
-
 Things TODO to WEG:
 ===================
 

@@ -1,5 +1,4 @@
 ;; -*- ini-generic -*-
-;; $Id$
 
 [Setup]
 AppName=Expert Guide for Windows
@@ -20,7 +19,7 @@ OutputDir=.
 ChangesAssociations=Yes
 VersionInfoCompany=davep.org <http://www.davep.org/>
 VersionInfoVersion=2.15
-VersionInfoTextVersion=$Revision$
+VersionInfoTextVersion=$Revision: 1.30 $
 WizardSmallImageFile=Images\WEGInstallImage.bmp
 Compression=bzip
 SolidCompression=Yes

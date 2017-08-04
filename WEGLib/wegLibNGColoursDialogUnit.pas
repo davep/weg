@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Dialog for editing wegLibNGColours values.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -165,9 +164,9 @@ Begin
       // This colour change might affect the display of the guide colour
       // combo boxes. Get them to refresh.
       repaintGuideColours();
-      
+
     End;
-      
+
   End;
 
 End;
@@ -193,7 +192,7 @@ Begin
 
   // Populate the dialog.
   populateDialog();
-  
+
 End;
 
 /////
@@ -311,7 +310,7 @@ Procedure TwegLibNGColoursDialog.cbNGColourDrawItem( Control : TWinControl; Inde
     End;
 
   End;
-  
+
 Var
   rSample : TRect;
   rText   : TRect;
@@ -346,7 +345,7 @@ Begin
     textOut( rText.Left + textWidth( '.' ), rText.Top, Items[ Index ] );
 
   End;
-    
+
 End;
 
 /////
@@ -359,7 +358,7 @@ Begin
   For i := 0 To ComponentCount - 1 Do
     If Components[ i ] Is TComboBox Then
       TComboBox( Components[ i ] ).repaint();
-       
+
 End;
 
 /////

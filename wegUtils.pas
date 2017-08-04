@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Utility code.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -129,7 +128,7 @@ Begin
 
   // Return the registry key.
   Result := wegRegistryKey( Result );
-  
+
 End;
 
 /////
@@ -147,7 +146,7 @@ Begin
   Begin
 
     // We got it, save the placement details of the widnow.
-    
+
     // Write the maximized flag.
     oReg.writeBool( sPrefix + REG_FORM_MAXIMIZED, oForm.WindowState = wsMaximized );
 

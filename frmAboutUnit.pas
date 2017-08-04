@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: About dialog for WEG.
  * Licence....: GNU General Public Licence (see below)
  *

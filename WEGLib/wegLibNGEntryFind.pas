@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Component for finding text in a Norton Guide entry.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -172,7 +171,7 @@ Begin
 
   // Return the "can regexp" flag.
   Result := bCanRegExp;
-  
+
 End;
 
 /////
@@ -195,7 +194,7 @@ Begin
 
   // Where we'll start looking.
   iNextLine := iStartLine;
-  
+
 End;
 
 /////
@@ -220,7 +219,7 @@ Procedure TwegLibNGEntryFind.find( Const sFind : String; bCaseSensitive : Boolea
     If bCaseSensitive Then
       Result := Copy( s, 1, Length( sFind ) ) = sFind
     Else
-      Result := AnsiUpperCase( Copy( s, 1, Length( sFind ) ) ) = AnsiUpperCase( sFind );  
+      Result := AnsiUpperCase( Copy( s, 1, Length( sFind ) ) ) = AnsiUpperCase( sFind );
   End;
 
   Function Contains( Const s : String ) : Boolean;
@@ -230,7 +229,7 @@ Procedure TwegLibNGEntryFind.find( Const sFind : String; bCaseSensitive : Boolea
     Else
       Result := ContainsText( s );
   End;
-  
+
 ResourceString
   RSNoRegExp = 'Regular expression searches are not available.';
   RSNoStart  = 'Call to find without a call to startSearch.';

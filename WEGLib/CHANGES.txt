@@ -1,7 +1,5 @@
 -*- mode:flyspell; -*-
 
-$Id$
-
 Changes since v1.12
 ===================
 
@@ -54,7 +52,7 @@ o Limited the max number of read see-also entries to 20 to stay consistent
   with the limits mentioned in the Expert Help Compiler manual. This change
   also helps guard against corrupt guides.
 
-Changes since v1.8 
+Changes since v1.8
 ==================
 
 o Modified the entry viewer component so that it doesn't create and free a
@@ -99,7 +97,7 @@ o Improved the code in the entry viewer that worked out how tall an a line
 
 o The global finder now records the title of the guide as well as the name
   of the file.
-  
+
 Changes since v1.4
 ==================
 

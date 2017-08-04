@@ -1,7 +1,5 @@
 -*- mode:flyspell; -*-
 
-$Id$
-
 Changes since v2.15
 ===================
 

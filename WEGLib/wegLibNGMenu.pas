@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Norton Guide menu class.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -93,7 +92,7 @@ Implementation
 Uses
   SysUtils,
   wegLibUtils;
-  
+
 /////
 
 Destructor TwegLibNGMenu.destroy;

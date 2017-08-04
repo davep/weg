@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Norton Guide entry class.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -161,7 +160,7 @@ Type
 
     {** Constructor }
     Constructor create; Virtual;
-    
+
     {** Destructor }
     Destructor destroy; Override;
 
@@ -189,10 +188,10 @@ Constructor TwegLibNGEntry.create;
 Begin
 
   Inherited;
-  
+
   // Create the line stripper.
   oStripper := TwegLibNGLineStripper.create();
-  
+
 End;
 
 /////
@@ -208,7 +207,7 @@ Begin
   oStripper.free();
 
   Inherited;
-  
+
 End;
 
 /////
@@ -285,7 +284,7 @@ Begin
   // Create a new see-also list.
   FSeeAlso            := TwegLibNGSeeAlso.create();
   FSeeAlso.bOEMToANSI := bOEMToANSI;
-  
+
   // Read the "header" information from the entry.
   FOffset       := hNG.seek( 0, soFromCurrent );
   iType         := wegLibReadWord( hNG );
@@ -308,13 +307,13 @@ Begin
 
   // Size the lines array.
   SetLength( FLines, FLineCount );
-  
+
   // Read the rest of the entry, depending on its type.
   If IsShort Then
     readShort( hNG )
   Else
     readLong( hNG );
-      
+
 End;
 
 /////
@@ -333,7 +332,7 @@ Begin
 
     // Now read the offset that the line points at.
     FLines[ i ].lOffset := wegLibReadLong( hNG );
-    
+
   End;
 
   // Now we load the text of the entry.
@@ -352,7 +351,7 @@ Begin
   // If this long entry has a see-also list...
   If FHasSeeAlso Then
     FSeeAlso.load( hNG );
-    
+
 End;
 
 /////

@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Dialog for editing wegLibNGSettings values.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -64,7 +63,7 @@ Implementation
 
 Uses
   FileCtrl;
-  
+
 {$R *.DFM}
 
 Procedure TwegLibNGSettingsDialog.refreshDialog( Sender : TObject );
@@ -80,7 +79,7 @@ Begin
 
   If fdGuideFont.execute() Then
     refreshDialog( Sender );
-    
+
 End;
 
 /////
@@ -100,7 +99,7 @@ Begin
     // Set focus back on the guide directory edit control.
     edtGuideDirectory.setFocus();
   End;
-    
+
 End;
 
 End.

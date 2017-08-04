@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Guide form.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -321,7 +320,7 @@ Procedure TfrmGuide.refreshSeeAlsoMenu;
     End;
 
     Result := oItem;
-    
+
   End;
 
 Var
@@ -351,7 +350,7 @@ Begin
       mnuSeeAlso.add( TTBSeparatorItem.create( mnuSeeAlso ) );
       popGuideSeeAlso.add( TTBSeparatorItem.create( popGuideSeeAlso ) );
     End;
-    
+
     For i := 0 To slURLs.Count - 1 Do
     Begin
       mnuSeeAlso.add( SetupSeeAlsoItem( TTBItem.create( mnuSeeAlso ), i, slURLs[ i ], seeAlsoURLClick ) );
@@ -363,7 +362,7 @@ Begin
   // Set the enabled state of the see-also menu.
   mnuSeeAlso.Enabled      := ( mnuSeeAlso.Count > 0 );
   popGuideSeeAlso.Visible := mnuSeeAlso.Enabled;
-  
+
 End;
 
 /////
@@ -471,7 +470,7 @@ Begin
     tbGuideMenu.endUpdate();
 
   End;
-  
+
 End;
 
 /////
@@ -484,7 +483,7 @@ Begin
 
   // Scan for any URLs.
   populateURLList();
-  
+
   // Refresh the see also menu.
   refreshSeeAlsoMenu();
 
@@ -694,7 +693,7 @@ Begin
 
     // Set the regular expression for funding URLs.
     oURLRegExp.Pattern := '(http|https|ftp|news|mailto|telnet|finger):[^ "''\)>\t\r\n]*';
-    
+
   Except
     // Seems that this facility isn't available in the current environment.
     bCanURLSeeAlso := False;
@@ -928,7 +927,7 @@ Begin
 
   // Ensure that the finder component has the latest BOL-search setting.
   NGEntryFind.BOLSearchFirstInShorts := frmMain.actOptionsBOLShortSearch.Checked;
-  
+
   // If we're not already searching this guide...
   If Not NGEntryFind.Searching Then
     // ...start the search.
@@ -936,7 +935,7 @@ Begin
 
   // Try and find.
   NGEntryFind.find( frmFinder.edtFind.Text, frmFinder.cbCaseSensitive.Checked, frmFinder.cbRegularExpression.Checked );
-  
+
 End;
 
 /////
@@ -1012,7 +1011,7 @@ Begin
 
           // Set the title of the print job.
           Title := NGEntry.entryTitle();
-          
+
           // Start the document.
           beginDoc();
 
@@ -1029,8 +1028,8 @@ Begin
           If frmMain.actOptionsPrintColour.Checked Then
             oPainter := TwegLibNGLineColourPainter.create()
           Else
-            oPainter := TwegLibNGLinePainter.create();  
-                    
+            oPainter := TwegLibNGLinePainter.create();
+
           Try
 
             // Starting at position 0.
@@ -1091,7 +1090,7 @@ Begin
 
   // Assume that the key has been handled.
   bHandled := True;
-  
+
   // Handle some of the key strokes from the DOS/Linux version of EG.
   Case Key Of
     'Q', 'q' : If NGEntry.canNavigateUp()       Then actNavigateUpExecute( Nil );
@@ -1177,9 +1176,9 @@ Begin
         // Yes, add them to the URL list.
         For j := 0 To oHits.Count - 1 Do
           slURLs.add( oHits.Item[ j ] );
-        
+
     End;
-    
+
   End;
 
 End;

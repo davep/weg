@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Component for controlling a global find operation.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -198,7 +197,7 @@ Begin
     bRegExpInitDone := True;
 
   End;
-  
+
 End;
 
 /////
@@ -234,10 +233,10 @@ Begin
 
   // Try and initalise the regular expression engine.
   initRegExp();
-  
+
   // Return the flag.
   Result := bCanRegExp;
-  
+
 End;
 
 /////
@@ -247,7 +246,7 @@ Begin
 
   // Init the regular expression engine.
   initRegExp();
-  
+
   // Create the finder thread.
   oFindThread := TwegLibNGFindThread.create();
 
@@ -303,7 +302,7 @@ Begin
 
   // Call the search finished event.
   If Assigned( FOnFinishedSearch ) Then FOnFinishedSearch( self );
-  
+
 End;
 
 /////
@@ -346,4 +345,4 @@ Begin
 End;
 
 End.
- 
+

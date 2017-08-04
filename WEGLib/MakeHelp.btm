@@ -1,0 +1,17 @@
+  @Echo Off
+
+  Rem 4NT batch file to build a help file for WEGLib.
+  Rem Uses DIPasDoc <URL:http://www.zeitungsjunge.de/delphi/>.
+
+  Rem Ensure that we've got a working directory.
+  If Not Exist Work\Nul MkDir Work
+
+  Rem Generate the documentation.
+  DIPasDoc_Console -NWEGLib -Mprotected+ -Mprivate+ -le -XHomePage -CwegLibContents.txt -OHtmlHelp -EWork *.pas
+
+  Rem Copy the help file.
+  Copy Work\WEGLib.chm
+
+  Rem Clean up the work files.
+  Del Work\*.* /y /q
+  RmDir Work

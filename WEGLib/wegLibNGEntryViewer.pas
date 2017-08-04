@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Norton Guide entry viewing component.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -106,7 +105,7 @@ Type
     Procedure rememberEntry( Var aHistory : TwegLibNGEntryViewerHistory ); Virtual;
     {** Move thru a history list}
     Procedure historyMove( Var aThis : TwegLibNGEntryViewerHistory; Var aOther : TwegLibNGEntryViewerHistory ); Virtual;
-    {** Add a horizontal scroll bar } 
+    {** Add a horizontal scroll bar }
     Procedure addHorizontalScrollBar; Virtual;
 
     {** Handle a click }
@@ -270,7 +269,7 @@ Begin
   // Free the painters.
   oPainter.free();
   oColourPainter.free();
-  
+
   // Clear down the history.
   clearHistory();
 
@@ -382,7 +381,7 @@ Begin
 
     // Remember what the history suspended status was.
     bSavHis := FHistorySuspended;
-    
+
     // Suspend history.
     FHistorySuspended := True;
 
@@ -399,7 +398,7 @@ Begin
     End;
 
   End;
-    
+
 End;
 
 /////
@@ -436,7 +435,7 @@ Begin
 
   // Set the item hight.
   ItemHeight := Canvas.textHeight( 'W' );
-    
+
   // Start an update.
   Items.beginUpdate();
 
@@ -458,7 +457,7 @@ Begin
     // Mark the end of the update.
     Items.endUpdate();
   End;
-    
+
 End;
 
 /////
@@ -489,7 +488,7 @@ Begin
   // If it isn't and if we've got a callback for this...
   If ( Not Result ) And Assigned( FOnInvalidLink ) Then
     // ...call it.
-    FOnInvalidLink( self ); 
+    FOnInvalidLink( self );
 
 End;
 
@@ -521,7 +520,7 @@ Begin
 
   // Remember the history suspended status.
   bSavHis := FHistorySuspended;
-  
+
   // Suspend history.
   FHistorySuspended := True;
 
@@ -557,7 +556,7 @@ Begin
 
   // Then we tell Windows the point at which it should add a horizontal scrollbar.
   SendMessage( Handle, LB_SETHORIZONTALEXTENT, Canvas.textWidth( sMax ), 0 );
-  
+
 End;
 
 /////
@@ -573,7 +572,7 @@ Procedure TwegLibNGentryViewer.click;
 Begin
 
   Inherited;
-  
+
   // TODO: Don't do this in click, possibly do it as a mouseUp event instead.
   // Currently moving in the list with the cursor keys will cause a link to
   // be followed when single clicking is turned on. We don't want this to
@@ -581,7 +580,7 @@ Begin
 
   If FSingleClickJump Then
     navigateDown();
-    
+
 End;
 
 /////
@@ -621,7 +620,7 @@ Begin
     Else
       // Otherwise use the text cursor.
       Cursor := FTextCursor;
-        
+
   End
   Else
     // Use the default cursor when we're disabled.
@@ -650,7 +649,7 @@ Procedure TwegLibNGEntryViewer.drawItem( iIndex : Integer; rRect : TRect; State:
   Begin
     If DoColour() Then Result := clrColour Else Result := clrMono;
   End;
-  
+
 Begin
 
   // If the line is selected...

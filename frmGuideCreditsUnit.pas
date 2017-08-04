@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Guide credits dialog.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -101,7 +100,7 @@ Begin
     memCredits.Lines.Text := oNortonGuide.Credits
   Else
     // ...hide the copy button, there's nothing to copy.
-    btnCopy.Visible := False;  
+    btnCopy.Visible := False;
 
 
 End;

@@ -4,5 +4,3 @@ Known WEG bugs:
 ===============
 
 o No known bugs.
-
-$Id$

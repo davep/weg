@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Component for holding the guide display colour settings.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -24,6 +23,11 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *}
 
+{ @abstract(Defines a component for holding the guide display colour settings.)
+  @author(Dave Pearson <davep@davep.org>)
+  @lastmod($Id$)
+  The @name unit provides a component for holding the guide display colour
+  settings. }
 Unit wegLibNGColours;
 
 {$R *.DCR}
@@ -38,134 +42,153 @@ Uses
 
 Type
 
-  {** Type of a colour ID }
+  { Type of a colour ID. }
   TwegLibNGColourID = 0..15;
-  
-  {** Component for holding the guide colour settings }
+
+  { @abstract(Component for holding the guide colour settings.)
+    @name is a component that holds the guide display colour settings. It
+    also provides a user interface for letting a user modify the colour
+    settings. }
   TwegLibNGColours = Class( TComponent )
 
   Protected
 
-    {** Colour for normal text }
+    { Colour for normal text. }
     FNormalText : TwegLibNGColourID;
-    {** Colour for normal background }
+    { Colour for normal background. }
     FNormalBackground : TwegLibNGColourID;
-    {** Colour for bold text }
+    { Colour for bold text. }
     FBoldText : TwegLibNGColourID;
-    {** Colour for bold background }
+    { Colour for bold background. }
     FBoldBackground : TwegLibNGColourID;
-    {** Colour for reverse text }
+    { Colour for reverse text. }
     FReverseText : TwegLibNGColourID;
-    {** Colour for reverse background }
+    { Colour for reverse background. }
     FReverseBackground : TwegLibNGColourID;
-    {** Colour for underlined text }
+    { Colour for underlined text. }
     FUnderlinedText : TwegLibNGColourID;
-    {** Colour for underlined background }
+    { Colour for underlined background. }
     FUnderlinedBackground : TwegLibNGColourID;
-    {** Colour for selected text }
+    { Colour for selected text. }
     FSelectedText : TwegLibNGColourID;
-    {** Colour for selected background }
+    { Colour for selected background. }
     FSelectedBackground : TwegLibNGColourID;
-    {** Colour for focused text }
+    { Colour for focused text. }
     FFocusedText : TwegLibNGColourID;
-    {** Colour for focused background }
+    { Colour for focused background. }
     FFocusedBackground : TwegLibNGColourID;
 
-    {** The array of DOS colours }
+    { The array of DOS colours. }
     aDOSMap : Array[ 0..15 ] Of TColor;
 
-    {** Check if the colour ID is ok, throw an exception if it isn't }
+    { Check if the colour ID is ok, throw an exception if it isn't. }
     Function colourIDOk( i : Integer ) : Boolean; Virtual;
-    {** Set a colour in the DOS map }
+    { Set a colour in the DOS map. }
     Procedure setDOSColour( i : Integer; col : TColor ); Virtual;
-    {** Get a colour in the DOS map }
+    { Get a colour in the DOS map. }
     Function getDOSColour( i : Integer ) : TColor; Virtual;
 
   Public
 
-    {** Access to the DOS map }
+    { @abstract(Access to the DOS map.)
+      Access is a wrapper around @link(getDOSColour).
+      Assignment is a wrapper around @link(setDOSColour). }
     Property DOSMap[ i : Integer ] : TColor Read getDOSColour Write setDOSColour; Default;
 
-    {** Cosntructor }
+    { Constructor. }
     Constructor create( AOwner : TComponent ); Override;
 
-    {** Edit the settings }
+    { @abstract(Edit the settings.)
+      @code(sCaption) is an optinal caption to give the edit dialog
+      (@link(TwegLibNGColoursDialog)). }
     Function edit( Const sCaption : String = '' ) : Boolean; Virtual;
-    {** Default the colours }
+    { Set all colour information back to their default values. }
     Procedure defaultColours; Virtual;
-    {** Clone colours from another instance of this class }
+    { Clone colours from another instance of this class. }
     Procedure cloneColours( oColours : TwegLibNGColours ); Virtual;
-    {** Save the settings using the passed registry object }
+    { Save the settings using the passed registry object. }
     Procedure saveToRegistry( Const sKeyPrefix : String; oRegistry : TRegistry ); Overload; Virtual;
-    {** Save the settings to the registry }
+    { Save the settings to the registry. }
     Procedure saveToRegistry( Const sKeyPrefix : String ); Overload; Virtual;
-    {** Load the settings using the passed registry object }
+    { Load the settings using the passed registry object. }
     Procedure loadFromRegistry( Const sKeyPrefix : String; oRegistry : TRegistry ); Overload; Virtual;
-    {** Load the settings from the registry }
+    { Load the settings from the registry. }
     Procedure loadFromRegistry( Const sKeyPrefix : String ); Overload; Virtual;
 
   Published
 
-    {** Colour for normal text }
+    { @abstract(Colour for normal text.)
+      This is a wrapper around @link(FNormalText). }
     Property NormalText : TwegLibNGColourID Read FNormalText Write FNormalText;
-    {** Colour for normal background }
+    { @abstract(Colour for normal background.)
+      This is a wrapper around @link(FNormalBackground). }
     Property NormalBackground : TwegLibNGColourID Read FNormalBackground Write FNormalBackground;
-    {** Colour for bold text }
+    { @abstract(Colour for bold text.)
+      This is a wrapper around @link(FBoldText). }
     Property BoldText : TwegLibNGColourID Read FBoldText Write FBoldText;
-    {** Colour for bold background }
+    { @abstract(Colour for bold background.)
+      This is a wrapper around @link(FBoldBackground). }
     Property BoldBackground : TwegLibNGColourID Read FBoldBackground Write FBoldBackground;
-    {** Colour for reverse text }
+    { @abstract(Colour for reverse text.)
+      This is a wrapper around @link(FReverseText). }
     Property ReverseText : TwegLibNGColourID Read FReverseText Write FReverseText;
-    {** Colour for reverse background }
+    { @abstract(Colour for reverse background.)
+      This is a wrapper around @link(FReverseBackground). }
     Property ReverseBackground : TwegLibNGColourID Read FReverseBackground Write FReverseBackground;
-    {** Colour for underlined text }
+    { @abstract(Colour for underlined text.)
+      This is a wrapper around @link(FUnderlinedText). }
     Property UnderlinedText : TwegLibNGColourID Read FUnderlinedText Write FUnderlinedText;
-    {** Colour for underlined background }
+    { @abstract(Colour for underlined background.)
+      This is a wrapper around @link(FUnderlinedBackground). }
     Property UnderlinedBackground : TwegLibNGColourID Read FUnderlinedBackground Write FUnderlinedBackground;
-    {** Colour for selected text }
+    { @abstract(Colour for selected text.)
+      This is a wrapper around @link(FSelectedText). }
     Property SelectedText : TwegLibNGColourID Read FSelectedText Write FSelectedText;
-    {** Colour for selected background }
+    { @abstract(Colour for selected background.)
+      This is a wrapper around @link(FSelectedBackground). }
     Property SelectedBackground : TwegLibNGColourID Read FSelectedBackground Write FSelectedBackground;
-    {** Colour for focused text }
+    { @abstract(Colour for focused text.)
+      This is a wrapper around @link(FFocusedText). }
     Property FocusedText : TwegLibNGColourID Read FFocusedText Write FFocusedText;
-    {** Colour for focused background }
-    Property FocusedBackground : TwegLibNGColourID Read FFocusedBackground Write FFocusedBackground; 
-    {** Colour to use for black }
+    { @abstract(Colour for focused background.)
+      This is a wrapper around @link(FFocusedBackground). }
+    Property FocusedBackground : TwegLibNGColourID Read FFocusedBackground Write FFocusedBackground;
+    { Colour to use for black. }
     Property Black : TColor Index 0 Read getDOSColour Write setDOSColour;
-    {** Colour to use for brown }
+    { Colour to use for brown. }
     Property Blue : TColor Index 1 Read getDOSColour Write setDOSColour;
-    {** Colour to use for green }
+    { Colour to use for green. }
     Property Green : TColor Index 2 Read getDOSColour Write setDOSColour;
-    {** Colour to use for cyan }
+    { Colour to use for cyan. }
     Property Cyan : TColor Index 3 Read getDOSColour Write setDOSColour;
-    {** Colour to use for red }
+    { Colour to use for red. }
     Property Red : TColor Index 4 Read getDOSColour Write setDOSColour;
-    {** Colour to use for violet }
+    { Colour to use for violet. }
     Property Violet : TColor Index 5 Read getDOSColour Write setDOSColour;
-    {** Colour to use for brown }
+    { Colour to use for brown. }
     Property Brown : TColor Index 6 Read getDOSColour Write setDOSColour;
-    {** Colour to use for white }
+    { Colour to use for white. }
     Property White : TColor Index 7 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright black }
+    { Colour to use for bright black. }
     Property BrightBlack : TColor Index 8 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright blue }
+    { Colour to use for bright blue. }
     Property BrightBlue : TColor Index 9 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright green }
+    { Colour to use for bright green. }
     Property BrightGreen : TColor Index 10 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright cyan }
+    { Colour to use for bright cyan. }
     Property BrightCyan : TColor Index 11 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright red }
+    { Colour to use for bright red. }
     Property BrightRed : TColor Index 12 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright violet }
+    { Colour to use for bright violet. }
     Property BrightViolet : TColor Index 13 Read getDOSColour Write setDOSColour;
-    {** Colour to use for bright brown }
+    { Colour to use for bright brown. }
     Property BrightBrown : TColor Index 14 Read getDOSColour Write setDOSColour;
-    {** Colour to use fo bright white }
+    { Colour to use fo bright white. }
     Property BrightWhite : TColor Index 15 Read getDOSColour Write setDOSColour;
-    
+
   End;
 
-{** Register components with Delphi's IDE }
+{ Register components with Delphi's IDE. }
 Procedure Register;
 
 Implementation
@@ -173,13 +196,13 @@ Implementation
 Uses
   SysUtils,
   wegLibNGColoursDialogUnit;
-  
+
 Const
-  {** Registry key suffix for the dos map. }
+  // Registry key suffix for the dos map.
   REG_KEY_DOSMAP = 'DOSMap';
-  {** Registry key suffix for the guide colours }
+  // Registry key suffix for the guide colours.
   REG_KEY_GUIDE  = 'Guide';
-  {** Registry value names for each of the guide colours }
+  // Registry value names for each of the guide colours.
   REG_NORMAL_TEXT           = 'Normal Text';
   REG_NORMAL_BACKGROUND     = 'Normal Background';
   REG_BOLD_TEXT             = 'Bold Text';
@@ -241,8 +264,8 @@ Begin
     Result := aDOSMap[ i ]
   Else
     // This shouldn't happen, but it keeps the compiler quiet.
-    Result := clBlack;  
-    
+    Result := clBlack;
+
 End;
 
 /////

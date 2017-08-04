@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Guide manager form.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -135,7 +134,7 @@ Type
     Procedure getGuideNames( slNames : TStringList );
     {** Returns the name of the highlighted guide }
     Function highlightedGuide : String;
-    
+
   End;
 
 Var
@@ -289,7 +288,7 @@ Begin
             actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
           Except
             lvGuides.ShowHint := True;
-          End;  
+          End;
         Finally
           // Close the settings key.
           closeKey();
@@ -297,7 +296,7 @@ Begin
 
       // Load the guides list.
       loadGuideList();
-      
+
     Finally
       // Free the registry object.
       free();
@@ -321,7 +320,7 @@ Begin
 
   // Point the open dialog at the default guide directory.
   odAdd.InitialDir := frmMain.NGSettings.DefaultGuideDirectory;
-  
+
   // Let the user select some guides...
   If odAdd.execute() Then
     With TwegBusyCursor.create() Do
@@ -398,7 +397,7 @@ Begin
       MessageBeep( MB_ICONERROR );
       MessageDlg( Format( RSCantOpenAsGuide, [ sFile ] ), mtError, [ mbOk ], 0 );
     End;
-        
+
   Finally
     oGuide.free();
   End;
@@ -457,7 +456,7 @@ Begin
 
       // Seems we loaded the list.
       bLoaded := True;
-      
+
     Finally
 
       // Free the lists.
@@ -470,7 +469,7 @@ Begin
     End;
 
   End;
-  
+
 End;
 
 /////
@@ -563,7 +562,7 @@ Begin
 
   If lvGuides.Selected <> Nil Then
     frmMain.openGuide( highlightedGuide(), OpenType() );
-    
+
 End;
 
 /////
@@ -579,7 +578,7 @@ Begin
     lvGuides.Selected.delete();
     saveGuideList();
   End;
-  
+
 End;
 
 /////

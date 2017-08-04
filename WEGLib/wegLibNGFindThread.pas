@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Thread class for searching entries in a list of Norton Guides.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -31,7 +30,7 @@ Interface
 Uses
   Classes,
   wegLibNortonGuide;
-  
+
 Type
 
   {** Record for holding a "hit" when doing a global find. }
@@ -148,7 +147,7 @@ Begin
 
   // We want to be freed when we terminate.
   FreeOnTerminate := True;
-  
+
   // Create the guide list.
   FGuides := TStringList.create();
 
@@ -182,7 +181,7 @@ Procedure TwegLibNGFindThread.execute;
     Else
       Result := Pos( sFind, AnsiUpperCase( s ) ) > 0;
   End;
-  
+
   Function Contains( Const s : String ) : Boolean;
   Begin
     If bRegExp Then
@@ -323,7 +322,7 @@ Begin
     On EOleException Do synchronize( badRegExp );
     On EOleError     Do synchronize( badRegExp );
   End;
-  
+
 End;
 
 /////

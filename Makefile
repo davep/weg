@@ -1,5 +1,3 @@
-# $Id$
-
 cleanish:
 	rm -f .cvsignore~ *~ *.~* WEGLib/*~ WEGLib/*.~*
 

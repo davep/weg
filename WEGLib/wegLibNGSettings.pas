@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Component for holding and managing wegLib settings.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -128,7 +127,7 @@ Begin
 
   // Create the guide font.
   FGuideFont := TFont.create();
-  
+
 End;
 
 /////
@@ -176,7 +175,7 @@ Begin
         FOEMToANSI             := cbOEMToANSI.Checked;
         FSingleClickJump       := cbSingleClick.Checked;
       End;
-      
+
     Finally
       // Free the config dialog.
       free();
@@ -213,7 +212,7 @@ Procedure TwegLibNGSettings.saveToRegistry( Const sKey : String; oRegistry : TRe
     End;
 
   End;
-  
+
 Begin
 
   With oRegistry Do
@@ -290,13 +289,13 @@ Procedure TwegLibNGSettings.loadFromRegistry( Const sKey : String; oRegistry : T
       If sl.indexOf( 'Italic' )    > -1 Then Result := Result + [ fsItalic ];
       If sl.indexOf( 'Underline' ) > -1 Then Result := Result + [ fsUnderline ];
       If sl.indexOf( 'Strikeout' ) > -1 Then Result := Result + [ fsStrikeout ];
-      
+
     Finally
       sl.free();
     End;
-        
+
   End;
-  
+
 Begin
 
   With oRegistry Do

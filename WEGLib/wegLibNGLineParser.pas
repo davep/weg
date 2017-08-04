@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2004
- * ID.........: $Id$
  * Description: Classes for parsing a line in a Norton Guide.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -62,7 +61,7 @@ Type
 
   End;
 
-  {** Line parser for stripping our control characters and returning text }
+  {** Line parser for stripping out control characters and returning text }
   TwegLibNGLineStripper = Class( TwegLibNGLineParser )
 
   Protected
@@ -140,14 +139,14 @@ Type
     Procedure handleReverse; Override;
     {** Handle an underlined text request }
     Procedure handleUnderline; Override;
-    
+
   End;
 
 Implementation
 
 Uses
   wegLibUtils;
-  
+
 /////
 
 Procedure TwegLibNGLineParser.parse( sRaw : String; bOEMToANSI : Boolean );
@@ -192,7 +191,7 @@ Begin
 
         // Get the colour attribute.
         iAttr := wegLibHex2Int( Copy( sRaw, iCtrl + 2, 2 ) );
-        
+
         // If there's already a colour attribute in effect and the new colour
         // is the same as the previous colour...
         If ( cmMode = cmColourAttr ) And ( iAttr = iLastAttr ) Then
@@ -211,7 +210,7 @@ Begin
 
         // Skip along the string.
         Inc( iCtrl, 4 );
-        
+
       End;
 
       // Bold mode toggle.
@@ -236,7 +235,7 @@ Begin
         Inc( iCtrl, 2 );
 
       End;
-        
+
       // Character.
       'C', 'c' :
       Begin
@@ -246,7 +245,7 @@ Begin
 
         // Skip along the string.
         Inc( iCtrl, 4 );
-        
+
       End;
 
       // Normal mode.
@@ -259,7 +258,7 @@ Begin
 
         // Skip along the string.
         Inc( iCtrl, 2 );
-        
+
       End;
 
       // Reverse mode toggle.
@@ -317,13 +316,13 @@ Begin
 
         // Skip along the string.
         Inc( iCtrl, 2 );
-        
+
       End;
 
       // None of the above, just move along.
       Else
         Inc( iCtrl );
-          
+
     End;
 
     // Chop the bits we've done off the raw string.
@@ -335,7 +334,7 @@ Begin
 
   // Handle any remaining text.
   handleText( WithOEMToANSI( sRaw ) );
-  
+
 End;
 
 /////
@@ -485,7 +484,7 @@ Begin
 
   // Remember the colour configuration.
   self.oColours := oColours;
-  
+
   // Call the main parser.
   Inherited parse( sRaw, oCanvas, iTop, iLeft, bOEMToANSI );
 

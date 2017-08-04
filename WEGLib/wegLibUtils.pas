@@ -2,7 +2,6 @@
  * System.....: WEGLib - Norton Guide Reader Library for Delphi.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Utility functions and procedures.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -24,6 +23,11 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *}
 
+{ @abstract(Utility functions and procedures for WEGLib.)
+  @author(Dave Pearson <davep@davep.org>)
+  @lastmod($Date$)
+  The @name unit provides a utility functions and procudres for WEGLib. }
+
 Unit wegLibUtils;
 
 Interface
@@ -32,42 +36,64 @@ Uses
   Classes;
 
 Const
-  {** Magic number of a Norton Guide compiled database }
+  { Magic number of a Norton Guide compiled database. }
   wegLib_MAGIC_NG = $474E;
-  {** Magic number of an Expert Help compiled database }
+  { Magic number of an Expert Help compiled database. }
   wegLib_MAGIC_EH = $4845;
-  {** ID of a short entry }
+  { ID of a short entry. }
   wegLib_ENTRY_SHORT = 0;
-  {** ID of a long entry }
+  { ID of a long entry. }
   wegLib_ENTRY_LONG = 1;
-  {** ID of a menu entry }
+  { ID of a menu entry. }
   wegLib_ENTRY_MENU = 2;
-  {** Version of WEGLib }
+  { Version of WEGLib. }
   wegLib_VERSION = '1.12';
 
 Type
-  {** Types of reads that can take place }
-  TwegLibReadType = ( wlrtNoDecrypt, wlrtDecrypt );
+  { @abstract(Types of reads that can take place.)
+    @name defines the types of reads that can take place with the Norton Guide
+    reading functions (@link(wegLibReadByte), @link(wegLibReadWord),
+    @link(wegLibReadLong)). }
+  TwegLibReadType = (
+    { Do not decrypt after read. }
+    wlrtNoDecrypt,
+    { Decrypt after read. }
+    wlrtDecrypt
+  );
 
-{** Decrypt a byte }
+{ Decrypt a byte. }
 Function wegLibDecrypt( c : Byte ) : Byte;
-{** Read a byte from the passed stream }
+{ @abstract(Read a @code(byte) from the passed stream.)
+  By default the byte is decrypted after it is read. If you wish to read
+  without decrypting pass @link(wlrtNoDecrypt) as the value of @code(wlrt). }
 Function wegLibReadByte( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Byte;
-{** Read a word from the passed stream }
+{ @abstract(Read a @code(word) from the passed stream.)
+  By default the word is decrypted after it is read. If you wish to read
+  without decrypting pass @link(wlrtNoDecrypt) as the value of @code(wlrt). }
 Function wegLibReadWord( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : Word;
-{** Read a long from the passed stream }
+{ @abstract(Read a @code(long) from the passed stream.)
+  By default the long is decrypted after it is read. If you wish to read
+  without decrypting pass @link(wlrtNoDecrypt) as the value of @code(wlrt). }
 Function wegLibReadLong( h : TStream; wlrt : TwegLibReadType = wlrtDecrypt ) : LongInt;
-{** Expand the passed text }
+{ @abstract(Expand the passed text.)
+  This function takes a string, looks for any Norton Guide style run-length encoding
+  and unrolls it. }
 Function wegLibExpand( Const s : String ) : String;
-{** Get a string of a given length from the passed stream }
+{ @abstract(Get a string of a given length from the passed stream.)
+  By default the string is decrypted after it is read. If you wish to read
+  without decrypting pass @link(wlrtNoDecrypt) as the value of @code(wlrt). }
 Function wegLibReadString( h : TStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
-{** Get a null terminated string from the passed stream }
+{ @abstract(Get a @code(null) terminated string from the passed stream.)
+  This function reads a string from the stream until a @code(null) is
+  encountered or until @code(wLen) bytes have been read. By default the
+  string is decrypted as it is read. If you wish to read without
+  decrypting pass @link(wlrtNoDecrypt) as the value of @code(wlrt). }
 Function wegLibReadStringZ( h : TStream; wLen : Word; wlrt : TwegLibReadType = wlrtDecrypt ) : String;
-{** Convert OEM text to ANSI text }
+{ Convert OEM text to ANSI text. }
 Function wegLibOEMToANSI( Const s : String ) : String;
-{** Convert a hex string into an integer }
+{ Convert a hex string into an integer. }
 Function wegLibHex2Int( Const s : String ) : Integer;
-{** Convert a hex string into a character}
+{ Convert a hex string into a character. }
 Function wegLibHex2Char( Const s : String ) : Char;
 
 Implementation
@@ -75,7 +101,7 @@ Implementation
 Uses
   Windows,
   SysUtils;
-  
+
 /////
 
 Function wegLibDecrypt( c : Byte ) : Byte;
@@ -242,7 +268,7 @@ Begin
 
   // Now roll back to the next byte after the end of what was read.
   h.seek( lSavOff + Length( Result ) + 1, soFromBeginning );
-  
+
 End;
 
 /////
@@ -301,7 +327,7 @@ Begin
   If Result = #0 Then
     // ...use a space instead.
     Result := ' ';
-    
+
 End;
 
 End.

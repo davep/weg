@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2003
- * ID.........: $Id$
  * Description: Main form.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -58,7 +57,7 @@ Type
 
   {** Types of guide opening options }
   TfrmMainOpenGuide = ( mogNew, mogRecycle );
-  
+
   {** Main form }
   TfrmMain = Class( TForm )
     sbMain: TStatusBar;
@@ -337,7 +336,7 @@ Begin
 
   // Return the window.
   Result := oWindow;
-  
+
 End;
 
 /////
@@ -381,7 +380,7 @@ Begin
 
   // Open the guide.
   Result := openGuide( sFile, oWindow, lEntry, iStartingLine );
-  
+
 End;
 
 /////
@@ -438,7 +437,7 @@ Begin
 
   // Point the open dialog at the default guide directory.
   odGuide.InitialDir := NGSettings.DefaultGuideDirectory;
-  
+
   // Fire off the guide open dialog.
   If odGuide.execute() Then
     // If the user selected something, attempt to open what they selected.
@@ -541,8 +540,8 @@ Begin
           // Misc preferences.
           If openKey( wegRegistryKey( REG_PREFERENCES ), True ) Then
             Try
-              writeBool( REG_RECYCLE_FILE_OPENS,          actOptionsRecycleFileOpen.Checked );        
-              writeBool( REG_RECYCLE_FILE_REOPENS,        actOptionsRecycleFileReOpen.Checked );        
+              writeBool( REG_RECYCLE_FILE_OPENS,          actOptionsRecycleFileOpen.Checked );
+              writeBool( REG_RECYCLE_FILE_REOPENS,        actOptionsRecycleFileReOpen.Checked );
               writeBool( REG_RECYCLE_DDE_OPENS,           actOptionsRecycleDDE.Checked );
               writeBool( REG_RECYCLE_COMMAND_LINE_OPENS,  actOptionsRecycleCommandLine.Checked );
               writeBool( REG_RECYCLE_DRAG_AND_DROP_OPENS, actOptionsRecycleDragAndDrop.Checked );
@@ -617,7 +616,7 @@ Begin
             Try
 
               sPrefix := IntToStr( i ) + '.';
-              
+
               // Load the details of the child window.
               sGuide   := readString(  sPrefix + REG_GUIDE    );
               lOffset  := readInteger( sPrefix + REG_ENTRY    );
@@ -635,7 +634,7 @@ Begin
                 TBRegLoadPositions( oForm, HKEY_CURRENT_USER, wegRegistryKey( [ REG_MAIN_WINDOW, REG_CHILDREN, sPrefix + REG_TOOLBARS ] ) );
                 TfrmGuide( oForm ).NGEntry.TopIndex := iTopLine;
                 // Ensure that the item index is the selected line.
-                TfrmGuide( oForm ).NGEntry.Selected[ TfrmGuide( oForm ).NGEntry.ItemIndex ] := True; 
+                TfrmGuide( oForm ).NGEntry.Selected[ TfrmGuide( oForm ).NGEntry.ItemIndex ] := True;
               End;
 
               // Get ready for the next window.
@@ -757,7 +756,7 @@ Begin
     // Seems we have, try and open guides from the command line.
     For i := 1 To ParamCount() Do
       openGuide( ParamStr( i ), openType( actOptionsRecycleCommandLine ) );
-      
+
 End;
 
 /////
@@ -852,7 +851,7 @@ Begin
 
   // Refresh the MRU menu.
   refreshMRUMenu();
-  
+
 End;
 
 /////
@@ -925,7 +924,7 @@ Begin
 
   // Refresh the global find window.
   frmGlobalFind.NortonGuide.readSettings();
-  
+
 End;
 
 /////
@@ -1082,7 +1081,7 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
 
         // Ensure that the global finder is visible.
         If Not frmGlobalFind.Visible Then frmGlobalFind.show();
-        
+
         // Get the setting.
         sSetting := AnsiLowerCase( Trim( slParams[ 0 ] ) );
         // Get the value.
@@ -1108,9 +1107,9 @@ Procedure TfrmMain.ExecuteExecuteMacro( Sender : TObject; Msg : TStrings );
       End;
 
     End;
-    
+
   End;
-  
+
   Procedure DDEGlobalSearch( slParams : TStringList );
   ResourceString
     RSNoSearchStringGiven = 'DDE Error:'#13#10#13#10'No search string given for "gsearch" macro.';
@@ -1171,10 +1170,10 @@ Begin
       If sFunction = 'open' Then
         DDEOpenFile( slCall )
       Else If sFunction = 'gsearchset' Then
-        DDESetGlobalSearch( slCall )  
+        DDESetGlobalSearch( slCall )
       Else If sFunction = 'gsearch' Then
         DDEGlobalSearch( slCall );
-        
+
     Finally
       // Free the string list used for breaking up the call.
       slCall.free();
@@ -1226,7 +1225,7 @@ Begin
   Else If Source = frmGlobalFind.lbHits Then
     // ..that's it, open the hit.
     frmGlobalFind.actFindOpenExecute( Sender );
-    
+
 End;
 
 /////

@@ -2,7 +2,6 @@
  * System.....: WEG - Norton Guide Reader For Windows.
  * Author.....: Dave Pearson <davep@davep.org>
  * Copyright..: Dave Pearson 2004
- * ID.........: $Id$
  * Description: Bookmarks form.
  * Licence....: GNU General Public Licence (see below)
  *
@@ -236,15 +235,15 @@ Begin
             actOptionsRecycleWindows.Checked := readBool( REG_OPTION_RECYCLE_WINDOWS );
           Except
             // GNDN.
-          End;  
+          End;
         Finally
           // Close the settings key.
           closeKey();
         End;
-        
+
       // Load the bookmarks.
       loadBookmarks();
-      
+
     Finally
       // Free the registry object.
       free();
@@ -322,7 +321,7 @@ Begin
     End;
 
   End;
-  
+
 End;
 
 /////
@@ -447,7 +446,7 @@ Begin
   If MessageDlg( Format( RSConfirm, [ lvBookmarks.Selected.Caption ] ), mtConfirmation, [ mbYes, mbNo ], 0 ) = mrYes Then
     // They do, delete it.
     lvBookmarks.Selected.delete();
-    
+
 End;
 
 /////
@@ -489,7 +488,7 @@ Begin
   If lvBookmarks.Selected <> Nil Then
     With lvBookmarks.Selected Do
       frmMain.openGuide( SubItems[ 0 ], OpenType(), StrToInt( SubItems[ 1 ] ), 0 );
-      
+
 End;
 
 /////
@@ -501,7 +500,7 @@ Begin
     sbBookmarks.Panels[ 1 ].Text := ''
   Else
     sbBookmarks.Panels[ 1 ].Text := ExtractFileName( highlightedGuide() );
-      
+
 End;
 
 /////
@@ -551,7 +550,7 @@ Begin
   If lvBookmarks.Selected = Nil Then
     Result := -1
   Else
-    Result := StrToInt( lvBookmarks.Selected.SubItems[ 1 ] );  
+    Result := StrToInt( lvBookmarks.Selected.SubItems[ 1 ] );
 End;
 
 End.
